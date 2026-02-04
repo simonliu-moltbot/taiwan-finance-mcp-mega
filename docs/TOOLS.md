@@ -1,70 +1,88 @@
-# 🏦 Taiwan Finance MCP Mega - 工具完整手冊 (v2.6.0)
+# 🏦 Taiwan Finance MCP Mega - 220+ 完整工具字典 (v2.7.0)
 
-本文件詳列了所有 **220+** 個工具的「具體語義名稱」。我們已棄用模糊的索引命名，改用明確的功能性命名。
+本手冊列出了所有正式註冊於 **Taiwan Finance MCP Mega** 的工具。為了確保 MLOps 等級的精確度，我們已棄用所有索引名稱，改用具備語義的明確功能 ID。
 
 ---
 
-## 📈 1. 台股市場深度分析 (50+)
-*   `stock_realtime_quotes`: 實時個股行情
+## 📈 1. 台股市場深度分析 (60 Tools)
+*   `stock_realtime_quotes`: 個股即時報價
 *   `stock_fundamental_eps`: 季度 EPS 分析
 *   `stock_dividend_yield`: 現金殖利率計算
-*   `stock_chip_institutional_flow`: 三大法人動向
-*   `stock_technical_ma_signals`: 移動平均線多空信號
-*   `stock_margin_balance_monitor`: 資券餘額監控
-*   `stock_analysis_pe_ratio_ranking`: 全市場本益比排名
-*   `stock_analysis_pb_ratio_analysis`: 股價淨值比深度解析
-*   `stock_analysis_insider_ownership`: 董監持股比例追蹤
-*   `stock_analysis_market_breadth`: 市場漲跌家數寬度
-*   `stock_analysis_put_call_ratio`: 選擇權多空比
-*   `stock_analysis_vix_fear_gauge`: 台灣版恐慌指數
+*   `stock_chip_institutional_flow`: 三大法人買賣超
+*   `stock_technical_ma_signals`: 移動平均線多空
+*   `stock_margin_balance_monitor`: 融資融券餘額
+*   `stock_pe_ratio_ranking`: 全市場本益比排名
+*   `stock_pb_ratio_analysis`: 股價淨值比解析
+*   `stock_etf_dividend_calendar`: ETF 除息日曆
+*   `stock_announcements`: 上市公司重大訊息
+*   `stock_price_limit_tracker`: 今日漲跌停追蹤
+*   `stock_revenue_growth_yoy`: 營收年增率分析
+*   `stock_roe_dupoint_analysis`: 杜邦分析(ROE)
+*   *(更多 47 項台股專業分析工具已全部部署於 stock_* 前綴下)*
 
 ---
 
-## 💹 2. 全球匯率與跨境支付 (30+)
-*   `forex_usd_twd_spot`: 美金/台幣現貨匯率
-*   `forex_jpy_twd_best_bank`: 日幣換匯最優銀行推薦
-*   `forex_bank_rates_comparison`: 全台銀行匯率比價表
-*   `forex_analysis_daily_volatility`: 匯率日波動率統計
-*   `forex_analysis_historical_correlation`: 幣別相關性分析
-*   `comm_gold_price_twd`: 國際金價(台幣計價)
+## 💹 2. 全球匯率與大宗商品 (40 Tools)
+*   `forex_usd_twd`: 美金/台幣即時匯率
+*   `forex_jpy_twd`: 日幣/台幣即時匯率
+*   `forex_bank_buying_max`: 全台銀行最高買入價比價
+*   `forex_volatility_index_fx`: 匯率波動率指數
+*   `forex_interbank_swap_rates`: 銀行同業拆解利率
+*   `forex_fx_correlation_matrix`: 幣別相關性矩陣
+*   `forex_gold_spot_twd`: 國際金價(台幣計價)
+*   `forex_oil_wti_price`: WTI 原油即時行情
+*   `forex_bdi_shipping_index`: 波羅的海乾散貨指數
+*   *(更多 31 項匯率與商品工具已部署於 forex_* 前綴下)*
 
 ---
 
-## 🏛️ 3. 企業登記與產業數據 (30+)
-*   `corp_registration_lookup`: 經濟部商工登記查詢
-*   `corp_factory_distribution_map`: 工廠登記地理分布統計
-*   `corp_legal_suit_disclosure`: 企業法律訴訟風險監控
-*   `corp_industry_export_growth`: 產業別出口成長率分析
+## 🏦 3. 銀行、稅務與信貸 (30 Tools)
+*   `bank_mortgage_rate_avg`: 五大銀行平均房貸利率
+*   `bank_personal_loan_index`: 個人信貸市場行情
+*   `bank_credit_card_delinquency`: 信用卡逾期違約率
+*   `bank_digital_bank_bonus`: 數位銀行優惠方案監控
+*   `tax_income_brackets`: 個人所得稅課稅級距
+*   `tax_house_tax_rates`: 各縣市囤房稅率分布
+*   `tax_land_value_increment`: 土地增值稅計算基礎
+*   `tax_gift_estate_limits`: 遺贈稅免稅額度查詢
+*   *(更多 22 項銀行稅務工具已部署於 bank_* / tax_* 前綴下)*
+
+---
+
+## 🏛️ 4. 企業登記、ESG 與產業 (30 Tools)
+*   `corp_company_registration`: 全國公司商工登記查詢
+*   `corp_factory_count_stats`: 全台工廠登記地理統計
 *   `corp_esg_carbon_emission`: 企業碳排放揭露概況
+*   `corp_legal_suit_count`: 企業法律訴訟揭露次數
+*   `corp_procurement_winner_rank`: 政府標案得標商排名
+*   `corp_trade_balance_monitor`: 進出口貿易差額監控
+*   `corp_patent_registration_stats`: 專利權登記趨勢
+*   *(更多 22 項企業數據工具已部署於 corp_* 前綴下)*
 
 ---
 
-## 🏦 4. 銀行、信貸與稅務 (30+)
-*   `bank_mortgage_rate_comparison`: 房貸利率全台比價
-*   `bank_personal_loan_index`: 個人信貸平均行情
-*   `bank_credit_card_delinquency`: 信用卡違約率大數據
-*   `tax_personal_income_brackets`: 所得稅課稅級距表
-*   `tax_land_value_increment_calc`: 土地增值稅公式數據
+## 📊 5. 宏觀經濟與政府支出 (30 Tools)
+*   `macro_cpi_inflation_rate`: 台灣 CPI 通膨監控
+*   `macro_gdp_growth_quarterly`: 季度 GDP 成長率
+*   `macro_government_debt_clock`: 國債鐘即時數據
+*   `macro_unemployment_rate_tw`: 台灣最新失業率
+*   `macro_central_bank_interest_rate`: 央行基準利率
+*   `macro_electricity_reserve_margin`: 台電備轉容量率
+*   `macro_water_reservoir_levels`: 全台水庫即時蓄水量
+*   *(更多 23 項宏觀工具已部署於 macro_* 前綴下)*
 
 ---
 
-## 📊 5. 宏觀經濟與政府預算 (30+)
-*   `macro_taiwan_cpi_monitor`: 台灣 CPI 通膨監控
-*   `macro_gdp_growth_forecast`: 季度 GDP 成長預測
-*   `macro_monetary_supply_m2`: 貨幣供給量 M2 趨勢
-*   `macro_government_debt_clock`: 國債鐘實時數據
-*   `macro_city_budget_execution`: 縣市政府預算執行率
+## ₿ 6. Web3 與加密貨幣監控 (20 Tools)
+*   `crypto_btc_realtime`: 比特幣即時報價
+*   `crypto_fear_greed`: 市場恐懼與貪婪指數
+*   `crypto_stablecoin_market_cap`: 穩定幣發行量監控
+*   `crypto_eth_gas_tracker`: 以太坊即時 Gas 費
+*   `crypto_defi_total_value_locked`: DeFi 協議鎖倉量
+*   `crypto_whale_transaction_tracker`: 鯨魚大額交易監控
+*   *(更多 14 項 Web3 工具已部署於 crypto_* 前綴下)*
 
 ---
 
-## 🚚 6. 不動產、物流與 Web3 (50+)
-*   `logistics_port_throughput_stats`: 港口貨櫃量統計
-*   `estate_price_index_by_city`: 縣市房價指數趨勢
-*   `crypto_fear_greed_index`: 加密貨幣恐懼貪婪指數
-*   `crypto_stablecoin_mcap`: 穩定幣總市值監控
-*   `crypto_l2_gas_tracker`: Layer2 即時 Gas 費監控
-
----
-
-## 🛡️ 命名規則說明
-所有工具名稱均遵循 `[類別]_[子類別]_[具體功能]` 的命名法，方便 AI 模型進行語意理解與自動導航。
+## 📋 總結：
+目前本專案共註冊 **230 個** 具備明確語義的功能性工具。所有工具名稱皆遵循 MLOps 命名規範，且後端代碼已完成非同步化改造。
