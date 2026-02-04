@@ -41,8 +41,8 @@
 請在 **Dive** 或其他支援 MCP 的 AI 客戶端中新增此 Server：
 
 - **Type**: `stdio`
-- **Command**: `/Users/simonliuyuwei/clawd/projects/taiwan-finance-mcp-mega/.venv/bin/python`
-- **Args**: `/Users/simonliuyuwei/clawd/projects/taiwan-finance-mcp-mega/src/taiwan_finance_mcp_mega/server.py`
+- **Command**: `python` (或指向虛擬環境中的 python 路徑)
+- **Args**: `src/taiwan_finance_mcp_mega/server.py`
 
 ## 🚀 測試指令範例
 > 「查詢台積電 (2330) 今天的即時行情與三大法人買賣超。」
