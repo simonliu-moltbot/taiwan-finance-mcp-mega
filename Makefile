@@ -33,3 +33,6 @@ docker-build:
 
 docker-run:
 	docker run -p 8005:8000 taiwan-finance-mcp-mega
+
+test:
+	$(VENV)/bin/pytest tests/test_mega_v2.py -v

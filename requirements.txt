@@ -7,3 +7,5 @@ starlette
 sse-starlette
 pytz
 cachetools
+pytest
+pytest-asyncio
