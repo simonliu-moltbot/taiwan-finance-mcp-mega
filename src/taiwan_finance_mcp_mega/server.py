@@ -78,9 +78,14 @@ async def dispatch_mega_logic(name: str, symbol: Optional[str], limit: int) -> A
 
         # C. 宏觀與稅務
         elif name.startswith("macro_") or name.startswith("tax_"):
-            indicator = "salary" if "salary" in name else "unemployment"
-            if "participation" in name: indicator = "labor_participation"
-            if "cpi" in name: indicator = "cpi"
+            # 修正指標識別邏輯
+            indicator = "all"
+            if "salary" in name: indicator = "salary"
+            elif "unemployment" in name: indicator = "unemployment"
+            elif "cpi" in name: indicator = "cpi"
+            elif "gdp" in name: indicator = "gdp"
+            
+            # 正確調用 EconomicsLogic
             return await EconomicsLogic.get_macro_stats(indicator)
 
         # D. 加密貨幣
