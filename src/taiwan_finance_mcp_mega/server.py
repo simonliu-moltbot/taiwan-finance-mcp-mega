@@ -26,10 +26,7 @@ from taiwan_finance_mcp_mega.constants import (
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("mcp-finance")
 
-mcp = FastMCP(
-    Config.APP_NAME,
-    description="台灣金融數據最強大腦：提供 334+ 項台股、匯率、宏觀經濟及 Web3 實時工具。"
-)
+mcp = FastMCP(Config.APP_NAME)
 
 # --- 1. API 映射矩陣 (Endpoints) ---
 STOCK_MAP = {
