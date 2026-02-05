@@ -25,14 +25,22 @@ class StockLogic:
         if not isinstance(data, list):
             return []
         if symbol:
-            possible_keys = [code_key, "Code", "公司代號", "股票代號", "id", "STOCKsSecurityCode", "公司代碼"]
+            # 增加更多可能的代碼欄位 Key，以應對不同 API 的結構
+            possible_keys = [
+                code_key, "Code", "公司代號", "股票代號", "id", 
+                "STOCKsSecurityCode", "ETFsSecurityCode", "公司代碼", "證券代號"
+            ]
             filtered = []
+            symbol_str = str(symbol).strip()
             for item in data:
+                match = False
                 for pk in possible_keys:
                     val = item.get(pk)
-                    if val and str(val).strip() == str(symbol).strip():
-                        filtered.append(item)
+                    if val and str(val).strip() == symbol_str:
+                        match = True
                         break
+                if match:
+                    filtered.append(item)
             return filtered
         return data
 
