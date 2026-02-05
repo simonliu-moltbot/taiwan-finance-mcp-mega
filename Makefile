@@ -32,4 +32,4 @@ docker-build:
 	docker build -t taiwan-finance-mcp-mega .
 
 docker-run:
-	docker run -p 8000:8000 taiwan-finance-mcp-mega
+	docker run -p 8005:8000 taiwan-finance-mcp-mega

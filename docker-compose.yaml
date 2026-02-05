@@ -4,7 +4,7 @@ services:
     image: taiwan-finance-mcp-mega:v2.7.1
     container_name: taiwan-finance-mcp-mega
     ports:
-      - "8000:8000"
+      - "8005:8000"
     environment:
       - LOG_LEVEL=INFO
       - PYTHONUNBUFFERED=1
