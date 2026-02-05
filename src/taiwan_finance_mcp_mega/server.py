@@ -49,6 +49,9 @@ API_ENDPOINT_MAP = {
     "esg_water_resources": "/opendata/t187ap46_L_3",
     "esg_food_safety": "/opendata/t187ap46_L_12",
     "block_trade_summary": "/block/BFIAUU_d",
+    # CORPORATE
+    "company_registration": "corp_reg",
+    "industry_production_index": "corp_industry_index",
     # GLOBAL
     "fed_rates": "global_fed",
     "vix_index": "global_vix",
@@ -87,6 +90,14 @@ async def dispatch_mega_logic(name: str, symbol: Optional[str], limit: int) -> A
                 if cur not in ["BANK", "HISTORICAL", "RATE"]:
                     return await ForexLogic.get_pair(cur, "TWD")
             return await ForexLogic.get_latest_rates()
+
+        # E. 企業與物流類 (Corporate & Logistics)
+        elif name.startswith("corp_"):
+            if "company_registration" in name:
+                return await CorporateLogic.get_company_basic_info(symbol if symbol else "台積電")
+            if "industry_production_index" in name:
+                return await IndustryLogic.get_industry_production_index()
+            return await CorporateLogic.get_company_basic_info(symbol if symbol else "台積電")
 
         # C. 宏觀與稅務
         elif name.startswith("macro_") or name.startswith("tax_"):
