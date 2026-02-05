@@ -1,4 +1,4 @@
-# Taiwan Finance MCP Mega - Semantic Tool List Constants (v4.4.0)
+# Taiwan Finance MCP Mega - Semantic Tool List Constants (v4.5.0)
 
 STOCK_LIST = [
     "get_stock_quotes_realtime_all", "get_stock_eps_ranking_summary", "get_stock_dividend_yield_pe_pb", 
@@ -48,6 +48,10 @@ MACRO_LIST = [
     "get_macro_gdp_growth_rate_quarterly", "get_macro_cpi_inflation_rate_tw", 
     "get_macro_unemployment_rate_seasonal_adjusted", "get_macro_average_monthly_salary_dgbas",
     "get_macro_fuel_price_cpc_retail", "get_macro_housing_price_index_tw", "get_macro_national_debt_clock"
+]
+
+NEWS_LIST = [
+    "get_gov_financial_news_fsc", "get_gov_central_bank_announcements", "get_gov_industrial_policy_news_moea"
 ]
 
 CRYPTO_LIST = [

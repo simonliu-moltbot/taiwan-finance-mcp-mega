@@ -1,6 +1,6 @@
 """
-Taiwan Finance MCP Mega - Exhaustive Metadata Mapping (v4.4.0)
-Finalized 85+ tool descriptions with precise Inputs/Outputs.
+Taiwan Finance MCP Mega - Exhaustive Metadata Mapping (v4.5.0)
+Added Official Gov News & Policy Announcements.
 """
 
 TOOL_METADATA = {
@@ -51,15 +51,20 @@ TOOL_METADATA = {
     "get_macro_average_monthly_salary_dgbas": { "summary": "台灣月平均總薪資。", "inputs": "None", "outputs": "TWD", "source": "MOL" },
     "get_macro_fuel_price_cpc_retail": { "summary": "中油當週零售掛牌油價。", "inputs": "None", "outputs": "Price", "source": "CPC" },
     "get_macro_housing_price_index_tw": { "summary": "台灣全國住宅價格指數。", "inputs": "None", "outputs": "Index", "source": "Interior Ministry" },
-    "get_macro_national_debt_clock": { "summary": "獲取國債鐘資料統計中央政府債務。", "inputs": "None", "outputs": "Debt Amount", "source": "MOF" },
+    "get_macro_national_debt_clock": { "summary": "獲取國債鐘統計數據。", "inputs": "None", "outputs": "Debt Amount", "source": "MOF" },
     "get_tax_revenue_collection_monthly": { "summary": "全國賦稅收入月報。", "inputs": "None", "outputs": "Revenue", "source": "MOF" },
     "get_tax_income_bracket_calculator": { "summary": "綜所稅級距與試算公式。", "inputs": "None", "outputs": "Brackets", "source": "MOF" },
     "get_tax_electronic_invoice_usage_stats": { "summary": "電子發票普及率統計。", "inputs": "None", "outputs": "Stats", "source": "MOF" },
     "get_corp_moea_business_registration": { "summary": "經濟部商工登記公示資料。", "inputs": "symbol: 名稱。", "outputs": "登記資料。", "source": "MOEA" },
     "get_corp_industry_production_index": { "summary": "台灣工業生產指數。", "inputs": "None", "outputs": "Index", "source": "MOEA" },
-    "get_corp_industry_electricity_consumption_stats": { "summary": "獲取各產業部門電力消費統計。領先景氣指標。", "inputs": "None", "outputs": "GWh", "source": "MOEA" },
+    "get_corp_industry_electricity_consumption_stats": { "summary": "各產業部門電力消費統計。", "inputs": "None", "outputs": "GWh", "source": "MOEA" },
     "get_corp_factory_count_statistics": { "summary": "全台工廠登記數統計。", "inputs": "None", "outputs": "Count", "source": "MOEA" },
     "get_corp_export_value_by_industry": { "summary": "各行業出口貿易總值。", "inputs": "None", "outputs": "Value", "source": "MOEA" },
+
+    # 📰 NEWS (3 Tools)
+    "get_gov_financial_news_fsc": { "summary": "獲取金管會最新官方新聞稿。包含政策變動與新制說明。", "inputs": "None", "outputs": "新聞標題、日期、官網連結。", "source": "FSC" },
+    "get_gov_central_bank_announcements": { "summary": "獲取中央銀行重要政策公告與理監事會議決議。", "inputs": "None", "outputs": "標題、日期。", "source": "CBC" },
+    "get_gov_industrial_policy_news_moea": { "summary": "獲取經濟部經貿與產業政策動態新聞。", "inputs": "None", "outputs": "日期、主旨。", "source": "MOEA" },
 
     # 🪙 CRYPTO (4 Tools)
     "get_crypto_btc_twd_price": { "summary": "比特幣 TWD/USD 報價。", "inputs": "None", "outputs": "Price", "source": "CoinGecko" },

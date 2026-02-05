@@ -16,11 +16,11 @@ from taiwan_finance_mcp_mega.logic.stock import StockLogic
 from taiwan_finance_mcp_mega.logic.forex import ForexLogic
 from taiwan_finance_mcp_mega.logic.derivatives import DerivativesLogic
 from taiwan_finance_mcp_mega.logic.global_macro import GlobalMacroLogic, CryptoLogic
-from taiwan_finance_mcp_mega.logic.gov_data import EconomicsLogic, PublicServiceLogic, BankLogic
+from taiwan_finance_mcp_mega.logic.gov_data import EconomicsLogic, PublicServiceLogic, BankLogic, GovNewsLogic
 from taiwan_finance_mcp_mega.logic.corporate_logistics import CorporateLogic, IndustryLogic
 from taiwan_finance_mcp_mega.utils.http_client import AsyncHttpClient
 from taiwan_finance_mcp_mega.constants import (
-    STOCK_LIST, FOREX_LIST, BANK_LIST, TAX_LIST, CORP_LIST, MACRO_LIST, CRYPTO_LIST, COMMON_LIST, DERIVATIVES_LIST
+    STOCK_LIST, FOREX_LIST, BANK_LIST, TAX_LIST, CORP_LIST, MACRO_LIST, CRYPTO_LIST, COMMON_LIST, DERIVATIVES_LIST, NEWS_LIST
 )
 from taiwan_finance_mcp_mega.metadata import TOOL_METADATA
 
@@ -95,7 +95,11 @@ async def dispatch_mega_logic(name: str, symbol: Optional[str], limit: int) -> A
             return await ForexLogic.get_pair(cur, "TWD")
 
         # 3. 宏觀與政府路由
-        elif name.startswith("get_macro_") or name.startswith("get_tax_") or name.startswith("get_corp_"):
+        elif name.startswith("get_macro_") or name.startswith("get_tax_") or name.startswith("get_corp_") or name.startswith("get_gov_"):
+            if "financial_news_fsc" in name: return await GovNewsLogic.get_fsc_news()
+            if "central_bank_announcements" in name: return await GovNewsLogic.get_cbc_news()
+            if "industrial_policy_news" in name: return await GovNewsLogic.get_moea_news()
+            
             if "fuel_price" in name: return await PublicServiceLogic.get_fuel_prices()
             if "housing_price_index" in name: return await EconomicsLogic.get_housing_price_index()
             if "national_debt_clock" in name: return await EconomicsLogic.get_national_debt_clock()
@@ -136,7 +140,8 @@ def register_all_tools():
     tool_groups = [
         (STOCK_LIST, "Stock"), (FOREX_LIST, "Forex"), (BANK_LIST, "Bank"),
         (TAX_LIST, "Tax"), (CORP_LIST, "Corp"), (MACRO_LIST, "Macro"), 
-        (CRYPTO_LIST, "Crypto"), (COMMON_LIST, "Common"), (DERIVATIVES_LIST, "Derivatives")
+        (CRYPTO_LIST, "Crypto"), (COMMON_LIST, "Common"), (DERIVATIVES_LIST, "Derivatives"),
+        (NEWS_LIST, "News")
     ]
     
     for tools, group_name in tool_groups:
