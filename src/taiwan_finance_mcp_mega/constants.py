@@ -60,3 +60,7 @@ CRYPTO_LIST = [
     "get_crypto_btc_twd_price", "get_crypto_eth_twd_price", "get_crypto_sol_twd_price",
     "get_crypto_market_fear_greed_index"
 ]
+
+COMMON_LIST = [
+    "get_current_time_taipei"
+]

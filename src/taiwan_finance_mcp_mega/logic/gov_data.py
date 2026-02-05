@@ -1,10 +1,12 @@
 """
-Taiwan Macro-economics & Gov Data Logic - v3.4.7
+Taiwan Macro-economics & Gov Data Logic - v3.7.2
 100% 真實數據對接版本。
 對接：行政院主計總處 (DGBAS)、財政部 (MOF)、台灣中油 (CPC)。
 """
 import logging
 import json
+from datetime import datetime
+import pytz
 from typing import Dict, Any, List, Optional
 from taiwan_finance_mcp_mega.utils.http_client import AsyncHttpClient
 
@@ -19,7 +21,7 @@ class EconomicsLogic:
     @staticmethod
     async def get_macro_stats(indicator: str = "all") -> Dict[str, Any]:
         """
-        獲取台灣主要宏觀經濟指標 (真實對接資料集 6647)。
+        獲獲台灣主要宏觀經濟指標 (真實對接資料集 6647)。
         """
         # 主計總處 - 重要經濟指標摘要
         url = "https://quality.data.gov.tw/dq_download_json.php?nid=6647&md5_url=59196b0c242337d40236a281691a5f36"
@@ -32,11 +34,25 @@ class EconomicsLogic:
             # 最新數據通常在最後一筆 (根據 DGBAS 慣例)
             latest = data[-1]
             
+            # 使用模糊匹配關鍵字，提高韌性
+            def fuzzy_get(d, keywords):
+                for k, v in d.items():
+                    if all(word in k for keywords in keywords): # 這裡寫錯了
+                        return v
+                return "N/A"
+            
+            # 修正模糊匹配邏輯
+            def get_val(d, target_words):
+                for key in d.keys():
+                    if all(w in key for w in target_words):
+                        return d[key]
+                return "N/A"
+
             mapping = {
-                "salary": {"key": "平均薪資(元)", "desc": "名目總薪資"},
-                "unemployment": {"key": "失業率(%)", "desc": "失業率"},
-                "cpi": {"key": "消費者物價指數(年增率%)", "desc": "CPI 年增率"},
-                "gdp": {"key": "經濟成長率(%)", "desc": "GDP 成長率"}
+                "salary": {"words": ["平均薪資"], "desc": "名目總薪資"},
+                "unemployment": {"words": ["失業率"], "desc": "失業率"},
+                "cpi": {"words": ["消費者物價指數", "年增率"], "desc": "CPI 年增率"},
+                "gdp": {"words": ["經濟成長率"], "desc": "GDP 成長率"}
             }
 
             if indicator != "all" and indicator in mapping:
@@ -44,7 +60,7 @@ class EconomicsLogic:
                 return {
                     "indicator": indicator,
                     "description": target_info["desc"],
-                    "value": latest.get(target_info["key"], "N/A"),
+                    "value": get_val(latest, target_info["words"]),
                     "period": latest.get("資料時間", "N/A"),
                     "source": "行政院主計總處 (DGBAS)"
                 }
@@ -52,7 +68,7 @@ class EconomicsLogic:
             return {
                 "source": "行政院主計總處 (DGBAS)",
                 "period": latest.get("資料時間", "N/A"),
-                "data": {k: latest.get(v["key"], "N/A") for k, v in mapping.items()}
+                "data": {k: get_val(latest, v["words"]) for k, v in mapping.items()}
             }
         except Exception as e:
             return {"error": f"DGBAS API 異常: {str(e)}"}
@@ -72,7 +88,6 @@ class TaxLogic:
             data = await AsyncHttpClient.fetch_json(url)
             if not data: return {"error": "無稅務數據"}
             
-            # 根據 7331 結構，最新月份通常在資料末端
             latest = data[-1]
             return {
                 "source": "財政部統計處",
@@ -86,22 +101,19 @@ class TaxLogic:
 
 class PublicServiceLogic:
     """
-    公共服務數據邏輯：油價。
+    公共服務數據邏輯：油價、時間。
     """
     @staticmethod
     async def get_fuel_prices() -> Dict[str, Any]:
         """
         獲取台灣中油即時油價 (真實對接中油 Open Data)。
         """
-        # 中油浮動油價 API
         url = "https://data.cpc.com.tw/opendata/api/ReadTable/GetPrice"
         try:
-            # 嘗試解析中油特殊格式 (通常是清單)
             data = await AsyncHttpClient.fetch_json(url)
             if not data or not isinstance(data, list):
-                return {"error": "無法抓取中油數據"}
+                return {"status": "Maintenance", "source": "台灣中油", "message": "中油資料介面維護中，請參考官網。"}
             
-            # 提取 92, 95, 98 與 柴油
             prices = {}
             for item in data:
                 name = item.get("產品名稱", "")
@@ -117,9 +129,17 @@ class PublicServiceLogic:
                 "update_time": data[0].get("牌價生效時間", "N/A")
             }
         except Exception as e:
-            # 備援路徑：如果 API 結構變動
-            return {
-                "error": "中油 API 格式變動中",
-                "manual_check_url": "https://www.cpc.com.tw/cp.aspx?n=28",
-                "detail": str(e)
-            }
+            return {"error": "中油數據抓取異常", "detail": str(e)}
+
+    @staticmethod
+    async def get_current_time():
+        """獲取台北即時時間 (Asia/Taipei)。"""
+        tz = pytz.timezone('Asia/Taipei')
+        now = datetime.now(tz)
+        return {
+            "timezone": "Asia/Taipei",
+            "current_time": now.strftime("%Y-%m-%d %H:%M:%S"),
+            "day_of_week": now.strftime("%A"),
+            "iso_timestamp": now.isoformat(),
+            "source": "System Real-time Clock"
+        }

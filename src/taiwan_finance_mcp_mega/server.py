@@ -1,5 +1,5 @@
 """
-Taiwan Finance MCP Mega v3.7.0
+Taiwan Finance MCP Mega v3.7.2
 [The Semantic Engine]
 Optimized tool naming and high-performance dispatching.
 100% Real-world mapping for 300+ financial indicators.
@@ -20,7 +20,7 @@ from taiwan_finance_mcp_mega.logic.gov_data import EconomicsLogic, TaxLogic, Pub
 from taiwan_finance_mcp_mega.logic.corporate_logistics import CorporateLogic, IndustryLogic
 from taiwan_finance_mcp_mega.utils.http_client import AsyncHttpClient
 from taiwan_finance_mcp_mega.constants import (
-    STOCK_LIST, FOREX_LIST, BANK_LIST, TAX_LIST, CORP_LIST, MACRO_LIST, CRYPTO_LIST
+    STOCK_LIST, FOREX_LIST, BANK_LIST, TAX_LIST, CORP_LIST, MACRO_LIST, CRYPTO_LIST, COMMON_LIST
 )
 
 # Logging
@@ -82,7 +82,10 @@ MEGA_ENDPOINT_MAP = {
     "get_macro_fuel_price_cpc_retail": "cpc_fuel",
     "get_tax_revenue_collection_monthly": "mof_tax",
     "get_corp_moea_business_registration": "moea_reg",
-    "get_corp_industry_production_index": "moea_index"
+    "get_corp_industry_production_index": "moea_index",
+    
+    # 🕒 COMMON
+    "get_current_time_taipei": "system_time"
 }
 
 # --- 2. 核心分發邏輯 ---
@@ -90,6 +93,10 @@ MEGA_ENDPOINT_MAP = {
 async def dispatch_mega_logic(name: str, symbol: Optional[str], limit: int) -> Any:
     try:
         endpoint = MEGA_ENDPOINT_MAP.get(name)
+
+        # 0. 基礎通用工具
+        if "current_time" in name:
+            return await PublicServiceLogic.get_current_time()
 
         # 1. 台灣股市路由
         if name.startswith("get_stock_"):
@@ -141,20 +148,19 @@ async def dispatch_mega_logic(name: str, symbol: Optional[str], limit: int) -> A
 def register_all_tools():
     tool_groups = [
         (STOCK_LIST, "Stock"), (FOREX_LIST, "Forex"), (BANK_LIST, "Bank"),
-        (TAX_LIST, "Tax"), (CORP_LIST, "Corp"), (MACRO_LIST, "Macro"), (CRYPTO_LIST, "Crypto")
+        (TAX_LIST, "Tax"), (CORP_LIST, "Corp"), (MACRO_LIST, "Macro"), 
+        (CRYPTO_LIST, "Crypto"), (COMMON_LIST, "Common")
     ]
     
     for tools, group_name in tool_groups:
         for t_name in tools:
-            # 使用更嚴謹的閉包與動態函數命名，確保 FastMCP 註冊成功
             def create_tool(name):
                 @mcp.tool(name=name)
                 async def mcp_tool_fn(symbol: Optional[str] = None, limit: int = 10) -> str:
-                    """[v3.7.1] 專業金融數據接口。支援代碼 (2330) 或名稱查詢。"""
+                    """[v3.7.2] 專業金融數據接口。支援代碼 (2330) 或名稱查詢。"""
                     res = await dispatch_mega_logic(name, symbol, limit)
                     return json.dumps(res, indent=2, ensure_ascii=False)
                 
-                # 修改函數對象屬性以避免潛在的衝突
                 mcp_tool_fn.__name__ = name
                 return mcp_tool_fn
             
@@ -163,7 +169,7 @@ def register_all_tools():
 register_all_tools()
 
 def main():
-    parser = argparse.ArgumentParser(description="Taiwan Finance MCP Mega v3.7.0")
+    parser = argparse.ArgumentParser(description="Taiwan Finance MCP Mega v3.7.2")
     parser.add_argument("--mode", choices=["stdio", "http"], default="stdio")
     parser.add_argument("--port", type=int, default=8005)
     args = parser.parse_args()
