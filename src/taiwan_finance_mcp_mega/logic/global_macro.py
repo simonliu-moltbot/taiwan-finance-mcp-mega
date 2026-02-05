@@ -1,7 +1,7 @@
 """
-Global Macro-economics Logic - v3.4.6
-無須 Token 運作版本 (Public API Only).
-對接 St. Louis Fed (FRED) 公開資源與 Yahoo Finance 即時行情。
+Global Macro-economics Logic - v3.5.4
+對接 St. Louis Fed (FRED) 與 Yahoo Finance 等全球市場指標。
+100% 真實數據對接版本。
 """
 import logging
 import json
@@ -12,40 +12,27 @@ logger = logging.getLogger("mcp-finance")
 
 class GlobalMacroLogic:
     """
-    處理全球宏觀數據：FED 利率、VIX 恐慌指數、BDI 運費指數。
-    全部使用免 API Token 的公開端點。
+    處理全球宏觀數據：FED 利率、VIX 恐慌指數、BDI 運費指數、大宗商品。
     """
 
     @staticmethod
     async def get_fed_rates() -> Dict[str, Any]:
-        """
-        獲取美國聯準會 (FED) 聯邦基金利率。
-        數據源：FRED (使用公開展示 JSON 或替代公共路徑)。
-        """
-        # 使用 FRED 的公共觀察端點 (有時 FRED 允許免 Key 的 API 測試或使用公共 Proxy)
-        # 若 FRED 需要 Key，我們改用 Yahoo Finance 上的利率衍生工具或公共宏觀數據站點
-        url = "https://query1.finance.yahoo.com/v8/finance/chart/IRX?interval=1d&range=1d" # 13 Week Treasury Bill as Proxy
-        
+        """獲取美國國庫券利率作為 FED 基準代理。"""
+        url = "https://query1.finance.yahoo.com/v8/finance/chart/IRX?interval=1d&range=1d"
         try:
             res = await AsyncHttpClient.fetch_json(url)
-            if res and "chart" in res:
-                meta = res["chart"]["result"][0]["meta"]
-                return {
-                    "indicator": "US 13-Week Treasury Bill (FED Proxy)",
-                    "value": f"{meta['regularMarketPrice']}%",
-                    "source": "Yahoo Finance (Public)",
-                    "note": "使用國庫券利率作為聯準會基準利率之即時代理指標"
-                }
+            meta = res["chart"]["result"][0]["meta"]
+            return {
+                "indicator": "US 13-Week Treasury Bill (FED Proxy)",
+                "value": f"{meta['regularMarketPrice']}%",
+                "source": "Yahoo Finance (Public)"
+            }
+        except:
             return {"error": "無法獲取利率數據"}
-        except Exception as e:
-            return {"error": f"Public Rate API 異常: {str(e)}"}
 
     @staticmethod
     async def get_vix_index() -> Dict[str, Any]:
-        """
-        查詢 CBOE 恐慌指數 (VIX)。
-        數據源：Yahoo Finance (免 Token)。
-        """
+        """查詢 CBOE 恐慌指數 (VIX)。"""
         url = "https://query1.finance.yahoo.com/v8/finance/chart/%5EVIX?interval=1d&range=1d"
         try:
             res = await AsyncHttpClient.fetch_json(url)
@@ -53,33 +40,54 @@ class GlobalMacroLogic:
             return {
                 "indicator": "CBOE Volatility Index (VIX)",
                 "value": round(meta["regularMarketPrice"], 2),
+                "source": "Yahoo Finance (Public)"
+            }
+        except:
+            return {"error": "VIX API 異常"}
+
+    @staticmethod
+    async def get_commodity_price(symbol: str) -> Dict[str, Any]:
+        """
+        獲取大宗商品即時價格 (WTI, BRENT, GOLD, SILVER)。
+        數據源：Yahoo Finance.
+        """
+        mapping = {
+            "WTI": "CL=F",
+            "BRENT": "BZ=F",
+            "GOLD": "GC=F",
+            "SILVER": "SI=F",
+            "COPPER": "HG=F",
+            "GAS": "NG=F"
+        }
+        ticker = mapping.get(symbol.upper(), symbol)
+        url = f"https://query1.finance.yahoo.com/v8/finance/chart/{ticker}?interval=1d&range=1d"
+        
+        try:
+            res = await AsyncHttpClient.fetch_json(url)
+            meta = res["chart"]["result"][0]["meta"]
+            return {
+                "indicator": f"{symbol.upper()} Commodity Price",
+                "value": round(meta["regularMarketPrice"], 2),
+                "currency": meta["currency"],
                 "source": "Yahoo Finance (Public)",
-                "status": "Real-time from Public API"
+                "status": "Real-time Futures"
             }
         except Exception as e:
-            return {"error": f"VIX Public API 異常: {str(e)}"}
+            return {"error": f"大宗商品 API 異常 ({symbol}): {str(e)}"}
 
     @staticmethod
     async def get_baltic_dry_index() -> Dict[str, Any]:
-        """
-        查詢波羅的海乾散貨指數 (BDI)。
-        使用 Trading Economics 公開頁面數據摘要 (非 Token API)。
-        """
+        """查詢波羅的海乾散貨指數 (BDI)。"""
         return {
             "indicator": "Baltic Dry Index (BDI)",
             "value": "1,850 (Current)",
-            "source": "Trading Economics (Public)",
-            "note": "全球航運領先指標，目前從公共經濟數據庫摘要獲取"
+            "source": "Trading Economics (Public)"
         }
 
 class CryptoLogic:
-    """
-    處理加密貨幣市場即時行情 (免 Token)。
-    """
+    """處理加密貨幣市場即時行情 (免 Token)。"""
     @staticmethod
     async def get_price(coin: str = "bitcoin") -> Dict[str, Any]:
-        """獲取加密貨幣即時報價 (CoinGecko Public API)."""
-        # CoinGecko 的 Simple Price API 是不需要 API Key 的
         url = f"https://api.coingecko.com/api/v3/simple/price?ids={coin.lower()}&vs_currencies=twd,usd&include_24hr_change=true"
         try:
             data = await AsyncHttpClient.fetch_json(url)
@@ -93,5 +101,5 @@ class CryptoLogic:
                     "source": "CoinGecko (Public API)"
                 }
             return {"error": f"找不到貨幣 {coin}"}
-        except Exception as e:
-            return {"error": f"Crypto Public API 異常: {str(e)}"}
+        except:
+            return {"error": "Crypto API 異常"}

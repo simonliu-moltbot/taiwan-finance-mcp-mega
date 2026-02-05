@@ -84,6 +84,12 @@ async def dispatch_mega_logic(name: str, symbol: Optional[str], limit: int) -> A
 
         # B. 匯率類
         elif name.startswith("forex_"):
+            # 優先處理大宗商品 (Oil, Gold, etc.)
+            if "oil_wti" in name: return await GlobalMacroLogic.get_commodity_price("WTI")
+            if "oil_brent" in name: return await GlobalMacroLogic.get_commodity_price("BRENT")
+            if "gold_spot" in name: return await GlobalMacroLogic.get_commodity_price("GOLD")
+            if "silver_spot" in name: return await GlobalMacroLogic.get_commodity_price("SILVER")
+            
             parts = name.split("_")
             if len(parts) >= 2:
                 cur = parts[1].upper()
