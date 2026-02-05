@@ -1,5 +1,4 @@
-# Taiwan Finance MCP Mega - Semantic Tool List Constants (v4.0.0)
-# Naming Pattern: [action]_[category]_[specific_data]_[frequency/source]
+# Taiwan Finance MCP Mega - Semantic Tool List Constants (v4.1.0)
 
 STOCK_LIST = [
     "get_stock_quotes_realtime_all", "get_stock_eps_ranking_summary", "get_stock_dividend_yield_pe_pb", 
@@ -16,10 +15,9 @@ FOREX_LIST = [
     "get_forex_aud_twd_realtime", "get_forex_cad_twd_realtime", "get_forex_sgd_twd_realtime", 
     "get_forex_krw_twd_realtime",
     
-    # Commodities
+    # Commodities (Government Source for Oil)
     "get_commodity_oil_wti_price_usd", "get_commodity_oil_brent_price_usd", 
-    "get_commodity_gold_spot_price_twd", "get_commodity_silver_spot_price_twd",
-    "get_commodity_baltic_dry_index_bdi"
+    "get_commodity_gold_spot_price_twd", "get_commodity_silver_spot_price_twd"
 ]
 
 BANK_LIST = [
@@ -41,10 +39,6 @@ MACRO_LIST = [
     "get_macro_gdp_growth_rate_quarterly", "get_macro_cpi_inflation_rate_tw", 
     "get_macro_unemployment_rate_seasonal_adjusted", "get_macro_average_monthly_salary_dgbas",
     "get_macro_fuel_price_cpc_retail"
-]
-
-GLOBAL_LIST = [
-    "get_global_market_vix_index", "get_global_fed_funds_rate", "get_global_bdi_shipping_index"
 ]
 
 CRYPTO_LIST = [
