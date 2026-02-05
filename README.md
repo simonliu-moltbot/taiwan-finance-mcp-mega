@@ -44,9 +44,8 @@
 
 請在 **Dive** 或其他支援 MCP 的 AI 客戶端中新增此 Server：
 
-- **Type**: `stdio`
-- **Command**: `python` (或指向虛擬環境中的 python 路徑)
-- **Args**: `src/taiwan_finance_mcp_mega/server.py`
+- **Type**: `Streamable HTTP` (或 SSE)
+- **URL**: `http://你的伺服器IP:8005/mcp`
 
 ## 🛡️ 數據合法性說明
 本專案 100% 串接政府 Open Data 及知名數據終端，嚴格遵守數據使用規範，數據來源包含：
