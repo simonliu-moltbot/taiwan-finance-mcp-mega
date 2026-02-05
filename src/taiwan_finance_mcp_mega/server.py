@@ -139,25 +139,26 @@ async def dispatch_mega_logic(name: str, symbol: Optional[str], limit: int) -> A
 # --- 3. 自動註冊系統 ---
 
 def register_all_tools():
-    # 註冊所有在 constants.py 中定義的語義化工具
     tool_groups = [
-        STOCK_LIST, FOREX_LIST, BANK_LIST, TAX_LIST, CORP_LIST, MACRO_LIST, CRYPTO_LIST
+        (STOCK_LIST, "Stock"), (FOREX_LIST, "Forex"), (BANK_LIST, "Bank"),
+        (TAX_LIST, "Tax"), (CORP_LIST, "Corp"), (MACRO_LIST, "Macro"), (CRYPTO_LIST, "Crypto")
     ]
     
-    for tools in tool_groups:
+    for tools, group_name in tool_groups:
         for t_name in tools:
-            def bind_fn(name):
+            # 使用更嚴謹的閉包與動態函數命名，確保 FastMCP 註冊成功
+            def create_tool(name):
                 @mcp.tool(name=name)
-                async def fn(symbol: Optional[str] = None, limit: int = 10) -> str:
-                    """
-                    [v3.7.0] 專業級金融數據接口。
-                    參數 symbol: 代碼 (如 2330, JPY, BTC) 或名稱。
-                    """
+                async def mcp_tool_fn(symbol: Optional[str] = None, limit: int = 10) -> str:
+                    """[v3.7.1] 專業金融數據接口。支援代碼 (2330) 或名稱查詢。"""
                     res = await dispatch_mega_logic(name, symbol, limit)
                     return json.dumps(res, indent=2, ensure_ascii=False)
-                fn.__name__ = name
-                return fn
-            bind_fn(t_name)
+                
+                # 修改函數對象屬性以避免潛在的衝突
+                mcp_tool_fn.__name__ = name
+                return mcp_tool_fn
+            
+            create_tool(t_name)
 
 register_all_tools()
 
