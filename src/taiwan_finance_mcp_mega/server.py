@@ -48,7 +48,7 @@ API_ENDPOINT_MAP = {
     "esg_waste_management": "/opendata/t187ap46_L_4",
     "esg_water_resources": "/opendata/t187ap46_L_3",
     "esg_food_safety": "/opendata/t187ap46_L_12",
-    "block_trade_summary": "/block/BFIAUU_d"
+    "block_trade_summary": "/block/BFIAUU_d",
     # GLOBAL
     "fed_rates": "global_fed",
     "vix_index": "global_vix",
