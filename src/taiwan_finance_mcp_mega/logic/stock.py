@@ -1,5 +1,5 @@
 """
-專業台股市場數據邏輯模組 (Logic Module for Taiwan Stock Market) - v3.4.0
+專業台股市場數據邏輯模組 (Logic Module for Taiwan Stock Market) - v3.4.1
 對接 臺灣證券交易所 (TWSE) 與 證券櫃檯買賣中心 (TPEx) 的實時 OpenAPI。
 符合 MLOps 規格之詳細文件化版本。
 """
@@ -67,7 +67,7 @@ class StockLogic:
         """
         獲取盤中零股交易即時行情。
         
-        解釋：專為小資族設計，查詢非張數交易（1-999股）的即時撮合價格。
+        解釋：專為小資族設計，查詢非張數交易（1-999股）的即時專用撮合價格。
         使用時機：當使用者想以較低金額參與權值股投資時。
         輸入 (Input)：
             symbol (str): 股票代碼。
@@ -137,9 +137,33 @@ class StockLogic:
         
         解釋：此為核心分發接口，將 ID 映射至官方 Swagger 定義的任意端點。
         使用時機：當系統呼叫細分專業工具（如 ESG, 職安, 融資券）時。
+        
         輸入 (Input)：
-            endpoint (str): API 路徑 (例如 /opendata/t187ap46_L_1)。
+            endpoint (str): API 路徑。
             symbol (str): 過濾代碼。
+            
+        目前支援的主要 API 端點：
+            1. 行情類：
+               - /exchangeReport/STOCK_DAY_ALL : 上市個股日收盤行情
+               - /exchangeReport/TWT53U : 盤中零股交易行情
+               - /exchangeReport/BFT41U : 盤後定價交易資訊
+            2. 財務與營收：
+               - /opendata/t187ap14_L : 上市公司 EPS 統計
+               - /opendata/t187ap05_L : 上市公司每月營收
+               - /opendata/t187ap07_X_ci : 公發公司資產負債表 (一般業)
+            3. 籌碼與交易：
+               - /fund/BFI82U : 三大法人買賣超彙總
+               - /exchangeReport/MI_MARGN : 融資融券餘額
+               - /exchangeReport/BWIBBU_d : 個股本益比、殖利率、淨值比
+            4. 公司治理與 ESG：
+               - /opendata/t187ap03_L : 上市公司基本資料
+               - /opendata/t187ap04_L : 上市公司重大訊息
+               - /opendata/t187ap46_L_1 : 企業溫室氣體排放量
+               - /opendata/t187ap46_L_21 : 企業職業安全衛生
+            5. 指數與權證：
+               - /indicesReport/MI_5MINS_HIST : 大盤發行量加權指數歷史
+               - /exchangeReport/TWT84U : 個股漲跌停價預告
+               
         輸出 (Output)：
             Any: 由原始 API 回傳並經過欄位映射的 JSON 資料。
         """
