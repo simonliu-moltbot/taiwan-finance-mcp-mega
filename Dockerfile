@@ -7,11 +7,11 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-# Set PYTHONPATH to root of src
+# Set PYTHONPATH to include src
 ENV PYTHONPATH=/app/src
 
 EXPOSE 8000
 
-# Run the self-contained main.py
-ENTRYPOINT ["python", "src/main.py"]
+# Reverted to modular entry point
+ENTRYPOINT ["python", "src/taiwan_finance_mcp_mega/server.py"]
 CMD ["--mode", "http", "--port", "8000"]
