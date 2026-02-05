@@ -1,84 +1,62 @@
-# Taiwan Finance MCP Mega - Tool List Constants
+# Taiwan Finance MCP Mega - Semantic Tool List Constants (v3.7.0)
+# Naming Pattern: [action]_[category]_[specific_data]_[frequency/source]
 
 STOCK_LIST = [
-    "realtime_quotes", "fundamental_eps", "dividend_yield", "chip_institutional_flow", "technical_ma_signals",
-    "margin_balance_monitor", "pe_ratio_ranking", "pb_ratio_analysis", "net_worth_lookup", "insider_ownership",
-    "government_fund_holdings", "foreign_investment_limit", "market_breadth_index", "put_call_ratio_tw", "vix_fear_gauge",
-    "etf_tracking_error", "etf_dividend_calendar", "warrant_delta_analysis", "after_hours_trading", "block_trade_summary",
-    "odd_lot_quotes", "announcements", "yield_ranking_top", "price_limit_tracker", "broker_branch_flow",
-    "buyback_status", "capital_reduction_notice", "new_listing_ipo", "delisting_risk_watch", "component_stock_weights",
-    "sector_rotation_meter", "daily_volume_rank", "market_capitalization_top", "tpex_quotes_realtime", "tpex_market_index",
-    "tpex_institutional_flow", "tpex_emerging_quotes", "tpex_convertible_bonds", "industry_pe_average", "cash_flow_statement_summary",
-    "balance_sheet_ratios", "profit_loss_preview", "operating_margin_trend", "inventory_turnover_rate", "debt_to_equity_ratio",
-    "roe_dupoint_analysis", "roa_efficiency_index", "revenue_growth_yoy", "monthly_sales_momentum", "quarterly_earnings_guide",
-    "esg_occupational_safety", "esg_fire_incidents", "esg_anti_competition", "esg_risk_management", "esg_shareholding_control",
-    "esg_inclusive_finance", "esg_info_security", "esg_community_relations", "esg_product_quality", "esg_supply_chain",
-    "esg_food_safety", "esg_life_cycle", "esg_fuel_management", "esg_functional_committee", "esg_climate_issues",
-    "esg_investor_comm", "esg_board_structure", "esg_human_development", "esg_waste_management", "esg_water_resources",
-    "esg_energy_efficiency", "esg_ghg_emissions", "etf_regular_savings_rank", "broker_sec_reg_data", "financial_report_general",
-    "financial_report_bank", "financial_report_ins", "financial_report_sec", "cash_dividend_history", "stock_dividend_history",
-    "mops_significant_events", "listed_company_basic_info", "otc_company_basic_info", "emerging_company_info", "suspension_trading_list",
-    "reumption_trading_list", "foreign_investor_holding", "market_turnover_ratio", "industry_market_cap_ratio", "investor_education_stats",
-    "broker_branch_locations", "trading_calendar_tw", "warrant_issuer_ranking", "etf_tracking_index_info", "bond_etf_quotes",
-    "leveraged_inverse_etf", "market_odd_lot_top", "investor_sentiment_index", "block_trade_details", "futures_realtime_top"
+    "get_stock_quotes_realtime_all", "get_stock_eps_ranking_summary", "get_stock_dividend_yield_pe_pb", 
+    "get_stock_institutional_investor_flow", "get_stock_margin_trading_balance", "get_stock_odd_lot_trading_quotes", 
+    "get_stock_mops_significant_announcements", "get_stock_price_limit_up_down_tracker", "get_stock_balance_sheet_general", 
+    "get_stock_monthly_revenue_summary", "get_stock_listed_company_basic_info", "get_stock_etf_regular_savings_ranking", 
+    "get_stock_block_trade_daily_summary", "get_stock_after_hours_trading_info", "get_stock_ipo_new_listing_schedule",
+    "get_stock_buyback_treasury_status", "get_stock_broker_regular_savings_data",
+    
+    # ESG (21 Semantic IDs)
+    "get_stock_esg_greenhouse_gas_emissions", "get_stock_esg_energy_management_efficiency", 
+    "get_stock_esg_water_resource_usage", "get_stock_esg_waste_management_data", 
+    "get_stock_esg_human_capital_development", "get_stock_esg_board_diversity_structure", 
+    "get_stock_esg_investor_communication_index", "get_stock_esg_climate_change_governance", 
+    "get_stock_esg_functional_committee_status", "get_stock_esg_fuel_management_stats", 
+    "get_stock_esg_product_life_cycle_management", "get_stock_esg_food_safety_verification", 
+    "get_stock_esg_supply_chain_management_audit", "get_stock_esg_product_quality_safety", 
+    "get_stock_esg_local_community_relations", "get_stock_esg_information_security_breach", 
+    "get_stock_esg_inclusive_finance_promotion", "get_stock_esg_shareholding_control_power", 
+    "get_stock_esg_risk_management_policy", "get_stock_esg_anti_competitive_litigation", 
+    "get_stock_esg_occupational_safety_health"
 ]
 
 FOREX_LIST = [
-    "usd_twd", "jpy_twd", "eur_twd", "cny_twd", "hkd_twd", "gbp_twd", "aud_twd", "cad_twd", "sgd_twd", "krw_twd",
-    "chf_twd", "nzd_twd", "thb_twd", "myr_twd", "idr_twd", "vnd_twd", "php_twd", "inr_twd", "zar_twd", "mxn_twd",
-    "bank_buying_max", "bank_selling_min", "atm_withdraw_rates", "credit_card_fx_fee", "travelers_check_quotes",
-    "historical_fx_high_low", "volatility_index_fx", "central_bank_intervention", "interbank_swap_rates", "fx_correlation_matrix",
-    "gold_spot_twd", "silver_spot_twd", "oil_wti_price", "oil_brent_price", "copper_lme_quotes", "gas_natural_spot",
-    "corn_futures_price", "soybean_futures_price", "wheat_futures_price", "bdi_shipping_index", "sugar_futures",
-    "coffee_futures", "platinum_spot", "palladium_spot", "aluminum_lme", "nickel_lme", "zinc_lme", "lead_lme",
-    "iron_ore_fines", "lithium_carbonate"
+    "get_forex_usd_twd_realtime", "get_forex_jpy_twd_realtime", "get_forex_eur_twd_realtime", 
+    "get_forex_cny_twd_realtime", "get_forex_hkd_twd_realtime", "get_forex_gbp_twd_realtime", 
+    "get_forex_aud_twd_realtime", "get_forex_cad_twd_realtime", "get_forex_sgd_twd_realtime", 
+    "get_forex_krw_twd_realtime",
+    
+    # Commodities (Semantic IDs)
+    "get_commodity_oil_wti_price_usd", "get_commodity_oil_brent_price_usd", 
+    "get_commodity_gold_spot_price_twd", "get_commodity_silver_spot_price_twd",
+    "get_commodity_baltic_dry_index_bdi"
 ]
 
 BANK_LIST = [
-    "deposit_rate_fixed", "deposit_rate_savings", "mortgage_rate_avg", "mortgage_first_home", "mortgage_investment",
-    "personal_loan_index", "car_loan_rates", "credit_card_delinquency", "credit_card_spending_total", "atm_map",
-    "digital_bank_bonus", "bank_branch_locations", "wire_transfer_speed", "check_clearing_volume", "capital_adequacy",
-    "loan_to_deposit", "npl_ratio", "sme_financing_index", "interest_margin", "asset_quality", "foreign_exchange_volume",
-    "mortgage_by_age", "credit_card_types", "trust_fund_stats", "financial_holding_profits", "open_api_standard"
+    "get_bank_deposit_rate_fixed", "get_bank_mortgage_rate_average", "get_bank_credit_card_delinquency",
+    "get_bank_atm_location_map", "get_bank_capital_adequacy_ratio"
 ]
 
 TAX_LIST = [
-    "income_brackets", "standard_deduction", "itemized_deduction", "gift_estate_limits", "corporate_rate",
-    "withholding_rules", "house_tax_rates", "land_value_increment", "deed_tax_calc", "luxury_tax_rules",
-    "vat_return_guide", "customs_duty_info", "tobacco_alcohol", "lottery_prize_tax", "foreign_income_rule",
-    "revenue_collection", "evasion_alerts", "incentive_policy", "electronic_invoice_usage", "global_minimum_tax",
-    "land_tax_overdue", "income_declaration_stats", "inheritance_case_stats", "business_registration_tax"
+    "get_tax_income_bracket_calculator", "get_tax_revenue_collection_monthly", 
+    "get_tax_electronic_invoice_usage_stats"
 ]
 
 CORP_LIST = [
-    "company_registration", "factory_count_stats", "industrial_park_list", "esg_carbon_emission", "legal_suit_count",
-    "announcement_mops", "procurement_tender_count", "procurement_winner_rank", "tech_tender_budget", "government_spending_yoy",
-    "export_value_by_industry", "import_value_by_category", "trade_balance_monitor", "port_container_throughput", "airport_cargo_volume",
-    "logistics_warehouse_rent", "e_commerce_delivery_speed", "retail_sales_index", "wholesale_market_prices", "agri_product_trading",
-    "factory_pollution_alerts", "patent_registration_stats", "trademark_lookup_tw", "labor_dispute_count", "income_tax_rank",
-    "energy_consumption", "green_energy_adoption", "foreign_talent_work_permit", "smb_financing_index", "bond_issuance",
-    "foreign_direct_investment", "offshore_wind_farm_progress", "semiconductor_fab_status", "venture_capital_stats", "listed_board_diversity",
-    "female_leadership_ratio", "rd_spending", "merger_acquisition_flow", "startup_survival_rate", "business_bankruptcy_stats",
-    "factory_land_demand", "industrial_electricity_stats", "high_tech_export_ratio", "supply_chain_resilience", "free_trade_zone_stats",
-    "brand_valuation_ranking", "incubator_occupancy", "foreign_representative_office", "cooperative_society_stats", "traditional_industry_upgrade"
+    "get_corp_moea_business_registration", "get_corp_industry_production_index", 
+    "get_corp_factory_count_statistics", "get_corp_export_value_by_industry"
 ]
 
 MACRO_LIST = [
-    "cpi_inflation_rate", "gdp_growth_quarterly", "unemployment_rate_tw", "pmi_manufacturing", "nmi_non_manufacturing",
-    "monetary_supply_m2", "foreign_exchange_reserve", "government_debt_clock", "public_infrastructure_budget", "central_bank_interest_rate",
-    "interbank_call_loan", "bond_yield_10y", "fertility_rate_stats", "population_aging_index", "electricity_reserve_margin",
-    "water_reservoir_levels", "oil_stockpile_days", "rice_security_inventory", "digital_economy_contribution", "startup_investment_total",
-    "tourism_arrival_count", "department_store_sales", "car_registration_new", "housing_starts_index", "m1b_m2_multiplier",
-    "labor_participation_rate", "avg_monthly_salary", "poverty_line_by_city", "tax_revenue_collection", "household_income_inequality",
-    "air_quality_avg", "forest_coverage_tw", "renewable_energy_gen", "co2_emission_per_capita", "river_pollution_index",
-    "social_welfare_spending", "education_budget_alloc", "r_d_to_gdp_ratio", "patent_application_total", "suicide_prevention_stats",
-    "traffic_accident_trends", "crime_rate_index", "internet_penetration_rate", "5g_coverage_map", "waste_recycling_rate",
-    "sea_level_monitoring", "average_life_expectancy", "gender_pay_gap", "real_estate_bubble_index", "national_happiness_rank"
+    "get_macro_gdp_growth_rate_quarterly", "get_macro_cpi_inflation_rate_tw", 
+    "get_macro_unemployment_rate_seasonal_adjusted", "get_macro_average_monthly_salary_dgbas",
+    "get_macro_fuel_price_cpc_retail"
 ]
 
 CRYPTO_LIST = [
-    "btc_realtime", "eth_realtime", "sol_realtime", "stablecoin_market_cap", "fear_greed_index",
-    "trending_coins_24h", "new_listings_dex", "eth_gas_tracker", "l2_transaction_fees", "nft_floor_prices",
-    "defi_total_value_locked", "bridge_volume_monitor", "exchange_reserve_proof", "mining_difficulty_btc", "staking_yield_avg",
-    "global_market_cap", "bitcoin_dominance", "event_calendar", "hack_alert_monitor", "whale_transaction_tracker"
+    "get_crypto_btc_twd_price", "get_crypto_eth_twd_price", "get_crypto_sol_twd_price",
+    "get_crypto_market_fear_greed_index"
 ]
