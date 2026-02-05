@@ -116,6 +116,10 @@ async def dispatch_mega_logic(name: str, symbol: Optional[str], limit: int) -> A
 
         # 3.5 銀行數據
         elif name.startswith("get_bank_"):
+            if "list_of_institutions" in name: return await BankLogic.get_list_of_institutions()
+            if "profit_loss_statements" in name: return await BankLogic.get_bank_profit_loss()
+            if "balance_sheets" in name: return await BankLogic.get_bank_balance_sheets()
+            if "major_assets_liabilities_stats" in name: return await BankLogic.get_bank_major_indicators()
             if "central_bank_base_rate" in name: return await EconomicsLogic.get_central_bank_rates()
             if "five_major_banks" in name: return await EconomicsLogic.get_five_major_banks_loan_rates()
             if "sme_loan" in name: return await BankLogic.get_sme_loan_stats()

@@ -23,6 +23,8 @@ DERIVATIVES_LIST = [
 ]
 
 BANK_LIST = [
+    "get_bank_list_of_institutions", "get_bank_profit_loss_statements", 
+    "get_bank_balance_sheets", "get_bank_major_assets_liabilities_stats",
     "get_bank_central_bank_base_rate", "get_bank_five_major_banks_loan_rates", 
     "get_bank_sme_loan_balance_stats", "get_bank_monthly_profit_summary",
     "get_bank_overdue_loan_stats", "get_bank_foreign_exchange_trading_volume",

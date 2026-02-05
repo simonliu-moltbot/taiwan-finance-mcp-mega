@@ -65,7 +65,11 @@ TOOL_METADATA = {
     "get_crypto_sol_twd_price": { "summary": "Solana 即時價格。", "inputs": "None", "outputs": "Price", "source": "CoinGecko" },
     "get_crypto_market_fear_greed_index": { "summary": "加密幣市場恐慌貪婪指數。", "inputs": "None", "outputs": "Index", "source": "CoinGecko" },
     
-    # 🏦 BANK (11 Tools)
+    # 🏦 BANK (15 Tools)
+    "get_bank_list_of_institutions": { "summary": "獲取台灣金融機構一覽表。包含銀行、信合社、農漁會等資訊。", "inputs": "None", "outputs": "機構名稱、代號。", "source": "CBC" },
+    "get_bank_profit_loss_statements": { "summary": "獲取本國銀行損益表彙總。分析銀行經營獲利狀況。", "inputs": "None", "outputs": "利息收入、淨收益、稅前損益。", "source": "CBC" },
+    "get_bank_balance_sheets": { "summary": "獲取本國銀行資產負債表。分析銀行資產規模與負債結構。", "inputs": "None", "outputs": "總資產、總負債、淨值。", "source": "CBC" },
+    "get_bank_major_assets_liabilities_stats": { "summary": "獲取本國銀行主要資產負債項目統計。監控重要金融指標變動。", "inputs": "None", "outputs": "存款、放款、投資部位。", "source": "CBC" },
     "get_bank_central_bank_base_rate": { "summary": "中央銀行基準利率(重貼現率)。", "inputs": "None", "outputs": "%", "source": "CBC" },
     "get_bank_five_major_banks_loan_rates": { "summary": "五大銀行新承做放款利率(含房貸)。", "inputs": "None", "outputs": "Rate (%)", "source": "CBC" },
     "get_bank_sme_loan_balance_stats": { "summary": "獲取本國銀行對中小企業放款餘額統計。", "inputs": "None", "outputs": "Balance (TWD)", "source": "FSC" },
