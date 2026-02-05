@@ -43,15 +43,16 @@ class EconomicsLogic:
             
             # 修正模糊匹配邏輯
             def get_val(d, target_words):
-                for key in d.keys():
+                for key, value in d.items():
+                    # 只要 Key 裡包含所有關鍵字組合，即視為匹配
                     if all(w in key for w in target_words):
-                        return d[key]
+                        return value
                 return "N/A"
 
             mapping = {
                 "salary": {"words": ["平均薪資"], "desc": "名目總薪資"},
                 "unemployment": {"words": ["失業率"], "desc": "失業率"},
-                "cpi": {"words": ["消費者物價指數", "年增率"], "desc": "CPI 年增率"},
+                "cpi": {"words": ["消費者物價指數"], "desc": "CPI 年增率"},
                 "gdp": {"words": ["經濟成長率"], "desc": "GDP 成長率"}
             }
 

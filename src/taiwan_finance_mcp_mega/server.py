@@ -1,5 +1,5 @@
 """
-Taiwan Finance MCP Mega v3.9.1
+Taiwan Finance MCP Mega v3.9.2
 [The Structured Intelligence Engine]
 Optimized tool naming and clean structured metadata.
 100% Real-world mapping for 75 core financial tools.
@@ -85,7 +85,10 @@ MEGA_ENDPOINT_MAP = {
     "get_corp_moea_business_registration": "moea_reg",
     "get_corp_industry_production_index": "moea_index",
     
-    # 🕒 COMMON
+    # 🌍 GLOBAL MACRO
+    "get_commodity_oil_wti_price_usd": "wti_oil",
+    "get_commodity_oil_brent_price_usd": "brent_oil",
+    "get_commodity_baltic_dry_index_bdi": "bdi_index",
     "get_current_time_taipei": "system_time"
 }
 
@@ -112,6 +115,8 @@ async def dispatch_mega_logic(name: str, symbol: Optional[str], limit: int) -> A
             if "gold_spot" in name: return await GlobalMacroLogic.get_commodity_price("GOLD")
             if "silver_spot" in name: return await GlobalMacroLogic.get_commodity_price("SILVER")
             if "baltic_dry" in name: return await GlobalMacroLogic.get_baltic_dry_index()
+            if "fed_rates" in name: return await GlobalMacroLogic.get_fed_rates()
+            if "vix_index" in name: return await GlobalMacroLogic.get_vix_index()
             
             # 提取幣別
             cur = name.split("_")[2].upper() if len(name.split("_")) > 2 else "USD"

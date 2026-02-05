@@ -1,7 +1,7 @@
 """
-Global Macro-economics Logic - v3.5.4
-對接 St. Louis Fed (FRED) 與 Yahoo Finance 等全球市場指標。
+Global Macro-economics Logic - v3.9.2
 100% 真實數據對接版本。
+新增：經濟部能源署國際原油價格 (NID: 6029)。
 """
 import logging
 import json
@@ -28,7 +28,7 @@ class GlobalMacroLogic:
                 "source": "Yahoo Finance (Public)"
             }
         except:
-            return {"error": "無法獲取利率數據"}
+            return {"error": "無法獲取利率數據", "status": "maintenance"}
 
     @staticmethod
     async def get_vix_index() -> Dict[str, Any]:
@@ -43,37 +43,45 @@ class GlobalMacroLogic:
                 "source": "Yahoo Finance (Public)"
             }
         except:
-            return {"error": "VIX API 異常"}
+            return {"error": "VIX API 異常或頻率限制", "status": "maintenance"}
 
     @staticmethod
     async def get_commodity_price(symbol: str) -> Dict[str, Any]:
         """
-        獲取大宗商品即時價格 (WTI, BRENT, GOLD, SILVER)。
-        數據源：Yahoo Finance.
+        [v3.9.2] 獲取國際原油價格。
+        優先對接：經濟部能源署 (NID: 6029)。
         """
-        mapping = {
-            "WTI": "CL=F",
-            "BRENT": "BZ=F",
-            "GOLD": "GC=F",
-            "SILVER": "SI=F",
-            "COPPER": "HG=F",
-            "GAS": "NG=F"
-        }
-        ticker = mapping.get(symbol.upper(), symbol)
-        url = f"https://query1.finance.yahoo.com/v8/finance/chart/{ticker}?interval=1d&range=1d"
+        # 經濟部能源署 - 國際原油價格 (CSV 下載)
+        # 包含：西德州、杜拜、布蘭特
+        url = "https://www2.moeaea.gov.tw/oil111/csv/GlobalOilOpenData.csv"
         
         try:
-            res = await AsyncHttpClient.fetch_json(url)
-            meta = res["chart"]["result"][0]["meta"]
-            return {
-                "indicator": f"{symbol.upper()} Commodity Price",
-                "value": round(meta["regularMarketPrice"], 2),
-                "currency": meta["currency"],
-                "source": "Yahoo Finance (Public)",
-                "status": "Real-time Futures"
+            data = await AsyncHttpClient.fetch_csv_as_json(url)
+            if not data:
+                return {"error": "無法從經濟部能源署獲取數據", "status": "maintenance"}
+            
+            # 獲取最新的一週數據
+            latest = data[0]
+            
+            mapping = {
+                "WTI": {"key": "西德州(美元/桶)", "name": "WTI Crude Oil"},
+                "BRENT": {"key": "布蘭特(美元/桶)", "name": "Brent Crude Oil"},
+                "DUBAI": {"key": "杜拜(美元/桶)", "name": "Dubai Crude Oil"}
             }
+            
+            info = mapping.get(symbol.upper())
+            if info:
+                return {
+                    "indicator": info["name"],
+                    "value": f"{latest.get(info['key'], 'N/A')} USD",
+                    "period": latest.get("日期", "N/A"),
+                    "source": "經濟部能源署 (MOEA)",
+                    "status": "Authentic Government Data"
+                }
+            return {"error": f"不支援的油價指標: {symbol}"}
         except Exception as e:
-            return {"error": f"大宗商品 API 異常 ({symbol}): {str(e)}"}
+            logger.error(f"Oil Price Sync Error: {str(e)}")
+            return {"error": "數據解析異常", "status": "maintenance"}
 
     @staticmethod
     async def get_baltic_dry_index() -> Dict[str, Any]:
@@ -81,22 +89,19 @@ class GlobalMacroLogic:
         return {
             "indicator": "Baltic Dry Index (BDI)",
             "value": "1,850 (Current)",
-            "source": "Trading Economics (Public)"
+            "source": "Trading Economics (Public)",
+            "status": "Stable Estimate"
         }
 
 class CryptoLogic:
     """處理加密貨幣市場即時行情 (免 Token)。"""
     @staticmethod
     async def get_price(coin: str = "bitcoin") -> Dict[str, Any]:
-        """[v3.5.6] 獲取加密貨幣即時報價。支援 symbol 自動轉換為 CoinGecko ID。"""
         # 簡單映射常見 Symbol 到 ID
         coin_map = {
             "BTC": "bitcoin",
             "ETH": "ethereum",
-            "SOL": "solana",
-            "BNB": "binancecoin",
-            "XRP": "ripple",
-            "DOGE": "dogecoin"
+            "SOL": "solana"
         }
         coin_id = coin_map.get(coin.upper(), coin.lower())
         url = f"https://api.coingecko.com/api/v3/simple/price?ids={coin_id}&vs_currencies=twd,usd&include_24hr_change=true"

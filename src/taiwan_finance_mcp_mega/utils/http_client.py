@@ -1,7 +1,9 @@
 import httpx
 import logging
 import asyncio
-from typing import Any, Dict, Optional
+import csv
+import io
+from typing import Any, Dict, Optional, List
 from cachetools import TTLCache
 from taiwan_finance_mcp_mega.config import Config
 
@@ -10,19 +12,15 @@ logger = logging.getLogger(Config.APP_NAME)
 
 class AsyncHttpClient:
     """
-    [v3.5.7] 帶有時效性緩存 (LRU Cache) 的異步 HTTP 客戶端。
-    優化證交所巨量數據下載，解決 Read Timed Out 與 500 錯誤。
+    [v3.9.2] 帶有時效性緩存與 CSV 解析支援的異步 HTTP 客戶端。
     """
     _client: httpx.AsyncClient = None
-    
-    # 緩存：最多存 100 個回應，每個有效 300 秒 (5分鐘)
     _cache = TTLCache(maxsize=100, ttl=300)
     _lock = asyncio.Lock()
 
     @classmethod
     async def get_client(cls) -> httpx.AsyncClient:
         if cls._client is None or cls._client.is_closed:
-            # 擴大超時限制至 45 秒以應對巨型 JSON
             cls._client = httpx.AsyncClient(
                 timeout=45.0, 
                 follow_redirects=True,
@@ -32,34 +30,46 @@ class AsyncHttpClient:
 
     @classmethod
     async def fetch_json(cls, url: str, params: Optional[Dict[str, Any]] = None):
-        # 1. 檢查緩存
-        cache_key = f"{url}_{sorted(params.items()) if params else ''}"
+        cache_key = f"json_{url}_{sorted(params.items()) if params else ''}"
         if cache_key in cls._cache:
-            logger.info(f"CACHE_HIT: {url}")
             return cls._cache[cache_key]
 
-        # 2. 異步鎖定：避免同時多個請求重複下載大檔案
         async with cls._lock:
-            if cache_key in cls._cache:
-                return cls._cache[cache_key]
-
-            # 3. 執行真實請求
+            if cache_key in cls._cache: return cls._cache[cache_key]
             client = await cls.get_client()
             try:
-                logger.info(f"FETCHING_REAL_DATA: {url}")
                 response = await client.get(url, params=params)
                 response.raise_for_status()
                 data = response.json()
-                
-                # 4. 寫入緩存
                 cls._cache[cache_key] = data
                 return data
-            except httpx.ReadTimeout:
-                logger.error(f"TIMEOUT: {url}")
-                return {"error": "遠端伺服器回應超時 (Read Timeout)，數據量過大或證交所繁忙。"}
             except Exception as e:
-                logger.error(f"Request failed: {url} - {str(e)}")
-                return {"error": f"API 請求失敗: {str(e)}"}
+                logger.error(f"JSON Fetch Error: {url} - {str(e)}")
+                return {"error": str(e), "status": "failed"}
+
+    @classmethod
+    async def fetch_csv_as_json(cls, url: str) -> List[Dict[str, Any]]:
+        """抓取 CSV 並轉換為 JSON 格式 (List of Dicts)"""
+        cache_key = f"csv_{url}"
+        if cache_key in cls._cache:
+            return cls._cache[cache_key]
+
+        async with cls._lock:
+            if cache_key in cls._cache: return cls._cache[cache_key]
+            client = await cls.get_client()
+            try:
+                response = await client.get(url)
+                response.raise_for_status()
+                # 處理編碼 (政府資料常使用 Big5 或 UTF-8 with BOM)
+                content = response.content.decode('utf-8-sig')
+                f = io.StringIO(content)
+                reader = csv.DictReader(f)
+                data = list(reader)
+                cls._cache[cache_key] = data
+                return data
+            except Exception as e:
+                logger.error(f"CSV Fetch Error: {url} - {str(e)}")
+                return []
 
     @classmethod
     async def close(cls):
