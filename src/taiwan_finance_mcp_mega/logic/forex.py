@@ -1,5 +1,5 @@
 """
-專業匯率與大宗商品邏輯模組 (Logic Module for Forex and Commodities) - v3.3.2
+專業匯率與大宗商品邏輯模組 (Logic Module for Forex and Commodities) - v3.3.3
 對接 真實世界即時匯率 API，支援全球 160+ 貨幣對台幣之精確換算。
 數據來源：ExchangeRate-API (實時市場價).
 """
@@ -26,7 +26,6 @@ class ForexLogic:
         Returns:
             Dict[str, Any]: 包含所有支援貨幣匯率的字典。
         """
-        # 使用穩定且無需 Key 的公開端點
         url = f"https://open.er-api.com/v6/latest/{base.upper()}"
         return await AsyncHttpClient.fetch_json(url)
 
@@ -50,7 +49,6 @@ class ForexLogic:
         rates = data.get("rates", {})
         try:
             # 2. 執行交叉換算 (Cross Rate Calculation)
-            # 因為 API 預設回傳的是對 USD 的匯率，需計算 target/base
             val_target = rates.get(target.upper())
             val_base = rates.get(base.upper())
             
@@ -73,23 +71,3 @@ class ForexLogic:
         except Exception as e:
             logger.error(f"Forex calculation failed: {str(e)}")
             return {"error": f"匯率計算發生異常: {str(e)}"}
-
-    @classmethod
-    async def get_bank_comparison(cls, currency: str) -> Dict[str, Any]:
-        """
-        [實體對接中] 查詢台灣主要銀行 (BOT, Mega, CTBC) 的牌告價差。
-        目前優先回傳市場即時中價與換匯建議。
-        """
-        market_data = await cls.get_pair(currency, "TWD")
-        if "error" in market_data: return market_data
-        
-        # 模擬銀行現鈔價差 (通常為中價 +- 1%~2%)
-        mid_rate = market_data["rate"]
-        return {
-            "currency": currency.upper(),
-            "market_mid_rate": mid_rate,
-            "estimated_cash_buy": round(mid_rate * 0.985, 4),
-            "estimated_cash_sell": round(mid_rate * 1.015, 4),
-            "recommendation": "建議優先查看台灣銀行 (Bank of Taiwan) 官方 App 獲取最準確現鈔匯率。",
-            "source": market_data["source"]
-        }
