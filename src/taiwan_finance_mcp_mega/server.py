@@ -14,12 +14,13 @@ from typing import Optional, List, Dict, Any
 from taiwan_finance_mcp_mega.config import Config
 from taiwan_finance_mcp_mega.logic.stock import StockLogic
 from taiwan_finance_mcp_mega.logic.forex import ForexLogic
+from taiwan_finance_mcp_mega.logic.derivatives import DerivativesLogic
 from taiwan_finance_mcp_mega.logic.global_macro import GlobalMacroLogic, CryptoLogic
 from taiwan_finance_mcp_mega.logic.gov_data import EconomicsLogic, PublicServiceLogic
 from taiwan_finance_mcp_mega.logic.corporate_logistics import CorporateLogic, IndustryLogic
 from taiwan_finance_mcp_mega.utils.http_client import AsyncHttpClient
 from taiwan_finance_mcp_mega.constants import (
-    STOCK_LIST, FOREX_LIST, BANK_LIST, TAX_LIST, CORP_LIST, MACRO_LIST, CRYPTO_LIST, COMMON_LIST
+    STOCK_LIST, FOREX_LIST, BANK_LIST, TAX_LIST, CORP_LIST, MACRO_LIST, CRYPTO_LIST, COMMON_LIST, DERIVATIVES_LIST
 )
 from taiwan_finance_mcp_mega.metadata import TOOL_METADATA
 
@@ -57,7 +58,15 @@ MEGA_ENDPOINT_MAP = {
     "get_macro_unemployment_rate_seasonal_adjusted": "dgbas_unemployment",
     "get_macro_average_monthly_salary_dgbas": "dgbas_salary",
     "get_macro_fuel_price_cpc_retail": "cpc_fuel",
-    "get_current_time_taipei": "system_time"
+    "get_macro_housing_price_index_tw": "housing_index",
+    
+    # 🕒 COMMON
+    "get_current_time_taipei": "system_time",
+
+    # 📉 DERIVATIVES
+    "get_futures_quotes_daily": "taifex_quotes",
+    "get_futures_institutional_investor_flow": "taifex_institutional",
+    "get_futures_open_interest_ranking": "taifex_oi"
 }
 
 # --- 2. 核心分發邏輯 ---
@@ -74,6 +83,12 @@ async def dispatch_mega_logic(name: str, symbol: Optional[str], limit: int) -> A
                 return await StockLogic.call_generic_api(endpoint, symbol)
             return await StockLogic.get_realtime_quotes(symbol)
 
+        # 1.5 衍生性商品 (Taifex)
+        elif name.startswith("get_futures_"):
+            if "institutional" in name: return await DerivativesLogic.get_taifex_institutional_flow()
+            if "ranking" in name: return await DerivativesLogic.get_futures_oi_top_list()
+            return await DerivativesLogic.get_futures_quotes()
+
         # 2. 全球匯率與大宗路由
         elif name.startswith("get_forex_") or name.startswith("get_commodity_"):
             if "oil_wti" in name: return await GlobalMacroLogic.get_commodity_price("WTI")
@@ -87,6 +102,7 @@ async def dispatch_mega_logic(name: str, symbol: Optional[str], limit: int) -> A
         # 3. 宏觀與政府路由
         elif name.startswith("get_macro_") or name.startswith("get_tax_") or name.startswith("get_corp_"):
             if "fuel_price" in name: return await PublicServiceLogic.get_fuel_prices()
+            if "housing_price_index" in name: return await EconomicsLogic.get_housing_price_index()
             if "moea_business_registration" in name: return await CorporateLogic.get_company_basic_info(symbol if symbol else "台積電")
             if "industry_production_index" in name: return await IndustryLogic.get_industry_production_index()
             
@@ -96,6 +112,11 @@ async def dispatch_mega_logic(name: str, symbol: Optional[str], limit: int) -> A
             elif "unemployment" in name: indicator = "unemployment"
             elif "salary" in name: indicator = "salary"
             return await EconomicsLogic.get_macro_stats(indicator)
+
+        # 3.5 銀行數據
+        elif name.startswith("get_bank_"):
+            if "central_bank_base_rate" in name: return await EconomicsLogic.get_central_bank_rates()
+            return {"error": "銀行細分數據正在對接中"}
 
         # 4. 加密貨幣路由
         elif name.startswith("get_crypto_"):
@@ -115,7 +136,7 @@ def register_all_tools():
     tool_groups = [
         (STOCK_LIST, "Stock"), (FOREX_LIST, "Forex"), (BANK_LIST, "Bank"),
         (TAX_LIST, "Tax"), (CORP_LIST, "Corp"), (MACRO_LIST, "Macro"), 
-        (CRYPTO_LIST, "Crypto"), (COMMON_LIST, "Common")
+        (CRYPTO_LIST, "Crypto"), (COMMON_LIST, "Common"), (DERIVATIVES_LIST, "Derivatives")
     ]
     
     for tools, group_name in tool_groups:

@@ -1,4 +1,4 @@
-# Taiwan Finance MCP Mega - Semantic Tool List Constants (v4.1.0)
+# Taiwan Finance MCP Mega - Semantic Tool List Constants (v4.2.0)
 
 STOCK_LIST = [
     "get_stock_quotes_realtime_all", "get_stock_eps_ranking_summary", "get_stock_dividend_yield_pe_pb", 
@@ -14,15 +14,17 @@ FOREX_LIST = [
     "get_forex_cny_twd_realtime", "get_forex_hkd_twd_realtime", "get_forex_gbp_twd_realtime", 
     "get_forex_aud_twd_realtime", "get_forex_cad_twd_realtime", "get_forex_sgd_twd_realtime", 
     "get_forex_krw_twd_realtime",
-    
-    # Commodities (Government Source for Oil)
     "get_commodity_oil_wti_price_usd", "get_commodity_oil_brent_price_usd", 
     "get_commodity_gold_spot_price_twd", "get_commodity_silver_spot_price_twd"
 ]
 
+DERIVATIVES_LIST = [
+    "get_futures_quotes_daily", "get_futures_institutional_investor_flow", "get_futures_open_interest_ranking"
+]
+
 BANK_LIST = [
-    "get_bank_deposit_rate_fixed", "get_bank_mortgage_rate_average", "get_bank_credit_card_delinquency",
-    "get_bank_atm_location_map", "get_bank_capital_adequacy_ratio"
+    "get_bank_central_bank_base_rate", "get_bank_deposit_rate_fixed", "get_bank_mortgage_rate_average", 
+    "get_bank_credit_card_delinquency", "get_bank_atm_location_map", "get_bank_capital_adequacy_ratio"
 ]
 
 TAX_LIST = [
@@ -38,7 +40,7 @@ CORP_LIST = [
 MACRO_LIST = [
     "get_macro_gdp_growth_rate_quarterly", "get_macro_cpi_inflation_rate_tw", 
     "get_macro_unemployment_rate_seasonal_adjusted", "get_macro_average_monthly_salary_dgbas",
-    "get_macro_fuel_price_cpc_retail"
+    "get_macro_fuel_price_cpc_retail", "get_macro_housing_price_index_tw"
 ]
 
 CRYPTO_LIST = [

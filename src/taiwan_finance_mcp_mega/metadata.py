@@ -1,6 +1,6 @@
 """
-Taiwan Finance MCP Mega - Exhaustive Metadata Mapping (v4.0.0)
-Removed ESG category as requested by the user due to data source limitations.
+Taiwan Finance MCP Mega - Exhaustive Metadata Mapping (v4.2.0)
+Added Derivatives, Central Bank Rates, and Housing Index.
 """
 
 TOOL_METADATA = {
@@ -23,11 +23,16 @@ TOOL_METADATA = {
     "get_stock_buyback_treasury_status": "查詢上市公司執行買回庫藏股的進度、金額與股數統計。數據源：TWSE。",
     "get_stock_broker_regular_savings_data": "查詢目前開辦定期定額業務的證券商名單與承作規定。數據源：TWSE。",
 
+    # 📉 DERIVATIVES (3 Tools)
+    "get_futures_quotes_daily": "獲取台灣期交所 (Taifex) 期貨每日收盤行情。包含各品種結算價與成交量。數據源：台灣期交所 (Taifex)。",
+    "get_futures_institutional_investor_flow": "查詢三大法人於期貨市場的買賣超與未平倉彙總。判斷市場多空力道關鍵指標。數據源：Taifex。",
+    "get_futures_open_interest_ranking": "查詢期貨市場大額交易人未平倉部位統計排名。追蹤大戶佈局動向。數據源：Taifex。",
+
     # 🌍 FOREX & GLOBAL (15 Tools)
     "get_forex_usd_twd_realtime": "查詢美金 (USD) 兌換新台幣 (TWD) 的即時市場中間匯率。數據源：Real-time ExchangeRate-API。",
     "get_forex_jpy_twd_realtime": "查詢日圓 (JPY) 兌換新台幣 (TWD) 的即時市場中間匯率。適用於旅遊與進出口。數據源：ExchangeRate-API。",
     "get_forex_eur_twd_realtime": "查詢歐元 (EUR) 兌換新台幣 (TWD) 的即時市場中間匯率。數據源：ExchangeRate-API。",
-    "get_forex_cny_twd_realtime": "查詢人民幣 (CNY) 兌換新台幣 (TWD) 的即時市場中間匯率。數據源：ExchangeRate-API。",
+    "get_forex_cny_twd_realtime": "查詢人民幣 (CNY) 兌換新台幣 (TWD) 的即時市場中間匯率.數據源：ExchangeRate-API。",
     "get_forex_hkd_twd_realtime": "查詢港幣 (HKD) 兌換新台幣 (TWD) 的即時市場中間匯率。數據源：ExchangeRate-API。",
     "get_forex_gbp_twd_realtime": "查詢英鎊 (GBP) 兌換新台幣 (TWD) 的即時市場中間匯率。數據源：ExchangeRate-API。",
     "get_forex_aud_twd_realtime": "查詢澳幣 (AUD) 兌換新台幣 (TWD) 的即時市場中間匯率。數據源：ExchangeRate-API。",
@@ -41,11 +46,12 @@ TOOL_METADATA = {
     "get_commodity_baltic_dry_index_bdi": "查詢波羅的海乾散貨指數 (BDI)。全球大宗原物料航運運費的重要指標。",
 
     # 🏛️ MACRO & GOV (13 Tools)
-    "get_macro_gdp_growth_rate_quarterly": "查詢台灣季度 GDP 經濟成長率 (%)。衡量台灣整體經濟擴張或衰退的最權威指標。數據源：行政院主計總處 (DGBAS)。",
-    "get_macro_cpi_inflation_rate_tw": "查詢台灣消費者物價指數 (CPI) 年增率。判斷通膨狀況的重要依據。數據源：勞動部年度主要指標 (MOL)。",
-    "get_macro_unemployment_rate_seasonal_adjusted": "查詢台灣最新失業率百分比。分析台灣就業市場供需。數據源：勞動部年度主要指標 (MOL)。",
-    "get_macro_average_monthly_salary_dgbas": "查詢台灣受僱員工每月平均名目總薪資。數據源：勞動部年度主要指標 (MOL)。",
-    "get_macro_fuel_price_cpc_retail": "查詢台灣中油 (CPC) 當週掛牌零售油價（92/95/98無鉛、超級柴油）。台灣在地生活成本參考。數據源：台灣中油。",
+    "get_macro_gdp_growth_rate_quarterly": "查詢台灣季度 GDP 經濟成長率 (%)。衡量台灣整體經濟擴張或衰退的最權威指標。數據源：勞動部年度主要指標 (MOL / DGBAS)。",
+    "get_macro_cpi_inflation_rate_tw": "查詢台灣消費者物價指數 (CPI) 年增率。判斷通膨狀況的重要依據。數據源：勞動部 (MOL / DGBAS)。",
+    "get_macro_unemployment_rate_seasonal_adjusted": "查詢台灣最新失業率百分比。分析台灣就業市場供需。數據源：勞動部 (MOL / DGBAS)。",
+    "get_macro_average_monthly_salary_dgbas": "查詢台灣受僱員工每月平均名目總薪資。數據源：勞動部 (MOL / DGBAS)。",
+    "get_macro_fuel_price_cpc_retail": "查詢台灣中油 (CPC) 當週掛牌零售油價（92/95/98無鉛、超級柴油）。數據源：台灣中油 (NID 6339)。",
+    "get_macro_housing_price_index_tw": "查詢台灣全國住宅價格指數與年增率。判斷房地產景氣與資產增值趨勢。數據源：內政部地政司。",
     "get_tax_revenue_collection_monthly": "查詢全國各項賦稅收入最新月份的實徵淨額與年度累計統計。數據源：財政部 (MOF)。",
     "get_tax_income_bracket_calculator": "獲取台灣綜合所得稅級距與免稅額試算資料。數據源：財政部。",
     "get_tax_electronic_invoice_usage_stats": "查詢台灣電子發票普及統計。數據源：財政部。",
@@ -53,14 +59,15 @@ TOOL_METADATA = {
     "get_corp_industry_production_index": "查詢台灣工業生產指數與年增率。判斷製造業生產動能。數據源：經濟部 (MOEA)。",
     "get_corp_factory_count_statistics": "查詢台灣各縣市工廠登記數量統計。數據源：經濟部 (MOEA)。",
     "get_corp_export_value_by_industry": "查詢按行業別劃分之出口貿易總值統計（美元）。數據源：經濟部 (MOEA)。",
-    "get_crypto_market_fear_greed_index": "查詢全球加密貨幣市場恐慌與貪婪指數。數據源：CoinGecko。",
 
-    # 🪙 CRYPTO (3 Core Tools)
+    # 🪙 CRYPTO (4 Tools)
     "get_crypto_btc_twd_price": "查詢比特幣 (Bitcoin) 的台幣與美金即時報價、24小時漲跌幅。數據源：CoinGecko。",
     "get_crypto_eth_twd_price": "查詢以太幣 (Ethereum) 的台幣與美金即時報價、24小時漲跌幅。數據源：CoinGecko。",
     "get_crypto_sol_twd_price": "查詢 Solana 的即時報價與 24 小時漲跌變動。數據源：CoinGecko。",
+    "get_crypto_market_fear_greed_index": "查詢全球加密貨幣市場恐慌與貪婪指數。數據源：CoinGecko。",
     
-    # 🏦 BANK
+    # 🏦 BANK (5 Tools)
+    "get_bank_central_bank_base_rate": "查詢中華民國中央銀行 (CBC) 最新的重貼現率等基準利率。反映市場資金成本。數據源：中央銀行 (CBC)。",
     "get_bank_deposit_rate_fixed": "查詢台灣主要銀行定期存款利率。數據源：中央銀行。",
     "get_bank_mortgage_rate_average": "查詢台灣平均購屋貸款利率趨勢。數據源：中央銀行。",
     "get_bank_credit_card_delinquency": "信用卡逾期帳款統計。數據源：金管會。",
@@ -68,5 +75,5 @@ TOOL_METADATA = {
     "get_bank_capital_adequacy_ratio": "本國銀行資本適足率指標。數據源：金管會。",
 
     # 🕒 COMMON (1 Tool)
-    "get_current_time_taipei": "獲取台北 (Asia/Taipei) 現下的精確系統時間。用於確認盤中、盤後或例假日狀態。"
+    "get_current_time_taipei": "獲取台北 (Asia/Taipei) 現下的精確系統時間、星期幾及 ISO 時間戳。用於確認盤中、盤後或例假日狀態。"
 }
