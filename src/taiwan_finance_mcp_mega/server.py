@@ -1,8 +1,8 @@
 """
-Taiwan Finance MCP Mega v3.8.3
-[The Semantic Engine]
-Optimized tool naming and rich metadata dispatching.
-100% Real-world mapping for 300+ financial indicators.
+Taiwan Finance MCP Mega v3.9.0
+[The Structured Intelligence Engine]
+Optimized tool naming and rich structured metadata.
+100% Real-world mapping for 75 core financial tools.
 """
 import sys
 import argparse
@@ -158,21 +158,34 @@ def register_all_tools():
             # 獲取該工具的專屬語義描述
             tool_desc = TOOL_METADATA.get(t_name, f"專業級金融數據接口 [{t_name}]。支援代碼或名稱查詢。")
             
-            def create_tool(name, desc):
+            def create_tool(name, meta):
                 # 1. 定義原始函數
                 async def mcp_tool_raw(symbol: Optional[str] = None, limit: int = 10) -> str:
                     res = await dispatch_mega_logic(name, symbol, limit)
                     return json.dumps(res, indent=2, ensure_ascii=False)
                 
-                # 2. 動態注入純粹的業務語義 (移除版本號與技術干擾)
-                mcp_tool_raw.__doc__ = f"{desc}"
+                # 2. 構造結構化 Markdown Docstring
+                summary = meta.get("summary", "專業級金融數據接口。")
+                inputs = meta.get("inputs", "symbol (選填): 代碼或名稱。")
+                outputs = meta.get("outputs", "回傳相關金融 JSON 數據。")
+                source = meta.get("source", "官方公開資料庫。")
+                
+                rich_doc = (
+                    f"{summary}\n\n"
+                    f"🔹 [參數 Inputs]: {inputs}\n"
+                    f"🔸 [回傳 Outputs]: {outputs}\n"
+                    f"🌐 [來源 Source]: {source}"
+                )
+                
+                mcp_tool_raw.__doc__ = rich_doc
                 mcp_tool_raw.__name__ = name
                 
                 # 3. 註冊至 MCP
                 mcp.tool(name=name)(mcp_tool_raw)
                 return mcp_tool_raw
             
-            create_tool(t_name, tool_desc)
+            # 傳遞完整的 meta 字典
+            create_tool(t_name, TOOL_METADATA.get(t_name, {}))
 
 register_all_tools()
 
