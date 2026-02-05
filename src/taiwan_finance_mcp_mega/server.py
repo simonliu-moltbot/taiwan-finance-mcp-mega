@@ -1,5 +1,5 @@
 """
-Taiwan Finance MCP Mega v3.8.2
+Taiwan Finance MCP Mega v3.8.3
 [The Semantic Engine]
 Optimized tool naming and rich metadata dispatching.
 100% Real-world mapping for 300+ financial indicators.
@@ -164,12 +164,11 @@ def register_all_tools():
                     res = await dispatch_mega_logic(name, symbol, limit)
                     return json.dumps(res, indent=2, ensure_ascii=False)
                 
-                # 2. 動態注入語義化 Docstring (在註冊前)
-                mcp_tool_raw.__doc__ = f"{desc}\n\n[v3.8.2] 參數 symbol: 標的代碼或名稱。"
+                # 2. 動態注入純粹的業務語義 (移除版本號與技術干擾)
+                mcp_tool_raw.__doc__ = f"{desc}"
                 mcp_tool_raw.__name__ = name
                 
-                # 3. 手動調用 mcp.tool 裝飾器進行註冊
-                # 這樣 FastMCP 才能在註冊當下抓取到正確的 __doc__
+                # 3. 註冊至 MCP
                 mcp.tool(name=name)(mcp_tool_raw)
                 return mcp_tool_raw
             
@@ -178,7 +177,7 @@ def register_all_tools():
 register_all_tools()
 
 def main():
-    parser = argparse.ArgumentParser(description="Taiwan Finance MCP Mega v3.8.2")
+    parser = argparse.ArgumentParser(description="Taiwan Finance MCP Mega v3.8.3")
     parser.add_argument("--mode", choices=["stdio", "http"], default="stdio")
     parser.add_argument("--port", type=int, default=8005)
     args = parser.parse_args()
