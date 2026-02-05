@@ -16,7 +16,7 @@ run-stdio:
 	$(VENV)/bin/python $(APP_PATH) --mode stdio
 
 run-http:
-	$(VENV)/bin/python $(APP_PATH) --mode http --port 8000
+	$(VENV)/bin/python $(APP_PATH) --mode http --port 8005
 
 compose-up:
 	docker-compose up -d --build
