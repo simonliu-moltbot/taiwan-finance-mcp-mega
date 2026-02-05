@@ -7,11 +7,11 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-# Set PYTHONPATH to include src
+# Set PYTHONPATH to root of src
 ENV PYTHONPATH=/app/src
 
 EXPOSE 8000
 
-# Default to HTTP mode for Docker
-ENTRYPOINT ["python", "src/taiwan_finance_mcp_mega/server.py"]
+# Run the self-contained main.py
+ENTRYPOINT ["python", "src/main.py"]
 CMD ["--mode", "http", "--port", "8000"]
