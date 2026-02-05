@@ -116,6 +116,7 @@ async def dispatch_mega_logic(name: str, symbol: Optional[str], limit: int) -> A
         # 3.5 銀行數據
         elif name.startswith("get_bank_"):
             if "central_bank_base_rate" in name: return await EconomicsLogic.get_central_bank_rates()
+            if "five_major_banks" in name: return await EconomicsLogic.get_five_major_banks_loan_rates()
             return {"error": "銀行細分數據正在對接中"}
 
         # 4. 加密貨幣路由

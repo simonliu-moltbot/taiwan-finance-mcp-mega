@@ -1,5 +1,5 @@
 """
-Derivatives & Futures Logic - v4.2.0
+Derivatives & Futures Logic - v4.2.1
 對接 臺灣期貨交易所 (Taifex) OpenAPI。
 提供期貨、選擇權與三大法人留倉數據。
 """

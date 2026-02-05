@@ -23,7 +23,8 @@ DERIVATIVES_LIST = [
 ]
 
 BANK_LIST = [
-    "get_bank_central_bank_base_rate", "get_bank_deposit_rate_fixed", "get_bank_mortgage_rate_average", 
+    "get_bank_central_bank_base_rate", "get_bank_five_major_banks_loan_rates", 
+    "get_bank_deposit_rate_fixed", "get_bank_mortgage_rate_average", 
     "get_bank_credit_card_delinquency", "get_bank_atm_location_map", "get_bank_capital_adequacy_ratio"
 ]
 

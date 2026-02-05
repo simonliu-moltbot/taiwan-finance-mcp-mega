@@ -1,7 +1,7 @@
 """
-Taiwan Macro-economics & Gov Data Logic - v4.2.0
+Taiwan Macro-economics & Gov Data Logic - v4.2.1
 100% 真實數據對接版本。
-新增：中央銀行 (CBC) 基準利率、內政部住宅價格指數。
+新增：中央銀行 (CBC) 基準利率、五大銀行利率、內政部住宅價格指數。
 """
 import logging
 import json
@@ -52,7 +52,7 @@ class EconomicsLogic:
 
     @staticmethod
     async def get_central_bank_rates() -> Dict[str, Any]:
-        """獲取中央銀行重貼現率等基準利率 (NID: 6303)。"""
+        """獲取中央銀行重貼現率 (NID: 6303)。"""
         url = "https://quality.data.gov.tw/dq_download_json.php?nid=6303&md5_url=59196b0c242337d40236a281691a5f36"
         try:
             data = await AsyncHttpClient.fetch_json(url)
@@ -65,6 +65,24 @@ class EconomicsLogic:
             }
         except:
             return {"error": "央行利率數據暫時無法獲取"}
+
+    @staticmethod
+    async def get_five_major_banks_loan_rates() -> Dict[str, Any]:
+        """獲取五大銀行新承做放款利率 (NID: 6301)。"""
+        # 使用政府 CSV 直接下載路徑以確保穩定
+        url = "https://www.cbc.gov.tw/public/data/statistics/rate/5banks.csv"
+        try:
+            data = await AsyncHttpClient.fetch_csv_as_json(url)
+            latest = data[-1] if data else {}
+            return {
+                "source": "中央銀行 (CBC)",
+                "indicator": "五大銀行新承做放款利率",
+                "average_mortgage_rate": f"{latest.get('購屋貸款', 'N/A')}%",
+                "base_rate": f"{latest.get('基準利率', 'N/A')}%",
+                "period": latest.get("日期", "N/A")
+            }
+        except:
+            return {"error": "五大銀行利率數據維護中"}
 
     @staticmethod
     async def get_housing_price_index() -> Dict[str, Any]:
