@@ -1,7 +1,7 @@
 """
-Taiwan Finance MCP Mega v3.9.0
+Taiwan Finance MCP Mega v3.9.1
 [The Structured Intelligence Engine]
-Optimized tool naming and rich structured metadata.
+Optimized tool naming and clean structured metadata.
 100% Real-world mapping for 75 core financial tools.
 """
 import sys
@@ -164,7 +164,7 @@ def register_all_tools():
                     res = await dispatch_mega_logic(name, symbol, limit)
                     return json.dumps(res, indent=2, ensure_ascii=False)
                 
-                # 2. 構造結構化 Markdown Docstring
+                # 2. 構造結構化 Markdown Docstring (無 Emoji 專業版)
                 summary = meta.get("summary", "專業級金融數據接口。")
                 inputs = meta.get("inputs", "symbol (選填): 代碼或名稱。")
                 outputs = meta.get("outputs", "回傳相關金融 JSON 數據。")
@@ -172,9 +172,9 @@ def register_all_tools():
                 
                 rich_doc = (
                     f"{summary}\n\n"
-                    f"🔹 [參數 Inputs]: {inputs}\n"
-                    f"🔸 [回傳 Outputs]: {outputs}\n"
-                    f"🌐 [來源 Source]: {source}"
+                    f"Inputs: {inputs}\n"
+                    f"Outputs: {outputs}\n"
+                    f"Source: {source}"
                 )
                 
                 mcp_tool_raw.__doc__ = rich_doc
