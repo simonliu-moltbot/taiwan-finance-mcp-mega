@@ -1,7 +1,7 @@
 """
-Taiwan Finance MCP Mega v3.7.2
+Taiwan Finance MCP Mega v3.8.1
 [The Semantic Engine]
-Optimized tool naming and high-performance dispatching.
+Optimized tool naming and rich metadata dispatching.
 100% Real-world mapping for 300+ financial indicators.
 """
 import sys
@@ -22,6 +22,7 @@ from taiwan_finance_mcp_mega.utils.http_client import AsyncHttpClient
 from taiwan_finance_mcp_mega.constants import (
     STOCK_LIST, FOREX_LIST, BANK_LIST, TAX_LIST, CORP_LIST, MACRO_LIST, CRYPTO_LIST, COMMON_LIST
 )
+from taiwan_finance_mcp_mega.metadata import TOOL_METADATA
 
 # Logging
 logging.basicConfig(level=logging.INFO)
@@ -154,22 +155,27 @@ def register_all_tools():
     
     for tools, group_name in tool_groups:
         for t_name in tools:
-            def create_tool(name):
+            # 獲取該工具的專屬語義描述，若無則使用預設
+            tool_desc = TOOL_METADATA.get(t_name, f"專業級金融數據接口 [{t_name}]。支援代碼或名稱查詢。")
+            
+            def create_tool(name, desc):
                 @mcp.tool(name=name)
                 async def mcp_tool_fn(symbol: Optional[str] = None, limit: int = 10) -> str:
-                    """[v3.7.2] 專業金融數據接口。支援代碼 (2330) 或名稱查詢。"""
+                    """[v3.8.1] 專業金融數據接口。支援代碼 (2330) 或名稱查詢。"""
                     res = await dispatch_mega_logic(name, symbol, limit)
                     return json.dumps(res, indent=2, ensure_ascii=False)
                 
+                # 動態注入富含語義的 Docstring
+                mcp_tool_fn.__doc__ = f"{desc}\n\n[v3.8.1] 參數 symbol: 標的代碼或名稱。"
                 mcp_tool_fn.__name__ = name
                 return mcp_tool_fn
             
-            create_tool(t_name)
+            create_tool(t_name, tool_desc)
 
 register_all_tools()
 
 def main():
-    parser = argparse.ArgumentParser(description="Taiwan Finance MCP Mega v3.7.2")
+    parser = argparse.ArgumentParser(description="Taiwan Finance MCP Mega v3.8.1")
     parser.add_argument("--mode", choices=["stdio", "http"], default="stdio")
     parser.add_argument("--port", type=int, default=8005)
     args = parser.parse_args()

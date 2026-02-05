@@ -1,0 +1,24 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.9.6, pytest-8.4.2, pluggy-1.6.0 -- /Library/Developer/CommandLineTools/usr/bin/python3
+cachedir: .pytest_cache
+rootdir: /Users/simonliuyuwei/clawd/projects/taiwan-finance-mcp-mega
+plugins: anyio-4.12.1, asyncio-1.2.0
+asyncio: mode=strict, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 0 items / 1 error
+
+==================================== ERRORS ====================================
+____________________ ERROR collecting tests/test_mega_v2.py ____________________
+ImportError while importing test module '/Users/simonliuyuwei/clawd/projects/taiwan-finance-mcp-mega/tests/test_mega_v2.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/importlib/__init__.py:127: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+tests/test_mega_v2.py:8: in <module>
+    from taiwan_finance_mcp_mega.server import dispatch_mega_logic
+src/taiwan_finance_mcp_mega/server.py:11: in <module>
+    from fastmcp import FastMCP
+E   ModuleNotFoundError: No module named 'fastmcp'
+=========================== short test summary info ============================
+ERROR tests/test_mega_v2.py
+!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+=============================== 1 error in 0.07s ===============================
