@@ -136,3 +136,9 @@ class StockLogic:
         """
         url = f"{Config.TWSE_BASE}{endpoint}"
         return await StockLogic._fetch_and_filter(url, symbol)
+
+    @staticmethod
+    async def get_tpex_quotes(symbol: Optional[str] = None) -> List[Dict[str, Any]]:
+        """獲取上櫃個股當日即時行情 (TPEx)."""
+        url = "https://www.tpex.org.tw/openapi/v1/t187ap03_O" # 上櫃基本資料為例
+        return await StockLogic._fetch_and_filter(url, symbol, "公司代號")

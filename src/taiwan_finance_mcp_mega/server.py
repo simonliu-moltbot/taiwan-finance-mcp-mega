@@ -48,12 +48,23 @@ API_ENDPOINT_MAP = {
     "esg_water_resources": "/opendata/t187ap46_L_3",
     "esg_food_safety": "/opendata/t187ap46_L_12",
     "block_trade_summary": "/block/BFIAUU_d"
+    # GLOBAL
+    "fed_rates": "global_fed",
+    "vix_index": "global_vix",
+    "baltic_dry": "global_bdi"
 }
 
 # --- 2. 核心分發邏輯 ---
 
 async def dispatch_mega_logic(name: str, symbol: Optional[str], limit: int) -> Any:
     try:
+        # Global 宏觀邏輯
+        if name.startswith("global_") or name == "macro_global_stats":
+            if "fed" in name: return await GlobalMacroLogic.get_fed_rates()
+            if "vix" in name: return await GlobalMacroLogic.get_vix_index()
+            if "bdi" in name: return await GlobalMacroLogic.get_baltic_dry_index()
+            return await GlobalMacroLogic.get_fed_rates()
+
         # A. 台股類
         if name.startswith("stock_"):
             tool_id = name.replace("stock_", "")
