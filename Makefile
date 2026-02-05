@@ -5,7 +5,7 @@ PIP = pip3
 VENV = .venv
 APP_PATH = src/taiwan_finance_mcp_mega/server.py
 
-.PHONY: setup run-stdio run-http clean docker-build docker-run
+.PHONY: setup run-stdio run-http clean docker-build docker-run compose-up compose-down
 
 setup:
 	$(PYTHON) -m venv $(VENV)
@@ -17,6 +17,12 @@ run-stdio:
 
 run-http:
 	$(VENV)/bin/python $(APP_PATH) --mode http --port 8000
+
+compose-up:
+	docker-compose up -d --build
+
+compose-down:
+	docker-compose down
 
 clean:
 	rm -rf $(VENV)
