@@ -1,6 +1,6 @@
 """
-Taiwan Finance MCP Mega - Exhaustive Metadata Mapping (v4.3.0)
-Expanded Bank category with FSC and CBC real-world indicators.
+Taiwan Finance MCP Mega - Exhaustive Metadata Mapping (v4.3.2)
+Finalizing Bank and Money Supply indicators.
 """
 
 TOOL_METADATA = {
@@ -65,21 +65,19 @@ TOOL_METADATA = {
     "get_crypto_sol_twd_price": { "summary": "Solana 即時價格。", "inputs": "None", "outputs": "Price", "source": "CoinGecko" },
     "get_crypto_market_fear_greed_index": { "summary": "加密幣市場恐慌貪婪指數。", "inputs": "None", "outputs": "Index", "source": "CoinGecko" },
     
-    # 🏦 BANK (15 Tools)
-    "get_bank_list_of_institutions": { "summary": "獲取台灣金融機構一覽表。包含銀行、信合社、農漁會等資訊。", "inputs": "None", "outputs": "機構名稱、代號。", "source": "CBC" },
-    "get_bank_profit_loss_statements": { "summary": "獲取本國銀行損益表彙總。分析銀行經營獲利狀況。", "inputs": "None", "outputs": "利息收入、淨收益、稅前損益。", "source": "CBC" },
-    "get_bank_balance_sheets": { "summary": "獲取本國銀行資產負債表。分析銀行資產規模與負債結構。", "inputs": "None", "outputs": "總資產、總負債、淨值。", "source": "CBC" },
-    "get_bank_major_assets_liabilities_stats": { "summary": "獲取本國銀行主要資產負債項目統計。監控重要金融指標變動。", "inputs": "None", "outputs": "存款、放款、投資部位。", "source": "CBC" },
+    # 🏦 BANK (13 Tools)
+    "get_bank_list_of_institutions": { "summary": "獲取台灣金融機構一覽表。", "inputs": "None", "outputs": "機構名稱、代號。", "source": "CBC" },
+    "get_bank_profit_loss_statements": { "summary": "獲取本國銀行損益表彙總。", "inputs": "None", "outputs": "損益數據。", "source": "CBC" },
+    "get_bank_balance_sheets": { "summary": "獲取本國銀行資產負債表。", "inputs": "None", "outputs": "規模結構。", "source": "CBC" },
+    "get_bank_major_assets_liabilities_stats": { "summary": "獲取本國銀行主要資產負債項目。", "inputs": "None", "outputs": "存貸款統計。", "source": "CBC" },
+    "get_bank_m1b_m2_money_supply": { "summary": "查詢貨幣總計數 M1B/M2 年增率。", "inputs": "None", "outputs": "%。", "source": "CBC" },
+    "get_bank_foreign_exchange_reserves": { "summary": "查詢台灣外匯存底統計。", "inputs": "None", "outputs": "USD 億元。", "source": "CBC" },
     "get_bank_central_bank_base_rate": { "summary": "中央銀行基準利率(重貼現率)。", "inputs": "None", "outputs": "%", "source": "CBC" },
     "get_bank_five_major_banks_loan_rates": { "summary": "五大銀行新承做放款利率(含房貸)。", "inputs": "None", "outputs": "Rate (%)", "source": "CBC" },
-    "get_bank_sme_loan_balance_stats": { "summary": "獲取本國銀行對中小企業放款餘額統計。", "inputs": "None", "outputs": "Balance (TWD)", "source": "FSC" },
-    "get_bank_monthly_profit_summary": { "summary": "獲取銀行業每月獲利與損益統計摘要。", "inputs": "None", "outputs": "Net Profit", "source": "FSC" },
-    "get_bank_foreign_exchange_trading_volume": { "summary": "查詢外匯指定銀行(DBU)之交易量統計。", "inputs": "None", "outputs": "Volume (USD)", "source": "CBC" },
-    "get_bank_overdue_loan_stats": { "summary": "查詢本國銀行逾期放款與資產品質統計。", "inputs": "None", "outputs": "NPL Ratio", "source": "FSC" },
-    "get_bank_deposit_rate_fixed": { "summary": "主要銀行定存利率彙總。", "inputs": "None", "outputs": "Rate", "source": "CBC" },
-    "get_bank_mortgage_rate_average": { "summary": "台灣房貸利率走勢趨勢。", "inputs": "None", "outputs": "Rate", "source": "CBC" },
-    "get_bank_credit_card_delinquency": { "summary": "信用卡逾期與簽帳統計。", "inputs": "None", "outputs": "Ratio", "source": "FSC" },
-    "get_bank_atm_location_map": { "summary": "全台 ATM 網點設置統計。", "inputs": "None", "outputs": "Stats", "source": "FSC" },
+    "get_bank_sme_loan_balance_stats": { "summary": "獲取本國銀行對中小企業放款餘額。", "inputs": "None", "outputs": "Balance (TWD)", "source": "FSC" },
+    "get_bank_monthly_profit_summary": { "summary": "獲取銀行業每月獲利損益摘要。", "inputs": "None", "outputs": "Profit", "source": "FSC" },
+    "get_bank_foreign_exchange_trading_volume": { "summary": "查詢外匯指定銀行交易量統計。", "inputs": "None", "outputs": "Volume", "source": "CBC" },
+    "get_bank_overdue_loan_stats": { "summary": "查詢銀行逾期放款與資產品質。", "inputs": "None", "outputs": "Ratio", "source": "FSC" },
     "get_bank_capital_adequacy_ratio": { "summary": "本國銀行資本適足率。", "inputs": "None", "outputs": "Ratio", "source": "FSC" },
 
     # 🕒 COMMON (1 Tool)

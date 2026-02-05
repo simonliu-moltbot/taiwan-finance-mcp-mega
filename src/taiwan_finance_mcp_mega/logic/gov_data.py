@@ -109,6 +109,39 @@ class BankLogic:
         """獲取外匯交易量統計。"""
         return {"source": "中央銀行", "volume_usd": "35B USD (Est.)"}
 
+    @staticmethod
+    async def get_money_supply_stats() -> Dict[str, Any]:
+        """獲取貨幣總計數 M1B, M2 (中央銀行)。"""
+        url = "https://www.cbc.gov.tw/public/data/statistics/money/money.csv"
+        try:
+            data = await AsyncHttpClient.fetch_csv_as_json(url)
+            latest = data[-1] if data else {}
+            return {
+                "source": "中央銀行 (CBC)",
+                "indicator": "貨幣總計數 (Money Supply)",
+                "m1b_growth_rate": f"{latest.get('M1B', 'N/A')}%",
+                "m2_growth_rate": f"{latest.get('M2', 'N/A')}%",
+                "period": latest.get('日期', 'N/A')
+            }
+        except:
+            return {"error": "貨幣供給數據維護中"}
+
+    @staticmethod
+    async def get_fx_reserves() -> Dict[str, Any]:
+        """獲取外匯存底統計 (中央銀行)。"""
+        url = "https://www.cbc.gov.tw/public/data/statistics/reserves/reserves.csv"
+        try:
+            data = await AsyncHttpClient.fetch_csv_as_json(url)
+            latest = data[-1] if data else {}
+            return {
+                "source": "中央銀行 (CBC)",
+                "indicator": "外匯存底 (Foreign Exchange Reserves)",
+                "amount_usd": f"{latest.get('金額', 'N/A')} (億美元)",
+                "period": latest.get('日期', 'N/A')
+            }
+        except:
+            return {"error": "外匯存底數據維護中"}
+
 class PublicServiceLogic:
     """公共服務邏輯：油價、時間。"""
     CPC_PRICE_API = "https://vipmbr.cpc.com.tw/openData/MainProdListPrice"
