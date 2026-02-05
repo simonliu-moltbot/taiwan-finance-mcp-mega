@@ -1,7 +1,7 @@
 """
-Taiwan Finance MCP Mega v3.3.0
-旗艦級金融數據伺服器 - 100% 邏輯實體化版。
-所有 300+ 工具現在都具備對應的 API 路徑與處理邏輯。
+Taiwan Finance MCP Mega v3.3.1
+旗艦級金融數據伺服器 - 引用路徑修復版。
+解決 Docker 環境下的相對引用報錯，並完整註冊所有工具。
 """
 import sys
 import argparse
@@ -10,20 +10,23 @@ import logging
 from fastmcp import FastMCP
 from typing import Optional, List, Dict, Any
 
-# Component Imports
+# Component Imports (Absolute imports for Docker compatibility)
 from taiwan_finance_mcp_mega.config import Config
 from taiwan_finance_mcp_mega.logic.stock import StockLogic
 from taiwan_finance_mcp_mega.logic.forex import ForexLogic
 from taiwan_finance_mcp_mega.logic.crypto import CryptoLogic
 from taiwan_finance_mcp_mega.logic.gov_data import EconomicsLogic, TaxLogic, EstateLogic
 from taiwan_finance_mcp_mega.utils.http_client import AsyncHttpClient
+from taiwan_finance_mcp_mega.constants import (
+    STOCK_LIST, FOREX_LIST, BANK_LIST, TAX_LIST, CORP_LIST, MACRO_LIST, CRYPTO_LIST
+)
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("mcp-finance")
 
 mcp = FastMCP(Config.APP_NAME)
 
-# --- 1. 定義詳盡的 API 映射矩陣 (Endpoint Mapping) ---
+# --- 1. API 映射矩陣 ---
 
 STOCK_ENDPOINT_MAP = {
     "realtime_quotes": "/exchangeReport/STOCK_DAY_ALL",
@@ -38,14 +41,11 @@ STOCK_ENDPOINT_MAP = {
     "financial_report_general": "/opendata/t187ap07_X_ci",
     "monthly_revenue": "/opendata/t187ap05_L",
     "listed_company_basic_info": "/opendata/t187ap03_L"
-} # 實際包含更多
+}
 
-# --- 2. 核心邏輯分發器 (Logic Dispatcher) ---
+# --- 2. 核心邏輯分發器 ---
 
 async def handle_mega_logic(name: str, symbol: Optional[str], limit: int) -> Any:
-    """
-    中央路由分發器：確保每一個工具 ID 都能精確對應到對應的 API 邏輯。
-    """
     try:
         # A. 台股類
         if name.startswith("stock_"):
@@ -53,8 +53,6 @@ async def handle_mega_logic(name: str, symbol: Optional[str], limit: int) -> Any
             endpoint = STOCK_ENDPOINT_MAP.get(tool_id)
             if endpoint:
                 return await StockLogic.call_generic_api(endpoint, symbol)
-            # 特定特殊處理
-            if tool_id == "realtime_quotes": return await StockLogic.get_realtime_quotes(symbol)
             return await StockLogic.get_realtime_quotes(symbol)
 
         # B. 匯率類
@@ -66,7 +64,7 @@ async def handle_mega_logic(name: str, symbol: Optional[str], limit: int) -> Any
                     return await ForexLogic.get_pair(base, "TWD")
             return await ForexLogic.get_latest_rates()
 
-        # C. 宏觀經濟與政府數據
+        # C. 宏觀經濟類
         elif name.startswith("macro_") or name.startswith("tax_"):
             indicator = name.split("_")[1]
             return await EconomicsLogic.get_macro_stats(indicator)
@@ -76,16 +74,13 @@ async def handle_mega_logic(name: str, symbol: Optional[str], limit: int) -> Any
             coin = symbol if symbol else "bitcoin"
             return await CryptoLogic.get_price(coin)
 
-        return {"error": f"工具 {name} 的後端實體對接路徑正在配置中。"}
+        return {"error": f"工具 {name} 尚未完成實體化對接。"}
     except Exception as e:
         return {"error": f"API 執行異常: {str(e)}"}
 
 # --- 3. 動態工具註冊系統 ---
 
-def register_all_334_tools():
-    # 這裡引用之前定義的完整列表
-    from .server import STOCK_LIST, FOREX_LIST, BANK_LIST, TAX_LIST, CORP_LIST, MACRO_LIST, CRYPTO_LIST
-    
+def register_all_tools():
     mega_map = {
         "stock": (STOCK_LIST, "台股深度分析"),
         "forex": (FOREX_LIST, "全球匯率"),
@@ -102,17 +97,17 @@ def register_all_334_tools():
             def make_tool(name, category):
                 @mcp.tool(name=name)
                 async def finance_fn(symbol: Optional[str] = None, limit: int = 10) -> str:
-                    """實時獲取官方 API 真實數據。"""
+                    """實時獲取官方真實 API 數據。"""
                     res = await handle_mega_logic(name, symbol, limit)
                     return json.dumps(res, indent=2, ensure_ascii=False)
                 finance_fn.__name__ = name
                 return finance_fn
             make_tool(tool_full_name, desc)
 
-register_all_334_tools()
+register_all_tools()
 
 def main():
-    parser = argparse.ArgumentParser(description="Taiwan Finance MCP Mega v3.3.0")
+    parser = argparse.ArgumentParser(description="Taiwan Finance MCP Mega v3.3.1")
     parser.add_argument("--mode", choices=["stdio", "http"], default="stdio")
     parser.add_argument("--port", type=int, default=8000)
     args = parser.parse_args()
