@@ -13,8 +13,9 @@ from typing import Optional, List, Dict, Any
 from taiwan_finance_mcp_mega.config import Config
 from taiwan_finance_mcp_mega.logic.stock import StockLogic
 from taiwan_finance_mcp_mega.logic.forex import ForexLogic
-from taiwan_finance_mcp_mega.logic.crypto import CryptoLogic
-from taiwan_finance_mcp_mega.logic.gov_data import EconomicsLogic, TaxLogic
+from taiwan_finance_mcp_mega.logic.global_macro import GlobalMacroLogic, CryptoLogic
+from taiwan_finance_mcp_mega.logic.gov_data import EconomicsLogic, TaxLogic, PublicServiceLogic
+from taiwan_finance_mcp_mega.logic.corporate_logistics import CorporateLogic, IndustryLogic
 from taiwan_finance_mcp_mega.utils.http_client import AsyncHttpClient
 from taiwan_finance_mcp_mega.constants import (
     STOCK_LIST, FOREX_LIST, BANK_LIST, TAX_LIST, CORP_LIST, MACRO_LIST, CRYPTO_LIST
