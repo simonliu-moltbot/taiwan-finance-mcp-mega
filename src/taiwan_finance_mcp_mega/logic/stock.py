@@ -20,29 +20,32 @@ class StockLogic:
 
     @staticmethod
     async def _fetch_and_filter(url: str, symbol: Optional[str] = None, code_key: str = "Code") -> List[Dict[str, Any]]:
-        """內部通用數據抓取與精確符號過濾工具"""
+        """
+        [v3.5.6] 超級過濾引擎：支援全欄位模糊匹配。
+        不再受限於特定的 Key 名稱，只要資料項中任何一個欄位的值匹配 symbol，即回傳。
+        """
         data = await AsyncHttpClient.fetch_json(url)
         if not isinstance(data, list):
             return []
-        if symbol:
-            # 增加更多可能的代碼欄位 Key，以應對不同 API 的結構
-            possible_keys = [
-                code_key, "Code", "公司代號", "股票代號", "id", 
-                "STOCKsSecurityCode", "ETFsSecurityCode", "公司代碼", "證券代號"
-            ]
-            filtered = []
-            symbol_str = str(symbol).strip()
-            for item in data:
-                match = False
-                for pk in possible_keys:
-                    val = item.get(pk)
-                    if val and str(val).strip() == symbol_str:
-                        match = True
-                        break
-                if match:
-                    filtered.append(item)
-            return filtered
-        return data
+        
+        if not symbol:
+            return data
+
+        symbol_str = str(symbol).strip().upper()
+        filtered = []
+        
+        for item in data:
+            # 掃描該 Dictionary 的所有 Values
+            match_found = False
+            for val in item.values():
+                if val and str(val).strip().upper() == symbol_str:
+                    match_found = True
+                    break
+            
+            if match_found:
+                filtered.append(item)
+        
+        return filtered
 
     # --- 1. 行情與交易類 (Quotes & Trading) ---
 

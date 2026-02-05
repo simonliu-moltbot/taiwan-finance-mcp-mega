@@ -145,7 +145,10 @@ def register_all_tools():
             def bind_fn(name):
                 @mcp.tool(name=name)
                 async def fn(symbol: Optional[str] = None, limit: int = 10) -> str:
-                    """獲取官方真實 API 數據 (v3.4.2)。"""
+                    """
+                    [v3.5.6] 獲取真實金融數據。
+                    參數 symbol: 股票代碼 (2330), ETF代碼 (0050), 貨幣 (JPY), 加密幣 (BTC) 或公司名稱。
+                    """
                     res = await dispatch_mega_logic(name, symbol, limit)
                     return json.dumps(res, indent=2, ensure_ascii=False)
                 fn.__name__ = name

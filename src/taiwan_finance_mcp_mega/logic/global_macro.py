@@ -88,13 +88,24 @@ class CryptoLogic:
     """處理加密貨幣市場即時行情 (免 Token)。"""
     @staticmethod
     async def get_price(coin: str = "bitcoin") -> Dict[str, Any]:
-        url = f"https://api.coingecko.com/api/v3/simple/price?ids={coin.lower()}&vs_currencies=twd,usd&include_24hr_change=true"
+        """[v3.5.6] 獲取加密貨幣即時報價。支援 symbol 自動轉換為 CoinGecko ID。"""
+        # 簡單映射常見 Symbol 到 ID
+        coin_map = {
+            "BTC": "bitcoin",
+            "ETH": "ethereum",
+            "SOL": "solana",
+            "BNB": "binancecoin",
+            "XRP": "ripple",
+            "DOGE": "dogecoin"
+        }
+        coin_id = coin_map.get(coin.upper(), coin.lower())
+        url = f"https://api.coingecko.com/api/v3/simple/price?ids={coin_id}&vs_currencies=twd,usd&include_24hr_change=true"
         try:
             data = await AsyncHttpClient.fetch_json(url)
-            if coin.lower() in data:
-                stats = data[coin.lower()]
+            if coin_id in data:
+                stats = data[coin_id]
                 return {
-                    "coin": coin.capitalize(),
+                    "coin": coin_id.capitalize(),
                     "price_twd": f"{stats['twd']:,} TWD",
                     "price_usd": f"{stats['usd']:,} USD",
                     "change_24h": f"{stats['usd_24h_change']:.2f}%",
