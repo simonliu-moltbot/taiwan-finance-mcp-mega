@@ -17,7 +17,7 @@ from taiwan_finance_mcp_mega.logic.crypto import CryptoLogic
 from taiwan_finance_mcp_mega.logic.gov_data import EconomicsLogic, TaxLogic, EstateLogic
 from taiwan_finance_mcp_mega.utils.http_client import AsyncHttpClient
 
-mcp = FastMCP(Config.APP_NAME, title="Taiwan Finance Mega Server", version="2.7.1")
+mcp = FastMCP(Config.APP_NAME)
 
 # --- EXHAUSTIVE DATA DEFINITIONS (234 TOOLS) ---
 
