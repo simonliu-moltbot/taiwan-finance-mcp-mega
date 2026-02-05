@@ -1,5 +1,5 @@
 """
-Taiwan Finance MCP Mega v3.8.1
+Taiwan Finance MCP Mega v3.8.2
 [The Semantic Engine]
 Optimized tool naming and rich metadata dispatching.
 100% Real-world mapping for 300+ financial indicators.
@@ -155,27 +155,30 @@ def register_all_tools():
     
     for tools, group_name in tool_groups:
         for t_name in tools:
-            # 獲取該工具的專屬語義描述，若無則使用預設
+            # 獲取該工具的專屬語義描述
             tool_desc = TOOL_METADATA.get(t_name, f"專業級金融數據接口 [{t_name}]。支援代碼或名稱查詢。")
             
             def create_tool(name, desc):
-                @mcp.tool(name=name)
-                async def mcp_tool_fn(symbol: Optional[str] = None, limit: int = 10) -> str:
-                    """[v3.8.1] 專業金融數據接口。支援代碼 (2330) 或名稱查詢。"""
+                # 1. 定義原始函數
+                async def mcp_tool_raw(symbol: Optional[str] = None, limit: int = 10) -> str:
                     res = await dispatch_mega_logic(name, symbol, limit)
                     return json.dumps(res, indent=2, ensure_ascii=False)
                 
-                # 動態注入富含語義的 Docstring
-                mcp_tool_fn.__doc__ = f"{desc}\n\n[v3.8.1] 參數 symbol: 標的代碼或名稱。"
-                mcp_tool_fn.__name__ = name
-                return mcp_tool_fn
+                # 2. 動態注入語義化 Docstring (在註冊前)
+                mcp_tool_raw.__doc__ = f"{desc}\n\n[v3.8.2] 參數 symbol: 標的代碼或名稱。"
+                mcp_tool_raw.__name__ = name
+                
+                # 3. 手動調用 mcp.tool 裝飾器進行註冊
+                # 這樣 FastMCP 才能在註冊當下抓取到正確的 __doc__
+                mcp.tool(name=name)(mcp_tool_raw)
+                return mcp_tool_raw
             
             create_tool(t_name, tool_desc)
 
 register_all_tools()
 
 def main():
-    parser = argparse.ArgumentParser(description="Taiwan Finance MCP Mega v3.8.1")
+    parser = argparse.ArgumentParser(description="Taiwan Finance MCP Mega v3.8.2")
     parser.add_argument("--mode", choices=["stdio", "http"], default="stdio")
     parser.add_argument("--port", type=int, default=8005)
     args = parser.parse_args()
