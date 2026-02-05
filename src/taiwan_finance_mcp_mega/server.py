@@ -10,12 +10,12 @@ from fastmcp import FastMCP
 from typing import Optional
 
 # Logic Imports
-from .config import Config
-from .logic.stock import StockLogic
-from .logic.forex import ForexLogic
-from .logic.crypto import CryptoLogic
-from .logic.gov_data import EconomicsLogic, TaxLogic, EstateLogic
-from .utils.http_client import AsyncHttpClient
+from taiwan_finance_mcp_mega.config import Config
+from taiwan_finance_mcp_mega.logic.stock import StockLogic
+from taiwan_finance_mcp_mega.logic.forex import ForexLogic
+from taiwan_finance_mcp_mega.logic.crypto import CryptoLogic
+from taiwan_finance_mcp_mega.logic.gov_data import EconomicsLogic, TaxLogic, EstateLogic
+from taiwan_finance_mcp_mega.utils.http_client import AsyncHttpClient
 
 mcp = FastMCP(Config.APP_NAME, title="Taiwan Finance Mega Server", version="2.7.1")
 

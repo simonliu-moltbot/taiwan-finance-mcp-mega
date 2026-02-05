@@ -1,5 +1,5 @@
-from ..config import Config
-from ..utils.http_client import AsyncHttpClient
+from taiwan_finance_mcp_mega.config import Config
+from taiwan_finance_mcp_mega.utils.http_client import AsyncHttpClient
 
 class CorporateLogic:
     @staticmethod

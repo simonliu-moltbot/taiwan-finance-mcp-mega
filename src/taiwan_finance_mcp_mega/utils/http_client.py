@@ -1,6 +1,6 @@
 import httpx
 import logging
-from ..config import Config
+from taiwan_finance_mcp_mega.config import Config
 
 logging.basicConfig(level=Config.LOG_LEVEL)
 logger = logging.getLogger(Config.APP_NAME)

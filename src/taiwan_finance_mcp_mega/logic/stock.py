@@ -3,8 +3,8 @@ Stock Logic Module for Taiwan Market.
 Provides methods to fetch data from TWSE and TPEx OpenAPI.
 """
 from typing import Dict, Any, List
-from ..config import Config
-from ..utils.http_client import AsyncHttpClient
+from taiwan_finance_mcp_mega.config import Config
+from taiwan_finance_mcp_mega.utils.http_client import AsyncHttpClient
 
 class StockLogic:
     @staticmethod
