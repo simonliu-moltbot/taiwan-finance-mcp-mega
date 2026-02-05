@@ -1,11 +1,11 @@
 services:
   mcp-server:
     build: .
-    image: taiwan-finance-mcp-mega:v2.7.1
+    image: taiwan-finance-mcp-mega:v2.7.3
     container_name: taiwan-finance-mcp-mega
     ports:
       - "8005:8000"
     environment:
-      - LOG_LEVEL=INFO
+      - LOG_LEVEL=DEBUG
       - PYTHONUNBUFFERED=1
     restart: unless-stopped
