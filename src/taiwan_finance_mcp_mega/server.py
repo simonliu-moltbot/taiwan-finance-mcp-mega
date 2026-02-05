@@ -16,7 +16,7 @@ from taiwan_finance_mcp_mega.logic.stock import StockLogic
 from taiwan_finance_mcp_mega.logic.forex import ForexLogic
 from taiwan_finance_mcp_mega.logic.derivatives import DerivativesLogic
 from taiwan_finance_mcp_mega.logic.global_macro import GlobalMacroLogic, CryptoLogic
-from taiwan_finance_mcp_mega.logic.gov_data import EconomicsLogic, PublicServiceLogic
+from taiwan_finance_mcp_mega.logic.gov_data import EconomicsLogic, PublicServiceLogic, BankLogic
 from taiwan_finance_mcp_mega.logic.corporate_logistics import CorporateLogic, IndustryLogic
 from taiwan_finance_mcp_mega.utils.http_client import AsyncHttpClient
 from taiwan_finance_mcp_mega.constants import (
@@ -60,13 +60,14 @@ MEGA_ENDPOINT_MAP = {
     "get_macro_fuel_price_cpc_retail": "cpc_fuel",
     "get_macro_housing_price_index_tw": "housing_index",
     
-    # 🕒 COMMON
+    # 🏦 BANK ADDITIONS
+    "get_bank_central_bank_base_rate": "cbc_base",
+    "get_bank_five_major_banks_loan_rates": "cbc_5banks",
+    "get_bank_sme_loan_balance_stats": "fsc_sme",
+    "get_bank_monthly_profit_summary": "fsc_profit",
+    "get_bank_foreign_exchange_trading_volume": "cbc_fx_vol",
     "get_current_time_taipei": "system_time",
-
-    # 📉 DERIVATIVES
-    "get_futures_quotes_daily": "taifex_quotes",
-    "get_futures_institutional_investor_flow": "taifex_institutional",
-    "get_futures_open_interest_ranking": "taifex_oi"
+    "get_macro_housing_price_index_tw": "housing_index"
 }
 
 # --- 2. 核心分發邏輯 ---
@@ -117,6 +118,9 @@ async def dispatch_mega_logic(name: str, symbol: Optional[str], limit: int) -> A
         elif name.startswith("get_bank_"):
             if "central_bank_base_rate" in name: return await EconomicsLogic.get_central_bank_rates()
             if "five_major_banks" in name: return await EconomicsLogic.get_five_major_banks_loan_rates()
+            if "sme_loan" in name: return await BankLogic.get_sme_loan_stats()
+            if "monthly_profit" in name: return await BankLogic.get_monthly_profit_summary()
+            if "foreign_exchange_trading" in name: return await BankLogic.get_fx_trading_volume()
             return {"error": "銀行細分數據正在對接中"}
 
         # 4. 加密貨幣路由

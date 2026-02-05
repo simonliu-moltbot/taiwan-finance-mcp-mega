@@ -1,13 +1,13 @@
 """
-Taiwan Finance MCP Mega - Exhaustive Metadata Mapping (v4.2.1)
-Refined 60+ tool descriptions with precise Inputs/Outputs.
+Taiwan Finance MCP Mega - Exhaustive Metadata Mapping (v4.3.0)
+Expanded Bank category with FSC and CBC real-world indicators.
 """
 
 TOOL_METADATA = {
     # 📈 STOCK CORE (17 Tools)
-    "get_stock_quotes_realtime_all": { "summary": "查詢台股上市個股即時行情。", "inputs": "symbol (選填): 代碼。", "outputs": "開高低收、量、漲跌。", "source": "TWSE" },
-    "get_stock_eps_ranking_summary": { "summary": "查詢上市公司 EPS 排名。", "inputs": "symbol (選填): 代碼。", "outputs": "EPS、排名。", "source": "TWSE" },
-    "get_stock_dividend_yield_pe_pb": { "summary": "獲取個股殖利率、PE、PB。", "inputs": "symbol (選填): 代碼。", "outputs": "Yield, PE, PB。", "source": "TWSE" },
+    "get_stock_quotes_realtime_all": { "summary": "查詢台股上市個股即時行情。", "inputs": "symbol: 代碼。", "outputs": "開高低收、量、漲跌。", "source": "TWSE" },
+    "get_stock_eps_ranking_summary": { "summary": "查詢上市公司 EPS 排名。", "inputs": "symbol: 代碼。", "outputs": "EPS、排名。", "source": "TWSE" },
+    "get_stock_dividend_yield_pe_pb": { "summary": "獲取個股殖利率、PE、PB。", "inputs": "symbol: 代碼。", "outputs": "Yield, PE, PB。", "source": "TWSE" },
     "get_stock_institutional_investor_flow": { "summary": "查詢三大法人合計買賣超。", "inputs": "limit: 筆數。", "outputs": "買賣超金額。", "source": "TWSE" },
     "get_stock_margin_trading_balance": { "summary": "查詢融資融券餘額。", "inputs": "symbol: 代碼。", "outputs": "餘額、增減。", "source": "TWSE" },
     "get_stock_odd_lot_trading_quotes": { "summary": "獲取盤中零股交易行情。", "inputs": "symbol: 代碼。", "outputs": "成交價量。", "source": "TWSE" },
@@ -65,9 +65,13 @@ TOOL_METADATA = {
     "get_crypto_sol_twd_price": { "summary": "Solana 即時價格。", "inputs": "None", "outputs": "Price", "source": "CoinGecko" },
     "get_crypto_market_fear_greed_index": { "summary": "加密幣市場恐慌貪婪指數。", "inputs": "None", "outputs": "Index", "source": "CoinGecko" },
     
-    # 🏦 BANK (6 Tools)
+    # 🏦 BANK (11 Tools)
     "get_bank_central_bank_base_rate": { "summary": "中央銀行基準利率(重貼現率)。", "inputs": "None", "outputs": "%", "source": "CBC" },
     "get_bank_five_major_banks_loan_rates": { "summary": "五大銀行新承做放款利率(含房貸)。", "inputs": "None", "outputs": "Rate (%)", "source": "CBC" },
+    "get_bank_sme_loan_balance_stats": { "summary": "獲取本國銀行對中小企業放款餘額統計。", "inputs": "None", "outputs": "Balance (TWD)", "source": "FSC" },
+    "get_bank_monthly_profit_summary": { "summary": "獲取銀行業每月獲利與損益統計摘要。", "inputs": "None", "outputs": "Net Profit", "source": "FSC" },
+    "get_bank_foreign_exchange_trading_volume": { "summary": "查詢外匯指定銀行(DBU)之交易量統計。", "inputs": "None", "outputs": "Volume (USD)", "source": "CBC" },
+    "get_bank_overdue_loan_stats": { "summary": "查詢本國銀行逾期放款與資產品質統計。", "inputs": "None", "outputs": "NPL Ratio", "source": "FSC" },
     "get_bank_deposit_rate_fixed": { "summary": "主要銀行定存利率彙總。", "inputs": "None", "outputs": "Rate", "source": "CBC" },
     "get_bank_mortgage_rate_average": { "summary": "台灣房貸利率走勢趨勢。", "inputs": "None", "outputs": "Rate", "source": "CBC" },
     "get_bank_credit_card_delinquency": { "summary": "信用卡逾期與簽帳統計。", "inputs": "None", "outputs": "Ratio", "source": "FSC" },
