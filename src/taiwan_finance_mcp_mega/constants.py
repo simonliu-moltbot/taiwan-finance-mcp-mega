@@ -56,6 +56,10 @@ MACRO_LIST = [
     "get_macro_fuel_price_cpc_retail"
 ]
 
+GLOBAL_LIST = [
+    "get_global_market_vix_index", "get_global_fed_funds_rate", "get_global_bdi_shipping_index"
+]
+
 CRYPTO_LIST = [
     "get_crypto_btc_twd_price", "get_crypto_eth_twd_price", "get_crypto_sol_twd_price",
     "get_crypto_market_fear_greed_index"

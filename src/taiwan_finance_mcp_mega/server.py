@@ -89,6 +89,8 @@ MEGA_ENDPOINT_MAP = {
     "get_commodity_oil_wti_price_usd": "wti_oil",
     "get_commodity_oil_brent_price_usd": "brent_oil",
     "get_commodity_baltic_dry_index_bdi": "bdi_index",
+    "get_global_market_vix_index": "global_vix",
+    "get_global_fed_funds_rate": "global_fed",
     "get_current_time_taipei": "system_time"
 }
 
@@ -155,7 +157,7 @@ def register_all_tools():
     tool_groups = [
         (STOCK_LIST, "Stock"), (FOREX_LIST, "Forex"), (BANK_LIST, "Bank"),
         (TAX_LIST, "Tax"), (CORP_LIST, "Corp"), (MACRO_LIST, "Macro"), 
-        (CRYPTO_LIST, "Crypto"), (COMMON_LIST, "Common")
+        (CRYPTO_LIST, "Crypto"), (COMMON_LIST, "Common"), (GLOBAL_LIST, "Global")
     ]
     
     for tools, group_name in tool_groups:
