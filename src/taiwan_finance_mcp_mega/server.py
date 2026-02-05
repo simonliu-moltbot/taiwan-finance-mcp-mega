@@ -1,7 +1,7 @@
 """
-Taiwan Finance MCP Mega v3.3.3
-旗艦級金融數據伺服器 - 邏輯優化版。
-移除不穩定的銀行比價功能，專注於精確的市場即時匯率換算。
+Taiwan Finance MCP Mega v3.3.4
+旗艦級金融數據伺服器 - 註冊邏輯修復版。
+修正了動態工具註冊時的變數命名錯誤與函數名稱衝突。
 """
 import sys
 import argparse
@@ -48,22 +48,17 @@ async def handle_mega_logic(name: str, symbol: Optional[str], limit: int) -> Any
                 return await StockLogic.call_generic_api(endpoint, symbol)
             return await StockLogic.get_realtime_quotes(symbol)
 
-        # B. 匯率類 (優化後的市場實時匯率對接)
+        # B. 匯率類
         elif name.startswith("forex_"):
-            # 如果是銀行比價工具，目前先導向至實時市場匯率 (因無穩定官方 API)
-            
-            # 從 ID 自動提取幣別: forex_jpy_twd -> JPY
             parts = name.split("_")
             if len(parts) >= 2:
                 cur_code = parts[1].upper()
                 if cur_code not in ["BANK", "HISTORICAL", "ANALYSIS", "RATE", "GLOBAL"]:
                     return await ForexLogic.get_pair(cur_code, "TWD")
-            
-            # 處理通用換算問題
             if symbol: return await ForexLogic.get_pair(symbol.upper(), "TWD")
             return await ForexLogic.get_latest_rates()
 
-        # C. 宏觀經濟類 (對接主計總處)
+        # C. 宏觀經濟類
         elif name.startswith("macro_") or name.startswith("tax_"):
             indicator = "salary" if "salary" in name else "unemployment"
             if "participation" in name: indicator = "labor_participation"
@@ -71,7 +66,7 @@ async def handle_mega_logic(name: str, symbol: Optional[str], limit: int) -> Any
             if "gdp" in name: indicator = "gdp"
             return await EconomicsLogic.get_macro_stats(indicator)
 
-        # D. 加密貨幣 (對接 CoinGecko)
+        # D. 加密貨幣
         elif name.startswith("crypto_"):
             coin = symbol if symbol else "bitcoin"
             return await CryptoLogic.get_price(coin)
@@ -80,7 +75,7 @@ async def handle_mega_logic(name: str, symbol: Optional[str], limit: int) -> Any
     except Exception as e:
         return {"error": f"系統錯誤: {str(e)}"}
 
-# --- 3. 動態工具註冊系統 ---
+# --- 3. 動態工具註冊系統 (Bug Fixed) ---
 
 def register_all_tools():
     mega_map = {
@@ -93,23 +88,31 @@ def register_all_tools():
         "crypto": (CRYPTO_LIST, "Web3 監控")
     }
     
+    count = 0
     for prefix, (tools, desc) in mega_map.items():
         for t_id in tools:
             tool_full_name = f"{prefix}_{t_id}"
-            def make_tool(n, cat):
-                @mcp.tool(name=n)
+            
+            # 使用獨立的作用域定義函數，避免變數污染
+            def make_tool(t_name, cat_desc):
+                @mcp.tool(name=t_name)
                 async def finance_fn(symbol: Optional[str] = None, limit: int = 10) -> str:
-                    """獲取官方 API 真實數據。"""
-                    res = await handle_mega_logic(n, symbol, limit)
+                    """實時獲取官方真實 API 數據。"""
+                    res = await handle_mega_logic(t_name, symbol, limit)
                     return json.dumps(res, indent=2, ensure_ascii=False)
-                finance_fn.__name__ = name
+                
+                # 關鍵修正：正確設定函數的內部屬性
+                finance_fn.__name__ = t_name 
                 return finance_fn
+            
             make_tool(tool_full_name, desc)
+            count += 1
+    return count
 
-register_all_tools()
+TotalRegistered = register_all_tools()
 
 def main():
-    parser = argparse.ArgumentParser(description="Taiwan Finance MCP Mega v3.3.3")
+    parser = argparse.ArgumentParser(description="Taiwan Finance MCP Mega v3.3.4")
     parser.add_argument("--mode", choices=["stdio", "http"], default="stdio")
     parser.add_argument("--port", type=int, default=8000)
     args = parser.parse_args()
@@ -117,6 +120,7 @@ def main():
     if args.mode == "stdio":
         mcp.run()
     else:
+        print(f"啟動 v3.3.4 [Tools: {TotalRegistered}] 於 HTTP 模式...", file=sys.stderr)
         mcp.run(transport="streamable-http", host="0.0.0.0", port=args.port, path="/mcp")
 
 if __name__ == "__main__":
