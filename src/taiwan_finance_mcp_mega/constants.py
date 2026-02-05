@@ -1,4 +1,4 @@
-# Taiwan Finance MCP Mega - Semantic Tool List Constants (v3.7.0)
+# Taiwan Finance MCP Mega - Semantic Tool List Constants (v4.0.0)
 # Naming Pattern: [action]_[category]_[specific_data]_[frequency/source]
 
 STOCK_LIST = [
@@ -7,20 +7,7 @@ STOCK_LIST = [
     "get_stock_mops_significant_announcements", "get_stock_price_limit_up_down_tracker", "get_stock_balance_sheet_general", 
     "get_stock_monthly_revenue_summary", "get_stock_listed_company_basic_info", "get_stock_etf_regular_savings_ranking", 
     "get_stock_block_trade_daily_summary", "get_stock_after_hours_trading_info", "get_stock_ipo_new_listing_schedule",
-    "get_stock_buyback_treasury_status", "get_stock_broker_regular_savings_data",
-    
-    # ESG (21 Semantic IDs)
-    "get_stock_esg_greenhouse_gas_emissions", "get_stock_esg_energy_management_efficiency", 
-    "get_stock_esg_water_resource_usage", "get_stock_esg_waste_management_data", 
-    "get_stock_esg_human_capital_development", "get_stock_esg_board_diversity_structure", 
-    "get_stock_esg_investor_communication_index", "get_stock_esg_climate_change_governance", 
-    "get_stock_esg_functional_committee_status", "get_stock_esg_fuel_management_stats", 
-    "get_stock_esg_product_life_cycle_management", "get_stock_esg_food_safety_verification", 
-    "get_stock_esg_supply_chain_management_audit", "get_stock_esg_product_quality_safety", 
-    "get_stock_esg_local_community_relations", "get_stock_esg_information_security_breach", 
-    "get_stock_esg_inclusive_finance_promotion", "get_stock_esg_shareholding_control_power", 
-    "get_stock_esg_risk_management_policy", "get_stock_esg_anti_competitive_litigation", 
-    "get_stock_esg_occupational_safety_health"
+    "get_stock_buyback_treasury_status", "get_stock_broker_regular_savings_data"
 ]
 
 FOREX_LIST = [
@@ -29,7 +16,7 @@ FOREX_LIST = [
     "get_forex_aud_twd_realtime", "get_forex_cad_twd_realtime", "get_forex_sgd_twd_realtime", 
     "get_forex_krw_twd_realtime",
     
-    # Commodities (Semantic IDs)
+    # Commodities
     "get_commodity_oil_wti_price_usd", "get_commodity_oil_brent_price_usd", 
     "get_commodity_gold_spot_price_twd", "get_commodity_silver_spot_price_twd",
     "get_commodity_baltic_dry_index_bdi"
