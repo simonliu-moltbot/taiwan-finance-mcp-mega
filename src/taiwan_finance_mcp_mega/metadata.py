@@ -1,6 +1,6 @@
 """
-Taiwan Finance MCP Mega - Exhaustive Metadata Mapping (v4.3.2)
-Finalizing Bank and Money Supply indicators.
+Taiwan Finance MCP Mega - Exhaustive Metadata Mapping (v4.4.0)
+Finalized 85+ tool descriptions with precise Inputs/Outputs.
 """
 
 TOOL_METADATA = {
@@ -44,18 +44,20 @@ TOOL_METADATA = {
     "get_commodity_gold_spot_price_twd": { "summary": "黃金現貨即時報價。", "inputs": "None", "outputs": "TWD/oz", "source": "Yahoo" },
     "get_commodity_silver_spot_price_twd": { "summary": "白銀現貨即時報價。", "inputs": "None", "outputs": "TWD/oz", "source": "Yahoo" },
 
-    # 🏛️ MACRO & GOV (13 Tools)
+    # 🏛️ MACRO & GOV (15 Tools)
     "get_macro_gdp_growth_rate_quarterly": { "summary": "台灣季度 GDP 成長率。", "inputs": "None", "outputs": "%", "source": "DGBAS" },
     "get_macro_cpi_inflation_rate_tw": { "summary": "台灣 CPI 通膨率。", "inputs": "None", "outputs": "%", "source": "MOL" },
     "get_macro_unemployment_rate_seasonal_adjusted": { "summary": "台灣季調後失業率。", "inputs": "None", "outputs": "%", "source": "MOL" },
     "get_macro_average_monthly_salary_dgbas": { "summary": "台灣月平均總薪資。", "inputs": "None", "outputs": "TWD", "source": "MOL" },
     "get_macro_fuel_price_cpc_retail": { "summary": "中油當週零售掛牌油價。", "inputs": "None", "outputs": "Price", "source": "CPC" },
     "get_macro_housing_price_index_tw": { "summary": "台灣全國住宅價格指數。", "inputs": "None", "outputs": "Index", "source": "Interior Ministry" },
+    "get_macro_national_debt_clock": { "summary": "獲取國債鐘資料統計中央政府債務。", "inputs": "None", "outputs": "Debt Amount", "source": "MOF" },
     "get_tax_revenue_collection_monthly": { "summary": "全國賦稅收入月報。", "inputs": "None", "outputs": "Revenue", "source": "MOF" },
     "get_tax_income_bracket_calculator": { "summary": "綜所稅級距與試算公式。", "inputs": "None", "outputs": "Brackets", "source": "MOF" },
     "get_tax_electronic_invoice_usage_stats": { "summary": "電子發票普及率統計。", "inputs": "None", "outputs": "Stats", "source": "MOF" },
     "get_corp_moea_business_registration": { "summary": "經濟部商工登記公示資料。", "inputs": "symbol: 名稱。", "outputs": "登記資料。", "source": "MOEA" },
     "get_corp_industry_production_index": { "summary": "台灣工業生產指數。", "inputs": "None", "outputs": "Index", "source": "MOEA" },
+    "get_corp_industry_electricity_consumption_stats": { "summary": "獲取各產業部門電力消費統計。領先景氣指標。", "inputs": "None", "outputs": "GWh", "source": "MOEA" },
     "get_corp_factory_count_statistics": { "summary": "全台工廠登記數統計。", "inputs": "None", "outputs": "Count", "source": "MOEA" },
     "get_corp_export_value_by_industry": { "summary": "各行業出口貿易總值。", "inputs": "None", "outputs": "Value", "source": "MOEA" },
 

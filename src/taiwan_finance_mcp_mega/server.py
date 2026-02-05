@@ -1,7 +1,7 @@
 """
-Taiwan Finance MCP Mega v4.1.0
+Taiwan Finance MCP Mega v4.4.0
 [The Refined Industrial Engine]
-Cleaned toolset and highly stable CPC/Macro data sources.
+Finalized with Industrial Leading Indicators and Debt stats.
 """
 import sys
 import argparse
@@ -59,15 +59,9 @@ MEGA_ENDPOINT_MAP = {
     "get_macro_average_monthly_salary_dgbas": "dgbas_salary",
     "get_macro_fuel_price_cpc_retail": "cpc_fuel",
     "get_macro_housing_price_index_tw": "housing_index",
-    
-    # 🏦 BANK ADDITIONS
-    "get_bank_central_bank_base_rate": "cbc_base",
-    "get_bank_five_major_banks_loan_rates": "cbc_5banks",
-    "get_bank_sme_loan_balance_stats": "fsc_sme",
-    "get_bank_monthly_profit_summary": "fsc_profit",
-    "get_bank_foreign_exchange_trading_volume": "cbc_fx_vol",
-    "get_current_time_taipei": "system_time",
-    "get_macro_housing_price_index_tw": "housing_index"
+    "get_macro_national_debt_clock": "mof_debt",
+    "get_corp_industry_electricity_consumption_stats": "moea_elec",
+    "get_current_time_taipei": "system_time"
 }
 
 # --- 2. 核心分發邏輯 ---
@@ -104,6 +98,8 @@ async def dispatch_mega_logic(name: str, symbol: Optional[str], limit: int) -> A
         elif name.startswith("get_macro_") or name.startswith("get_tax_") or name.startswith("get_corp_"):
             if "fuel_price" in name: return await PublicServiceLogic.get_fuel_prices()
             if "housing_price_index" in name: return await EconomicsLogic.get_housing_price_index()
+            if "national_debt_clock" in name: return await EconomicsLogic.get_national_debt_clock()
+            if "electricity_consumption" in name: return await PublicServiceLogic.get_electricity_consumption_stats()
             if "moea_business_registration" in name: return await CorporateLogic.get_company_basic_info(symbol if symbol else "台積電")
             if "industry_production_index" in name: return await IndustryLogic.get_industry_production_index()
             
@@ -114,21 +110,6 @@ async def dispatch_mega_logic(name: str, symbol: Optional[str], limit: int) -> A
             elif "salary" in name: indicator = "salary"
             return await EconomicsLogic.get_macro_stats(indicator)
 
-        # 3.5 銀行數據
-        elif name.startswith("get_bank_"):
-            if "list_of_institutions" in name: return await BankLogic.get_list_of_institutions()
-            if "profit_loss_statements" in name: return await BankLogic.get_bank_profit_loss()
-            if "balance_sheets" in name: return await BankLogic.get_bank_balance_sheets()
-            if "major_assets_liabilities_stats" in name: return await BankLogic.get_bank_major_indicators()
-            if "money_supply" in name: return await EconomicsLogic.get_money_supply_stats()
-            if "foreign_exchange_reserves" in name: return await EconomicsLogic.get_fx_reserves()
-            if "central_bank_base_rate" in name: return await EconomicsLogic.get_central_bank_rates()
-            if "five_major_banks" in name: return await EconomicsLogic.get_five_major_banks_loan_rates()
-            if "sme_loan" in name: return await BankLogic.get_sme_loan_stats()
-            if "monthly_profit" in name: return await BankLogic.get_monthly_profit_summary()
-            if "foreign_exchange_trading" in name: return await BankLogic.get_fx_trading_volume()
-            return {"error": "銀行細分數據正在對接中"}
-
         # 4. 加密貨幣路由
         elif name.startswith("get_crypto_"):
             coin = "bitcoin"
@@ -136,6 +117,14 @@ async def dispatch_mega_logic(name: str, symbol: Optional[str], limit: int) -> A
             elif "eth" in name: coin = "ETH"
             elif "sol" in name: coin = "SOL"
             return await CryptoLogic.get_price(coin)
+
+        # 5. 銀行數據
+        elif name.startswith("get_bank_"):
+            if "central_bank_base_rate" in name: return await EconomicsLogic.get_central_bank_rates()
+            if "five_major_banks" in name: return await EconomicsLogic.get_five_major_banks_loan_rates()
+            if "money_supply" in name: return await EconomicsLogic.get_money_supply_stats()
+            if "foreign_exchange_reserves" in name: return await EconomicsLogic.get_fx_reserves()
+            return {"error": "銀行細分數據正在對接中"}
 
         return {"error": f"功能 {name} 尚未完全實體化。"}
     except Exception as e:
@@ -152,7 +141,20 @@ def register_all_tools():
     
     for tools, group_name in tool_groups:
         for t_name in tools:
-            tool_desc = TOOL_METADATA.get(t_name, f"專業金融數據接口 [{t_name}]。")
+            tool_desc_dict = TOOL_METADATA.get(t_name, {})
+            # 構造結構化 Markdown Docstring (無 Emoji 專業版)
+            summary = tool_desc_dict.get("summary", "專業級金融數據接口。")
+            inputs = tool_desc_dict.get("inputs", "symbol (選填): 代碼或名稱。")
+            outputs = tool_desc_dict.get("outputs", "回傳相關金融 JSON 數據。")
+            source = tool_desc_dict.get("source", "官方公開資料庫。")
+            
+            rich_doc = (
+                f"{summary}\n\n"
+                f"Inputs: {inputs}\n"
+                f"Outputs: {outputs}\n"
+                f"Source: {source}"
+            )
+
             def create_tool(name, desc):
                 async def mcp_tool_raw(symbol: Optional[str] = None, limit: int = 10) -> str:
                     res = await dispatch_mega_logic(name, symbol, limit)
@@ -161,12 +163,12 @@ def register_all_tools():
                 mcp_tool_raw.__name__ = name
                 mcp.tool(name=name)(mcp_tool_raw)
                 return mcp_tool_raw
-            create_tool(t_name, tool_desc)
+            create_tool(t_name, rich_doc)
 
 register_all_tools()
 
 def main():
-    parser = argparse.ArgumentParser(description="Taiwan Finance MCP Mega v4.1.0")
+    parser = argparse.ArgumentParser(description="Taiwan Finance MCP Mega v4.4.0")
     parser.add_argument("--mode", choices=["stdio", "http"], default="stdio")
     parser.add_argument("--port", type=int, default=8005)
     args = parser.parse_args()
