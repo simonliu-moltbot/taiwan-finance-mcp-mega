@@ -1,6 +1,7 @@
 """
-Taiwan Macro-economics & Gov Data Logic - v3.9.3
-100% 真實數據對接與語義強化版本。
+Taiwan Macro-economics & Gov Data Logic - v3.9.4
+對接穩定性強化：正式切換至勞動部年度指標 API (NID: 130489)。
+解決 NID 6647 連結不穩定導致的數據抓取失敗問題。
 """
 import logging
 import json
@@ -14,66 +15,64 @@ logger = logging.getLogger("mcp-finance")
 class EconomicsLogic:
     """
     處理台灣宏觀經濟指標：薪資、失業率、CPI、GDP 等。
-    數據源：行政院主計總處 (DGBAS)。
+    數據源：勞動部年度國內主要經濟指標 (對接主計總處數據)。
     """
+
+    # 穩定數據源連結 (NID: 130489)
+    MOL_ECON_API = "https://apiservice.mol.gov.tw/OdService/download/A17000000J-030243-YTl"
 
     @staticmethod
     async def get_macro_stats(indicator: str = "all") -> Dict[str, Any]:
         """
-        [v3.9.3] 獲取台灣主要宏觀經濟指標。
-        採用關鍵字權重掃描，確保 GDP、CPI 即使 Key 變動也能精確抓取。
+        [v3.9.4] 獲取台灣主要宏觀經濟指標。
+        切換至勞動部 API，解決 NID 6647 轉跳連結不穩定的問題。
         """
-        # 主計總處 - 重要經濟指標摘要 (JSON)
-        url = "https://quality.data.gov.tw/dq_download_json.php?nid=6647&md5_url=59196b0c242337d40236a281691a5f36"
-        
         try:
-            data = await AsyncHttpClient.fetch_json(url)
+            data = await AsyncHttpClient.fetch_json(EconomicsLogic.MOL_ECON_API)
             if not data or not isinstance(data, list):
-                return {"error": "無法從主計總處獲取數據", "status": "maintenance"}
+                return {"error": "無法從勞動部 API 獲取數據", "status": "maintenance"}
 
-            # 最新數據通常在最後一筆
+            # 取最後一筆 (通常是最新年度或預測值)
             latest = data[-1]
             
-            def fuzzy_extract(d, keywords):
-                """掃描 dict 的 keys，只要包含所有關鍵字組合即回傳其值"""
-                for k, v in d.items():
-                    if all(word in k for word in keywords):
-                        return v
-                return "N/A"
-
-            # 定義各指標的「特徵關鍵字」
+            # 定義精確的欄位映射 (針對 NID 130489 結構)
             mapping = {
-                "gdp": {"keywords": ["經濟成長率"], "name": "GDP Growth Rate (%)"},
-                "cpi": {"keywords": ["消費者物價指數", "年增率"], "name": "CPI Inflation Rate (%)"},
-                "unemployment": {"keywords": ["失業率"], "name": "Unemployment Rate (%)"},
-                "salary": {"keywords": ["平均薪資"], "name": "Average Monthly Salary (TWD)"}
+                "gdp": {"key": "經濟成長率", "name": "GDP Growth Rate (%)"},
+                "cpi": {"key": "消費者物價-年增率", "name": "CPI Inflation Rate (%)"},
+                "unemployment": {"key": "失業率（百分比）", "name": "Unemployment Rate (%)"},
+                "salary": {"key": "工業及服務業平均月薪資（元）", "name": "Average Monthly Salary (TWD)"}
             }
 
             if indicator in mapping:
                 target = mapping[indicator]
-                value = fuzzy_extract(latest, target["keywords"])
                 return {
                     "indicator": target["name"],
-                    "value": value,
-                    "period": latest.get("資料時間", "N/A"),
-                    "source": "行政院主計總處 (DGBAS)",
-                    "note": "數據採自動語義對齊技術抓取"
+                    "value": latest.get(target["key"], "N/A"),
+                    "year": latest.get("年度", "N/A"),
+                    "source": "行政院主計總處 / 勞動部 (MOL API)",
+                    "note": "目前提供最新年度實測值或初步估計值。"
                 }
 
-            # 回傳全部摘要
+            # 回傳全部指標摘要
             return {
-                "source": "行政院主計總處 (DGBAS)",
-                "period": latest.get("資料時間", "N/A"),
-                "indicators": {k: fuzzy_extract(latest, v["keywords"]) for k, v in mapping.items()}
+                "source": "勞動部年度主要經濟指標",
+                "year": latest.get("年度", "N/A"),
+                "indicators": {
+                    "GDP成長率": f"{latest.get('經濟成長率', 'N/A')}%",
+                    "CPI年增率": f"{latest.get('消費者物價-年增率', 'N/A')}%",
+                    "失業率": f"{latest.get('失業率（百分比）', 'N/A')}%",
+                    "平均月薪資": f"{latest.get('工業及服務業平均月薪資（元）', 'N/A')} TWD"
+                }
             }
         except Exception as e:
-            logger.error(f"DGBAS Sync Error: {str(e)}")
-            return {"error": "主計總處 API 解析異常", "status": "maintenance"}
+            logger.error(f"MOL Economics API Error: {str(e)}")
+            return {"error": "宏觀經濟數據解析異常", "status": "maintenance"}
 
 class TaxLogic:
     """處理稅務數據。"""
     @staticmethod
     async def get_tax_revenue_stats() -> Dict[str, Any]:
+        # NID: 7331 (目前維持主計總處 JSON，若未來不穩可再切換至財政部專屬 API)
         url = "https://quality.data.gov.tw/dq_download_json.php?nid=7331&md5_url=e59196b0c242337d40236a281691a5f3"
         try:
             data = await AsyncHttpClient.fetch_json(url)
