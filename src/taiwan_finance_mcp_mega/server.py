@@ -111,10 +111,10 @@ async def dispatch_mega_logic(name: str, query_val: Optional[str], limit: int) -
             if "monthly_financial_indicators" in name: return await EconomicsLogic.get_monthly_financial_indicators()
             if "economic_indicators_monthly" in name: return await EconomicsLogic.get_macro_economic_indicators_monthly()
             if "economic_indicators_annual" in name: return await EconomicsLogic.get_macro_economic_indicators_annual()
-            if "global_stock_indices_annual" in name: return await BankLogic.get_macro_global_stock_indices_annual()
-            if "global_stock_indices" in name: return await BankLogic.get_macro_global_stock_indices()
-            if "forex_rates_annual" in name: return await BankLogic.get_macro_forex_rates_annual()
-            if "forex_rates_monthly" in name: return await BankLogic.get_macro_forex_rates_monthly()
+            if "global_stock_indices_annual" in name: return await EconomicsLogic.get_macro_global_stock_indices_annual()
+            if "global_stock_indices" in name: return await EconomicsLogic.get_macro_global_stock_indices()
+            if "forex_rates_annual" in name: return await EconomicsLogic.get_macro_forex_rates_annual()
+            if "forex_rates_monthly" in name: return await EconomicsLogic.get_macro_forex_rates_monthly()
             if "gdp_growth_rate_quarterly" in name: return await EconomicsLogic.get_macro_gdp_growth_rate_quarterly()
             
             return {"error": f"宏觀功能 {name} 尚未完全實體化。"}

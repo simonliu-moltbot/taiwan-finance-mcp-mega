@@ -14,7 +14,6 @@ logger = logging.getLogger("mcp-finance")
 
 class EconomicsLogic:
     """處理台灣宏觀經濟指標。"""
-    MOL_ECON_API = "https://apiservice.mol.gov.tw/OdService/download/A17000000J-030243-YTl"
 
     @staticmethod
     async def get_macro_gdp_growth_rate_quarterly() -> Dict[str, Any]:
@@ -45,7 +44,7 @@ class EconomicsLogic:
             return {"error": f"API 請求異常: {str(e)}"}
 
     @staticmethod
-    async def get_monthly_financial_indicators() -> Dict[str, Any]:
+    async def get_national_debt_clock() -> Dict[str, Any]:
         """獲取國債鐘資料 (財政部數據)。"""
         return {
             "source": "財政部 (MOF)",
