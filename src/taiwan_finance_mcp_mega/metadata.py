@@ -26,7 +26,10 @@ TOOL_METADATA = {
     "get_stock_pe_averages_by_industry": { "summary": "上市公司各類股本益比與殖利率統計。用於比較產業估值。", "inputs": "None", "outputs": "類股本益比。", "source": "TWSE" },
     "get_stock_broker_list_all": { "summary": "獲取全台證券商基本資料一覽表。包含券商名稱、地址與聯絡電話。", "inputs": "None", "outputs": "券商清單。", "source": "TWSE" },
     "get_stock_buyback_treasury_status": { "summary": "查詢上市公司庫藏股買回進度。", "inputs": "ticker: 股票代碼。", "outputs": "執行率。", "source": "TWSE" },
-    "get_stock_broker_regular_savings_data": { "summary": "[券商/業務] 查詢開辦「定期定額」業務的證券商名單（哪家券商可以開戶）。非查詢 ETF 排行。", "inputs": "None", "outputs": "券商名單。", "source": "TWSE" },
+    "get_stock_broker_regular_savings_data": { "summary": "[券商/業務] 查詢開辦「定期定額」業務的證券商清單（哪家券商可以開戶）。非查詢 ETF 排行。", "inputs": "None", "outputs": "券商名單。", "source": "TWSE" },
+    "get_stock_listed_investor_profile": { "summary": "[上市/投資] 查詢上市公司投資概況。包含發言人、上市日期、公司網址、會計師等深度投資資訊。", "inputs": "ticker: 股票代碼。", "outputs": "投資人關係資料。", "source": "TWSE" },
+    "get_stock_otc_investor_profile": { "summary": "[上櫃/投資] 查詢上櫃公司投資概況。包含發言人、上櫃日期、公司網址、會計師等深度投資資訊。", "inputs": "ticker: 股票代碼。", "outputs": "投資人關係資料。", "source": "TPEx" },
+    "get_stock_public_investor_profile": { "summary": "[公發/投資] 查詢興櫃及公開發行公司基本資料。包含聯繫方式、簽證資訊與成立日期。", "inputs": "ticker: 股票代碼。", "outputs": "公司基本投資資訊。", "source": "TWSE" },
 
     # 📉 DERIVATIVES: Specifically for TAIFEX (Futures/Options)
     # MANDATORY: Use ONLY for questions about 'Futures', 'Options', 'Open Interest', or 'Daily Settlement'.
@@ -55,9 +58,13 @@ TOOL_METADATA = {
     "get_macro_monthly_financial_indicators": { "summary": "每月國內主要金融指標。包含 M1B/M2、外匯存底、重貼現率、股價指數等總體指標。", "inputs": "None", "outputs": "Financial Indicators JSON", "source": "CBC/MOL" },
     "get_macro_economic_indicators_monthly": { "summary": "每月國內主要經濟指標。包含 GDP、CPI、失業率、薪資等。", "inputs": "None", "outputs": "Economic Indicators JSON", "source": "DGBAS/MOL" },
     "get_macro_economic_indicators_annual": { "summary": "年度國內主要經濟指標。長期趨勢分析用。", "inputs": "None", "outputs": "Economic Indicators JSON", "source": "DGBAS/MOL" },
+    "get_macro_global_stock_indices": { "summary": "[大盤指數] 每月國際主要股價指數。包含台股加權、美股 (Nasdaq/Dow)、日股等歷史趨勢。", "inputs": "None", "outputs": "Stock Indices JSON", "source": "MOL" },
+    "get_macro_forex_rates_monthly": { "summary": "[歷史趨勢] 國際主要國家貨幣每月匯率概況。包含美元、人民幣、日圓等對台幣趨勢。", "inputs": "None", "outputs": "Forex Rates JSON", "source": "MOL" },
+    "get_macro_global_stock_indices_annual": { "summary": "[大盤指數] 年度國際主要股價指數。歷史長期對比趨勢。", "inputs": "None", "outputs": "Stock Indices JSON", "source": "MOL" },
+    "get_macro_forex_rates_annual": { "summary": "[歷史趨勢] 國際主要國家貨幣年度匯率歷史概況。", "inputs": "None", "outputs": "Forex Rates JSON", "source": "MOL" },
 
     # 🏢 CORP & INDUSTRY
-    "get_corp_moea_business_registration": { "summary": "經濟部商工登記公示資料。查詢公司基本信息。", "inputs": "company_query: 公司名稱 or 統編。", "outputs": "登記資料。", "source": "MOEA" },
+    "get_corp_moea_business_registration": { "summary": "經濟部商工登記公示資料。查詢公司基本信息。適用於全台所有公司，包含非上市櫃企業。", "inputs": "company_query: 公司名稱 or 統編。", "outputs": "登記資料。", "source": "MOEA" },
 
     # 🪙 CRYPTO
     "get_crypto_btc_twd_price": { "summary": "比特幣 Bitcoin 即時 TWD/USD 報價與 24h 漲跌。", "inputs": "None", "outputs": "Price", "source": "CoinGecko" },
@@ -67,11 +74,7 @@ TOOL_METADATA = {
     
     # 🕒 COMMON
     "get_current_time_taipei": { "summary": "獲取台北即時系統時間、日期與星期幾。", "inputs": "None", "outputs": "Timestamp", "source": "System" },
-    "get_macro_global_stock_indices": { "summary": "[大盤指數] 每月國際主要股價指數。包含台股加權、美股 (Nasdaq/Dow)、日股等歷史趨勢。", "inputs": "None", "outputs": "Stock Indices JSON", "source": "MOL" },
-    "get_macro_forex_rates_monthly": { "summary": "[歷史趨勢] 國際主要國家貨幣每月匯率概況。包含美元、人民幣、日圓等對台幣趨勢。", "inputs": "None", "outputs": "Forex Rates JSON", "source": "MOL" },
     "get_bank_bond_issuance_monthly": { "summary": "國內債券每月發行概況。包含公債、公司債。", "inputs": "None", "outputs": "Bond Issuance JSON", "source": "MOL" },
     "get_bank_stock_issuance_monthly": { "summary": "國內公開發行公司股票每月發行概況。", "inputs": "None", "outputs": "Stock Issuance JSON", "source": "MOL" },
-    "get_bank_pension_fund_stats_monthly": { "summary": "國民年金保險基金每月經營概況。包含規模與收益率。", "inputs": "None", "outputs": "Fund Stats JSON", "source": "MOL" },
-    "get_macro_global_stock_indices_annual": { "summary": "[大盤指數] 年度國際主要股價指數。歷史長期對比趨勢。", "inputs": "None", "outputs": "Stock Indices JSON", "source": "MOL" },
-    "get_macro_forex_rates_annual": { "summary": "[歷史趨勢] 國際主要國家貨幣年度匯率歷史概況。", "inputs": "None", "outputs": "Forex Rates JSON", "source": "MOL" }
+    "get_bank_pension_fund_stats_monthly": { "summary": "國民年金保險基金每月經營概況。包含規模與收益率。", "inputs": "None", "outputs": "Fund Stats JSON", "source": "MOL" }
 }

@@ -11,7 +11,8 @@ STOCK_LIST = [
     "get_stock_individual_average_price", "get_stock_daily_closing_quotes_all",
     "get_stock_yield_averages_by_industry", "get_stock_pe_averages_by_industry",
     "get_stock_broker_list_all",
-    "get_stock_buyback_treasury_status", "get_stock_broker_regular_savings_data"
+    "get_stock_buyback_treasury_status", "get_stock_broker_regular_savings_data",
+    "get_stock_listed_investor_profile", "get_stock_otc_investor_profile", "get_stock_public_investor_profile"
 ]
 
 # 🌍 FOREX & COMMODITY

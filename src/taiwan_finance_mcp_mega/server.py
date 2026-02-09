@@ -55,7 +55,10 @@ MEGA_ENDPOINT_MAP = {
     "get_stock_pe_averages_by_industry": "/exchangeReport/FMNPTK_ALL",
     "get_stock_broker_list_all": "/brokerService/brokerList",
     "get_stock_buyback_treasury_status": "/opendata/t187ap13_L",
-    "get_stock_broker_regular_savings_data": "/brokerService/secRegData"
+    "get_stock_broker_regular_savings_data": "/brokerService/secRegData",
+    "get_stock_listed_investor_profile": "/opendata/t187ap03_L",
+    "get_stock_otc_investor_profile": "/v1/t187ap03_O",
+    "get_stock_public_investor_profile": "/opendata/t187ap03_P"
 }
 
 # --- 2. 核心分發邏輯 ---

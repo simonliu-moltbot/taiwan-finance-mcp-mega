@@ -24,6 +24,9 @@ This document provides an exhaustive mapping of every active tool in the `taiwan
 | `get_stock_block_trade_daily_summary` | [https://openapi.twse.com.tw/v1/block/BFIAUU_d](https://openapi.twse.com.tw/v1/block/BFIAUU_d) | 鉅額交易日成交量值統計 |
 | `get_stock_after_hours_trading_info` | [https://openapi.twse.com.tw/v1/exchangeReport/BFT41U](https://openapi.twse.com.tw/v1/exchangeReport/BFT41U) | 盤後定價交易資訊 |
 | `get_stock_individual_average_price` | [https://openapi.twse.com.tw/v1/exchangeReport/STOCK_DAY_AVG_ALL](https://openapi.twse.com.tw/v1/exchangeReport/STOCK_DAY_AVG_ALL) | 上市公司收盤價及月平均價 |
+| `get_stock_listed_investor_profile` | [TWSE OpenAPI](https://openapi.twse.com.tw/v1/opendata/t187ap03_L) | 上市公司投資人概況 (發言人/網址/上市日) |
+| `get_stock_otc_investor_profile` | [TPEx OpenAPI](https://www.tpex.org.tw/openapi/v1/t187ap03_O) | 上櫃公司投資人概況 (發言人/網址/上櫃日) |
+| `get_stock_public_investor_profile` | [TWSE OpenAPI](https://openapi.twse.com.tw/v1/opendata/t187ap03_P) | 興櫃/公發公司基本投資資料 |
 | `get_stock_daily_closing_quotes_all` | [https://openapi.twse.com.tw/v1/exchangeReport/MI_INDEX](https://openapi.twse.com.tw/v1/exchangeReport/MI_INDEX) | 收盤指數及各類股成交量值 |
 | `get_stock_yield_averages_by_industry` | [https://openapi.twse.com.tw/v1/exchangeReport/FMSRFK_ALL](https://openapi.twse.com.tw/v1/exchangeReport/FMSRFK_ALL) | 上市公司各類股殖利率統計 |
 | `get_stock_pe_averages_by_industry` | [https://openapi.twse.com.tw/v1/exchangeReport/FMNPTK_ALL](https://openapi.twse.com.tw/v1/exchangeReport/FMNPTK_ALL) | 上市公司各類股本益比統計 |
