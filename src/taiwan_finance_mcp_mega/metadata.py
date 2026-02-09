@@ -51,7 +51,6 @@ TOOL_METADATA = {
     "get_commodity_oil_wti_price_usd": { "summary": "WTI 原油期貨報價(USD)。", "inputs": "None", "outputs": "USD/Bbl", "source": "MOEA" },
     "get_commodity_oil_brent_price_usd": { "summary": "Brent 原油期貨報價(USD)。", "inputs": "None", "outputs": "USD/Bbl", "source": "MOEA" },
     "get_commodity_gold_spot_price_twd": { "summary": "黃金現貨即時報價(TWD)。", "inputs": "None", "outputs": "TWD/oz", "source": "Yahoo" },
-    "get_commodity_silver_spot_price_twd": { "summary": "白銀現貨即時報價(TWD)。", "inputs": "None", "outputs": "TWD/oz", "source": "Yahoo" },
 
     # 🏛️ MACRO: National Policy & Economy (DGBAS/CBC/MOF)
     "get_macro_gdp_growth_rate_quarterly": { "summary": "台灣季度 GDP 經濟成長率。國家級宏觀指標。", "inputs": "None", "outputs": "%", "source": "DGBAS" },
