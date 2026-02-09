@@ -115,19 +115,9 @@ async def dispatch_mega_logic(name: str, query_val: Optional[str], limit: int) -
             if "global_stock_indices" in name: return await BankLogic.get_macro_global_stock_indices()
             if "forex_rates_annual" in name: return await BankLogic.get_macro_forex_rates_annual()
             if "forex_rates_monthly" in name: return await BankLogic.get_macro_forex_rates_monthly()
+            if "gdp_growth_rate_quarterly" in name: return await EconomicsLogic.get_macro_gdp_growth_rate_quarterly()
             
-            # Moved Bank tools to Macro
-            if "policy_rate" in name: return await EconomicsLogic.get_macro_stats("gdp") # Placeholder for actual rate logic
-            if "money_supply" in name: return await BankLogic.get_bank_profit_loss() # Need mapping
-            if "foreign_exchange_reserves" in name: return await BankLogic.get_bank_profit_loss() # Need mapping
-            if "bank_mortgage_loan_rates" in name: return await BankLogic.get_bank_profit_loss() # Need mapping
-            
-            indicator = "all"
-            if "gdp" in name: indicator = "gdp"
-            elif "cpi" in name: indicator = "cpi"
-            elif "unemployment" in name: indicator = "unemployment"
-            elif "salary" in name: indicator = "salary"
-            return await EconomicsLogic.get_macro_stats(indicator)
+            return {"error": f"宏觀功能 {name} 尚未完全實體化。"}
 
         # 4. 商工數據路由
         elif name.startswith("get_corp_"):

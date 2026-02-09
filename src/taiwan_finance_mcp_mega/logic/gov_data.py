@@ -17,11 +17,35 @@ class EconomicsLogic:
     MOL_ECON_API = "https://apiservice.mol.gov.tw/OdService/download/A17000000J-030243-YTl"
 
     @staticmethod
-    async def get_macro_stats(indicator: str = "all") -> Dict[str, Any]:
-        return {"error": "MOL indicators decommissioned."}
+    async def get_macro_gdp_growth_rate_quarterly() -> Dict[str, Any]:
+        """獲取季度 GDP 經濟成長率 (從每月指標提取)。"""
+        url = "https://apiservice.mol.gov.tw/OdService/rest/datastore/A17030000J-000016-1ci"
+        try:
+            data = await AsyncHttpClient.fetch_json(url)
+            if data.get("success") and "result" in data:
+                records = data["result"].get("records", [])
+                # 過濾出有經濟成長率數據的月份 (通常為每季季底)
+                gdp_records = [
+                    {
+                        "period": r.get("日期（月別）"),
+                        "gdp_growth_rate": r.get("經濟成長率"),
+                        "unemployment_rate": r.get("失業率（百分比）"),
+                        "cpi_annual_growth": r.get("消費者物價-年增率")
+                    }
+                    for r in records if r.get("經濟成長率") and r.get("經濟成長率") != "…"
+                ]
+                return {
+                    "status": "success",
+                    "title": "台灣季度經濟指標 (GDP/失業率/CPI)",
+                    "records": gdp_records[-4:],  # 回傳最近四季
+                    "source": "勞動部/主計總處 (Open Data)"
+                }
+            return {"error": "無法從平台獲取 GDP 數據"}
+        except Exception as e:
+            return {"error": f"API 請求異常: {str(e)}"}
 
     @staticmethod
-    async def get_national_debt_clock() -> Dict[str, Any]:
+    async def get_monthly_financial_indicators() -> Dict[str, Any]:
         """獲取國債鐘資料 (財政部數據)。"""
         return {
             "source": "財政部 (MOF)",
