@@ -1,93 +1,66 @@
-# Detailed Tool-to-Source Mapping
+# Direct API Endpoint Registry
 
-This registry provides a direct mapping for every tool in the `taiwan-finance-mcp-mega` project to its specific data source and API endpoint. Use this for debugging data integrity or verifying connectivity.
+This document provides a comprehensive list of direct API URLs for every tool in the `taiwan-finance-mcp-mega` project. This allows for immediate verification of raw data from the source.
 
 ---
 
 ## 📈 Stock Market (TWSE / TPEx)
-*Data provided by the Taiwan Stock Exchange (TWSE) and Taipei Exchange (TPEx) OpenAPI.*
+*Data format: JSON*
 
-| Tool Name | Endpoint / Source | Description |
-|-----------|-------------------|-------------|
-| `get_stock_quotes_realtime_all` | `TWSE:/exchangeReport/STOCK_DAY_ALL` | Real-time quotes for all listed stocks. |
-| `get_stock_eps_ranking_summary` | `TWSE:/opendata/t187ap14_L` | EPS ranking for listed companies. |
-| `get_stock_dividend_yield_pe_pb` | `TWSE:/exchangeReport/BWIBBU_d` | PE, PB, and Dividend Yield. |
-| `get_stock_institutional_investor_flow` | `TWSE:/fund/BFI82U` | Daily institutional buy/sell summary. |
-| `get_stock_margin_trading_balance` | `TWSE:/exchangeReport/MI_MARGN` | Margin trading and short selling balance. |
-| `get_stock_odd_lot_trading_quotes` | `TWSE:/exchangeReport/TWT53U` | Intraday odd-lot trading prices. |
-| `get_stock_mops_significant_announcements` | `TWSE:/opendata/t187ap04_L` | Material information from MOPS. |
-| `get_stock_price_limit_up_down_tracker` | `TWSE:/exchangeReport/TWT84U` | Limit up/down stocks list. |
-| `get_stock_balance_sheet_general` | `TWSE:/opendata/t187ap07_X_ci` | General balance sheets. |
-| `get_stock_monthly_revenue_summary` | `TWSE:/opendata/t187ap05_L` | Monthly revenue aggregation. |
-| `get_stock_listed_company_basic_info` | `TWSE:/opendata/t187ap03_L` | Company profile (Tax ID, address, etc.). |
-| `get_stock_etf_regular_savings_ranking` | `TWSE:/ETFReport/ETFRank` | ETF recurring investment popularity. |
-| `get_stock_block_trade_daily_summary` | `TWSE:/block/BFIAUU_d` | Large block trade summary. |
-| `get_stock_after_hours_trading_info` | `TWSE:/exchangeReport/BFT41U` | After-hours fixed-price trading. |
-| `get_stock_ipo_new_listing_schedule` | `TWSE:/exchangeReport/TWT82U` | IPO and new listing schedules. |
-| `get_stock_buyback_treasury_status` | `TWSE:/opendata/t187ap13_L` | Treasury stock buyback progress. |
+| Tool Name | Direct API URL (Source) |
+|-----------|-------------------------|
+| `get_stock_quotes_realtime_all` | [https://openapi.twse.com.tw/v1/exchangeReport/STOCK_DAY_ALL](https://openapi.twse.com.tw/v1/exchangeReport/STOCK_DAY_ALL) |
+| `get_stock_eps_ranking_summary` | [https://openapi.twse.com.tw/v1/opendata/t187ap14_L](https://openapi.twse.com.tw/v1/opendata/t187ap14_L) |
+| `get_stock_dividend_yield_pe_pb` | [https://openapi.twse.com.tw/v1/exchangeReport/BWIBBU_d](https://openapi.twse.com.tw/v1/exchangeReport/BWIBBU_d) |
+| `get_stock_institutional_investor_flow` | [https://openapi.twse.com.tw/v1/fund/BFI82U](https://openapi.twse.com.tw/v1/fund/BFI82U) |
+| `get_stock_margin_trading_balance` | [https://openapi.twse.com.tw/v1/exchangeReport/MI_MARGN](https://openapi.twse.com.tw/v1/exchangeReport/MI_MARGN) |
+| `get_stock_odd_lot_trading_quotes` | [https://openapi.twse.com.tw/v1/exchangeReport/TWT53U](https://openapi.twse.com.tw/v1/exchangeReport/TWT53U) |
+| `get_stock_mops_significant_announcements` | [https://openapi.twse.com.tw/v1/opendata/t187ap04_L](https://openapi.twse.com.tw/v1/opendata/t187ap04_L) |
+| `get_stock_price_limit_up_down_tracker` | [https://openapi.twse.com.tw/v1/exchangeReport/TWT84U](https://openapi.twse.com.tw/v1/exchangeReport/TWT84U) |
+| `get_stock_balance_sheet_general` | [https://openapi.twse.com.tw/v1/opendata/t187ap07_X_ci](https://openapi.twse.com.tw/v1/opendata/t187ap07_X_ci) |
+| `get_stock_monthly_revenue_summary` | [https://openapi.twse.com.tw/v1/opendata/t187ap05_L](https://openapi.twse.com.tw/v1/opendata/t187ap05_L) |
+| `get_stock_listed_company_basic_info` | [https://openapi.twse.com.tw/v1/opendata/t187ap03_L](https://openapi.twse.com.tw/v1/opendata/t187ap03_L) |
+| `get_stock_etf_regular_savings_ranking` | [https://openapi.twse.com.tw/v1/ETFReport/ETFRank](https://openapi.twse.com.tw/v1/ETFReport/ETFRank) |
+| `get_stock_block_trade_daily_summary` | [https://openapi.twse.com.tw/v1/block/BFIAUU_d](https://openapi.twse.com.tw/v1/block/BFIAUU_d) |
+| `get_stock_after_hours_trading_info` | [https://openapi.twse.com.tw/v1/exchangeReport/BFT41U](https://openapi.twse.com.tw/v1/exchangeReport/BFT41U) |
+| `get_stock_ipo_new_listing_schedule` | [https://openapi.twse.com.tw/v1/exchangeReport/TWT82U](https://openapi.twse.com.tw/v1/exchangeReport/TWT82U) |
+| `get_stock_buyback_treasury_status` | [https://openapi.twse.com.tw/v1/opendata/t187ap13_L](https://openapi.twse.com.tw/v1/opendata/t187ap13_L) |
+| `get_stock_listed_company_profile_tpex` | [https://www.tpex.org.tw/openapi/v1/t187ap03_O](https://www.tpex.org.tw/openapi/v1/t187ap03_O) |
 
 ## 📉 Derivatives (Taifex)
-*Data provided by the Taiwan Futures Exchange (Taifex) OpenAPI.*
 
-| Tool Name | Endpoint / Source | Description |
-|-----------|-------------------|-------------|
-| `get_futures_quotes_daily` | `Taifex:/v1/DailyQuotes` | Daily settlement and futures prices. |
-| `get_futures_institutional_investor_flow` | `Taifex:/v1/InstitutionalInvestorsDaily` | Institutional net positions (Futures). |
-| `get_futures_open_interest_ranking` | `Taifex:/v1/LargeTradersPositionsDaily` | Top trader open interest distribution. |
+| Tool Name | Direct API URL (Source) |
+|-----------|-------------------------|
+| `get_futures_quotes_daily` | [https://openapi.taifex.com.tw/v1/DailyQuotes](https://openapi.taifex.com.tw/v1/DailyQuotes) |
+| `get_futures_institutional_investor_flow` | [https://openapi.taifex.com.tw/v1/InstitutionalInvestorsDaily](https://openapi.taifex.com.tw/v1/InstitutionalInvestorsDaily) |
+| `get_futures_open_interest_ranking` | [https://openapi.taifex.com.tw/v1/LargeTradersPositionsDaily](https://openapi.taifex.com.tw/v1/LargeTradersPositionsDaily) |
 
 ## 🌍 Forex & Commodities
-*Real-time market rates and commodity indices.*
 
-| Tool Name | Endpoint / Source | Description |
-|-----------|-------------------|-------------|
-| `get_forex_[CUR]_twd_realtime` | `ExchangeRate-API:open.er-api.com/v6/latest/` | Real-time FX (USD, JPY, EUR, etc.). |
-| `get_commodity_oil_wti_price_usd` | `MOEA (Oil111 CSV)` | WTI crude oil price. |
-| `get_commodity_oil_brent_price_usd` | `MOEA (Oil111 CSV)` | Brent crude oil price. |
-| `get_commodity_gold_spot_price_twd` | `Yahoo Finance / Market Feed` | Gold spot price in TWD. |
-| `get_commodity_silver_spot_price_twd` | `Yahoo Finance / Market Feed` | Silver spot price in TWD. |
+| Tool Name | Direct API URL (Source) |
+|-----------|-------------------------|
+| `get_forex_usd_twd_realtime` | [https://open.er-api.com/v6/latest/USD](https://open.er-api.com/v6/latest/USD) |
+| `get_forex_jpy_twd_realtime` | [https://open.er-api.com/v6/latest/JPY](https://open.er-api.com/v6/latest/JPY) |
+| `get_commodity_oil_wti_price_usd` | [https://www2.moeaea.gov.tw/oil111/csv/GlobalOilOpenData.csv](https://www2.moeaea.gov.tw/oil111/csv/GlobalOilOpenData.csv) |
 
 ## 🏛️ Macroeconomics & Gov Data
-*National indicators and official government statistics.*
 
-| Tool Name | Endpoint / Source | Description |
-|-----------|-------------------|-------------|
-| `get_macro_gdp_growth_rate_quarterly` | `MOL/DGBAS API` | Quarterly GDP growth metrics. |
-| `get_macro_cpi_inflation_rate_tw` | `MOL API` | Consumer Price Index (Inflation). |
-| `get_macro_unemployment_rate_seasonal_adjusted` | `MOL API` | Seasonally adjusted unemployment. |
-| `get_macro_average_monthly_salary_dgbas` | `MOL API` | Average worker monthly salary. |
-| `get_macro_fuel_price_cpc_retail` | `CPC:vipmbr.cpc.com.tw/openData/` | Weekly retail fuel prices. |
-| `get_macro_housing_price_index_tw` | `MOI:quality.data.gov.tw/dq_download_json.php?nid=11545` | Residential price index. |
-| `get_macro_national_debt_clock` | `MOF:Static / Registry Feed` | Current national debt status. |
-| `get_macro_central_bank_policy_rate` | `CBC:Official Announcements` | Discount rate and policy interest. |
+| Tool Name | Direct API URL (Source) |
+|-----------|-------------------------|
+| `get_macro_gdp_growth_rate_quarterly` | [https://apiservice.mol.gov.tw/OdService/download/A17000000J-030243-YTl](https://apiservice.mol.gov.tw/OdService/download/A17000000J-030243-YTl) |
+| `get_macro_fuel_price_cpc_retail` | [https://vipmbr.cpc.com.tw/openData/MainProdListPrice](https://vipmbr.cpc.com.tw/openData/MainProdListPrice) |
+| `get_macro_housing_price_index_tw` | [https://quality.data.gov.tw/dq_download_json.php?nid=11545&md5_url=59196b0c242337d40236a281691a5f36](https://quality.data.gov.tw/dq_download_json.php?nid=11545&md5_url=59196b0c242337d40236a281691a5f36) |
+| `get_bank_list_of_institutions` | [https://quality.data.gov.tw/dq_download_json.php?nid=18419&md5_url=2851676f4e157208d3663a890473919d](https://quality.data.gov.tw/dq_download_json.php?nid=18419&md5_url=2851676f4e157208d3663a890473919d) |
+| `get_bank_profit_loss_statements` | [https://quality.data.gov.tw/dq_download_json.php?nid=28567&md5_url=2851676f4e157208d3663a890473919d](https://quality.data.gov.tw/dq_download_json.php?nid=28567&md5_url=2851676f4e157208d3663a890473919d) |
+| `get_corp_industry_electricity_consumption_stats` | [https://www.moeaea.gov.tw/ECW/populace/opendata/wHandOpenData_File.ashx?set_id=236](https://www.moeaea.gov.tw/ECW/populace/opendata/wHandOpenData_File.ashx?set_id=236) |
+| `get_gov_financial_news_fsc` | [https://quality.data.gov.tw/dq_download_json.php?nid=7334&md5_url=59196b0c242337d40236a281691a5f36](https://quality.data.gov.tw/dq_download_json.php?nid=7334&md5_url=59196b0c242337d40236a281691a5f36) |
 
-## 🏦 Banking & Corporate
-*Financial institution performance and MOEA registrations.*
+## 🪙 Cryptocurrency (CoinGecko Simple API)
 
-| Tool Name | Endpoint / Source | Description |
-|-----------|-------------------|-------------|
-| `get_bank_list_of_institutions` | `Data.gov.tw:nid=18419` | List of all financial institutions. |
-| `get_bank_profit_loss_statements` | `Data.gov.tw:nid=28567` | Bank industry profit/loss reports. |
-| `get_bank_sme_loan_balance_stats` | `FSC Open Data` | SME loan balance and counts. |
-| `get_corp_moea_business_registration` | `GCIS:data.gcis.nat.gov.tw/od/data/api/` | Business registration search. |
-| `get_corp_industry_production_index` | `MOEA Industry Index Feed` | Industrial production index. |
-| `get_corp_industry_electricity_consumption_stats` | `MOEA:ECW/opendata/` | Power consumption by sector. |
-
-## 🪙 Cryptocurrency
-*Real-time crypto data from CoinGecko.*
-
-| Tool Name | Endpoint / Source | Description |
-|-----------|-------------------|-------------|
-| `get_crypto_btc_twd_price` | `CoinGecko:/api/v3/simple/price?ids=bitcoin` | BTC price in TWD/USD. |
-| `get_crypto_market_fear_greed_index` | `CoinGecko:Alternative.me Proxy` | Crypto market sentiment index. |
-
-## 📰 Official News
-*Direct feeds from regulatory bodies.*
-
-| Tool Name | Endpoint / Source | Description |
-|-----------|-------------------|-------------|
-| `get_gov_financial_news_fsc` | `Data.gov.tw:nid=7334` | FSC official press releases. |
-| `get_gov_central_bank_announcements` | `CBC:Official Site Feed` | Central Bank policy announcements. |
-| `get_gov_industrial_policy_news_moea` | `MOEA News Feed` | Industrial and energy policy news. |
+| Tool Name | Direct API URL (Source) |
+|-----------|-------------------------|
+| `get_crypto_btc_twd_price` | [https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=twd,usd&include_24hr_change=true](https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=twd,usd&include_24hr_change=true) |
+| `get_crypto_eth_twd_price` | [https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=twd,usd&include_24hr_change=true](https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=twd,usd&include_24hr_change=true) |
 
 ---
 *Last Updated: 2026-02-09*
