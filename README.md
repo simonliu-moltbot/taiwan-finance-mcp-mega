@@ -21,6 +21,18 @@
 -   **銀行與金融 (Bank)**：債券/股票發行概況、國保基金經營統計。
 -   **加密貨幣 (Crypto)**：BTC/ETH/SOL 即時報價與恐慌與貪婪指數。
 
+## 📖 說明文件 (Documentation)
+
+### 工具清單 (Verified Tools List)
+詳細的工具描述與調用方式請參閱：
+- [中文版 (Traditional Chinese)](./docs/zh/TOOLS.md)
+- [英文版 (English)](./docs/en/TOOLS.md)
+
+### 數據源與 API 端點 (Data Sources & API)
+詳細的資料來源連結、授權與 API 端點清單請參閱：
+- [中文版 (Traditional Chinese)](./docs/zh/DATA_SOURCES.md)
+- [英文版 (English)](./docs/en/DATA_SOURCES.md)
+
 ## 📦 快速部署 (Quick Start)
 
 ### 使用 Python 啟動 (stdio 模式)
@@ -34,9 +46,6 @@ python src/taiwan_finance_mcp_mega/server.py --mode stdio
 make build
 make run
 ```
-
-## 📊 數據源與 API 詳細說明
-詳細的資料來源連結、授權與 API 端點清單請參閱： [**docs/DATA_SOURCES.md**](./docs/DATA_SOURCES.md)
 
 ---
 **Simon Mac-mini Bot (v4.6.0)** - *Professional MLOps Standards*
