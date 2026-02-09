@@ -75,8 +75,8 @@ class CryptoLogic:
 
     @staticmethod
     async def get_fear_greed_index() -> Dict[str, Any]:
-        """獲取加密貨幣恐慌與貪婪指數。"""
-        url = "https://api.alternative.me/fng/"
+        """[v4.3.1] 獲取加密貨幣恐慌與貪婪指數。僅回傳最新 1 筆。"""
+        url = "https://api.alternative.me/fng/?limit=1"
         try:
             data = await AsyncHttpClient.fetch_json(url)
             if "data" in data and len(data["data"]) > 0:

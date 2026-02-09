@@ -110,9 +110,27 @@ class BankLogic:
 
     @staticmethod
     async def get_macro_global_stock_indices() -> Dict[str, Any]:
-        """獲取每月國際主要股價指數。"""
+        """[v4.3.1] 獲取每月國際主要股價指數。僅回傳前 12 筆（一年數據）。"""
         url = "https://apiservice.mol.gov.tw/OdService/rest/datastore/A17030000J-000050-Ipz"
-        return await EconomicsLogic._fetch_mol_api(url, "每月國際主要股價指數")
+        data = await EconomicsLogic._fetch_mol_api(url, "每月國際主要股價指數")
+        if data.get("status") == "success" and "records" in data.get("result", {}):
+             # 這裡是透過 _fetch_mol_api 封裝過的，需調整回傳結構或直接在此處理
+             pass
+        # 由於 _fetch_mol_api 已經回傳了格式化的 Dict，我們直接在 logic 裡修正 _fetch_mol_api 的行為或在此切片
+        try:
+            raw_data = await AsyncHttpClient.fetch_json(url)
+            if raw_data.get("success") and "result" in raw_data:
+                records = raw_data["result"].get("records", [])
+                return {
+                    "status": "success",
+                    "title": "每月國際主要股價指數",
+                    "count": 12,
+                    "latest_year": records[-12:] if records else [],
+                    "source": "勞動部/中央銀行 (Open Data)"
+                }
+            return {"error": "無法獲取數據"}
+        except Exception as e:
+            return {"error": str(e)}
 
     @staticmethod
     async def get_macro_forex_rates_monthly() -> Dict[str, Any]:
