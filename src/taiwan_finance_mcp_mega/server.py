@@ -149,7 +149,7 @@ async def dispatch_mega_logic(name: str, query_val: Optional[str], limit: int) -
 
         # 6. 銀行數據 (Commercial Banks only)
         elif name.startswith("get_bank_"):
-            if "bot_credit_rating" in name: return await BankLogic.get_bot_credit_rating()
+            if "bot_credit_rating" in name: return await BankLogic.get_bank_bot_credit_rating()
             if "bond_issuance_monthly" in name: return await BankLogic.get_bank_bond_issuance_monthly()
             if "stock_issuance_monthly" in name: return await BankLogic.get_bank_stock_issuance_monthly()
             if "pension_fund_stats_monthly" in name: return await BankLogic.get_bank_pension_fund_stats_monthly()

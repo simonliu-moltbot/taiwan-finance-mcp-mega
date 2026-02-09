@@ -40,7 +40,14 @@ class AsyncHttpClient:
             try:
                 response = await client.get(url, params=params, headers=headers)
                 response.raise_for_status()
-                data = response.json()
+                try:
+                    # 優先使用標準 json 解析
+                    data = response.json()
+                except:
+                    # 若失敗，嘗試處理 BOM (UTF-8-SIG)
+                    content = response.content.decode('utf-8-sig')
+                    data = json.loads(content)
+                
                 cls._cache[cache_key] = data
                 return data
             except Exception as e:
