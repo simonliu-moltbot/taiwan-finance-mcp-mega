@@ -112,6 +112,8 @@ async def dispatch_mega_logic(name: str, query_val: Optional[str], limit: int) -
             if "housing_price_index" in name: return await EconomicsLogic.get_housing_price_index()
             if "national_debt_clock" in name: return await EconomicsLogic.get_national_debt_clock()
             if "monthly_financial_indicators" in name: return await EconomicsLogic.get_monthly_financial_indicators()
+            if "economic_indicators_monthly" in name: return await EconomicsLogic.get_macro_economic_indicators_monthly()
+            if "economic_indicators_annual" in name: return await EconomicsLogic.get_macro_economic_indicators_annual()
             
             # Moved Bank tools to Macro
             if "policy_rate" in name: return await EconomicsLogic.get_macro_stats("gdp") # Placeholder for actual rate logic
@@ -147,6 +149,14 @@ async def dispatch_mega_logic(name: str, query_val: Optional[str], limit: int) -
         # 6. 銀行數據 (Commercial Banks only)
         elif name.startswith("get_bank_"):
             if "bot_credit_rating" in name: return await BankLogic.get_bot_credit_rating()
+            if "stock_indices_monthly" in name: return await BankLogic.get_bank_stock_indices_monthly()
+            if "forex_rates_monthly" in name: return await BankLogic.get_bank_forex_rates_monthly()
+            if "bond_issuance_monthly" in name: return await BankLogic.get_bank_bond_issuance_monthly()
+            if "stock_issuance_monthly" in name: return await BankLogic.get_bank_stock_issuance_monthly()
+            if "pension_fund_stats_monthly" in name: return await BankLogic.get_bank_pension_fund_stats_monthly()
+            if "stock_indices_annual" in name: return await BankLogic.get_bank_stock_indices_annual()
+            if "forex_rates_annual" in name: return await BankLogic.get_bank_forex_rates_annual()
+            
             if "list_of_institutions" in name: return await BankLogic.get_list_of_institutions()
             if "profit_loss" in name: return await BankLogic.get_bank_profit_loss()
             return {"error": "銀行商業數據正在對接中"}

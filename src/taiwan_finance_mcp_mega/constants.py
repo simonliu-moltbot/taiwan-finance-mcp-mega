@@ -31,14 +31,23 @@ DERIVATIVES_LIST = [
 
 # 🏦 BANK: Commercial Bank specific metrics
 BANK_LIST = [
-    "get_bank_bot_credit_rating"
+    "get_bank_bot_credit_rating",
+    "get_bank_stock_indices_monthly",
+    "get_bank_forex_rates_monthly",
+    "get_bank_bond_issuance_monthly",
+    "get_bank_stock_issuance_monthly",
+    "get_bank_pension_fund_stats_monthly",
+    "get_bank_stock_indices_annual",
+    "get_bank_forex_rates_annual"
 ]
 
 # 🏛️ MACRO: National Policy & Economy (DGBAS/CBC/MOF)
 MACRO_LIST = [
     "get_macro_gdp_growth_rate_quarterly",
     "get_macro_national_debt_clock",
-    "get_macro_monthly_financial_indicators"
+    "get_macro_monthly_financial_indicators",
+    "get_macro_economic_indicators_monthly",
+    "get_macro_economic_indicators_annual"
 ]
 
 TAX_LIST = []

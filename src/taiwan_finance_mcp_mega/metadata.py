@@ -56,6 +56,8 @@ TOOL_METADATA = {
     "get_macro_gdp_growth_rate_quarterly": { "summary": "台灣季度 GDP 經濟成長率。國家級宏觀指標。", "inputs": "None", "outputs": "%", "source": "DGBAS" },
     "get_macro_national_debt_clock": { "summary": "中華民國國債鐘：中央政府長短期債務與人均負擔額。", "inputs": "None", "outputs": "Debt Amount", "source": "MOF" },
     "get_macro_monthly_financial_indicators": { "summary": "每月國內主要金融指標。包含 M1B/M2、外匯存底、重貼現率、股價指數等總體指標。", "inputs": "None", "outputs": "Financial Indicators JSON", "source": "CBC/MOL" },
+    "get_macro_economic_indicators_monthly": { "summary": "每月國內主要經濟指標。包含 GDP、CPI、失業率、薪資等。", "inputs": "None", "outputs": "Economic Indicators JSON", "source": "DGBAS/MOL" },
+    "get_macro_economic_indicators_annual": { "summary": "年度國內主要經濟指標。長期趨勢分析用。", "inputs": "None", "outputs": "Economic Indicators JSON", "source": "DGBAS/MOL" },
 
     # 🏢 CORP & INDUSTRY
     "get_corp_moea_business_registration": { "summary": "經濟部商工登記公示資料。查詢公司基本信息。", "inputs": "company_query: 公司名稱 or 統編。", "outputs": "登記資料。", "source": "MOEA" },
@@ -68,5 +70,12 @@ TOOL_METADATA = {
     
     # 🕒 COMMON
     "get_current_time_taipei": { "summary": "獲取台北即時系統時間、日期與星期幾。", "inputs": "None", "outputs": "Timestamp", "source": "System" },
-    "get_bank_bot_credit_rating": { "summary": "獲取臺灣銀行 (Bank of Taiwan) 最新信用評等等級。包含 S&P, Moody's 與中華信評。", "inputs": "None", "outputs": "Credit Rating JSON", "source": "Bank of Taiwan" }
+    "get_bank_bot_credit_rating": { "summary": "獲取臺灣銀行 (Bank of Taiwan) 最新信用評等等級。包含 S&P, Moody's 與中華信評。", "inputs": "None", "outputs": "Credit Rating JSON", "source": "Bank of Taiwan" },
+    "get_bank_stock_indices_monthly": { "summary": "每月國際主要股價指數。包含台股、美股、日股等趨勢。", "inputs": "None", "outputs": "Stock Indices JSON", "source": "MOL" },
+    "get_bank_forex_rates_monthly": { "summary": "國際主要國家貨幣每月匯率。包含美元、人民幣、日圓等對台幣。", "inputs": "None", "outputs": "Forex Rates JSON", "source": "MOL" },
+    "get_bank_bond_issuance_monthly": { "summary": "國內債券每月發行概況。包含公債、公司債。", "inputs": "None", "outputs": "Bond Issuance JSON", "source": "MOL" },
+    "get_bank_stock_issuance_monthly": { "summary": "國內公開發行公司股票每月發行概況。", "inputs": "None", "outputs": "Stock Issuance JSON", "source": "MOL" },
+    "get_bank_pension_fund_stats_monthly": { "summary": "國民年金保險基金每月經營概況。包含規模與收益率。", "inputs": "None", "outputs": "Fund Stats JSON", "source": "MOL" },
+    "get_bank_stock_indices_annual": { "summary": "年度國際主要股價指數。歷史長期對比用。", "inputs": "None", "outputs": "Stock Indices JSON", "source": "MOL" },
+    "get_bank_forex_rates_annual": { "summary": "國際主要國家貨幣年度匯率。歷史長期對比用。", "inputs": "None", "outputs": "Forex Rates JSON", "source": "MOL" }
 }
