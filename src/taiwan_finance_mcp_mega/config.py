@@ -7,7 +7,7 @@ class Config:
     # API Bases
     TWSE_BASE = "https://openapi.twse.com.tw/v1"
     TPEX_BASE = "https://openapi.tpex.org.tw/v1"
-    FOREX_API = "https://open.er-api.com/v6/latest/JPY"
+    FOREX_API = "https://tw.rter.info/capi.php"
     COINGECKO_BASE = "https://api.coingecko.com/api/v3"
     
     # Server Settings

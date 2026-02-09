@@ -1,6 +1,6 @@
 """
-專業匯率與大宗商品邏輯模組 (Logic Module for Forex and Commodities) - v3.4.0
-對接 真實世界即時匯率 API，符合 MLOps 標準之註解規範。
+專業匯率與大宗商品邏輯模組 (Logic Module for Forex and Commodities) - v4.0.0
+對接 即匯站 (tw.rter.info) API，支援 OOO to OOO 匯率換算。
 """
 import logging
 from typing import Dict, Any, Optional
@@ -11,56 +11,88 @@ logger = logging.getLogger("mcp-finance")
 
 class ForexLogic:
     """
-    提供全球匯率對台幣 (TWD) 的即時換算與行情。
+    提供全球匯率換算與行情，數據源自 tw.rter.info。
     """
 
     @staticmethod
-    async def get_latest_rates(base: str = "USD") -> Dict[str, Any]:
+    async def get_latest_rates_raw() -> Dict[str, Any]:
         """
-        獲取全球即時匯率表。
-        
-        解釋：獲取以特定貨幣為基準（預設 USD）的所有全球主要貨幣最新行情。
-        使用時機：需要一次對比多國幣別波動或進行多幣別資產計算時。
-        輸入 (Input)：
-            base (str): 基準幣別代碼，例如 'USD', 'JPY'。
-        輸出 (Output)：
-            Dict[str, Any]: 包含 rates 對應表的 JSON 數據。
+        獲取 tw.rter.info 的原始匯率數據 (以 USD 為基準)。
         """
-        url = f"https://open.er-api.com/v6/latest/{base.upper()}"
-        return await AsyncHttpClient.fetch_json(url)
+        return await AsyncHttpClient.fetch_json(Config.FOREX_API)
 
     @classmethod
     async def get_pair(cls, base: str, target: str = "TWD") -> Dict[str, Any]:
         """
-        計算並獲取特定貨幣對的即時真實匯率。
+        計算並獲取特定貨幣對的即時匯率 (OOO to OOO)。
         
         解釋：執行精確的交叉換算邏輯，獲取當下市場的即時匯率。
-        使用時機：換匯決策、進出口成本估算或海外旅遊規劃。
         輸入 (Input)：
-            base (str): 原始幣別 (如 'JPY', 'EUR', 'CNY')。
-            target (str): 目標幣別。預設為台幣 'TWD'。
+            base (str): 原始幣別 (如 'JPY', 'EUR', 'USD')。
+            target (str): 目標幣別 (如 'TWD', 'HKD')。
         輸出 (Output)：
-            Dict[str, Any]: 包含 pair (貨幣對), rate (匯率數值), source (來源) 與 update_time。
+            Dict[str, Any]: 包含 pair, rate, source 與 update_time。
         """
-        data = await cls.get_latest_rates(base="USD")
-        if "error" in data:
-            return data
+        data = await cls.get_latest_rates_raw()
+        if not data or not isinstance(data, dict):
+            return {"error": "無法獲取匯率數據"}
         
-        rates = data.get("rates", {})
+        base = base.upper()
+        target = target.upper()
+        
         try:
-            val_target = rates.get(target.upper())
-            val_base = rates.get(base.upper())
+            # 取得基準匯率 (相對於 USD)
+            # tw.rter.info 格式為 "USDXXX"
+            usd_base_key = f"USD{base}"
+            usd_target_key = f"USD{target}"
             
-            if val_target is None or val_base is None:
-                return {"error": f"不支援的幣別: {base}/{target}"}
+            rate_to_usd_base = 1.0 if base == "USD" else data.get(usd_base_key, {}).get("Exrate")
+            rate_to_usd_target = 1.0 if target == "USD" else data.get(usd_target_key, {}).get("Exrate")
+            
+            if rate_to_usd_base is None:
+                return {"error": f"不支援的原始幣別: {base}"}
+            if rate_to_usd_target is None:
+                return {"error": f"不支援的目標幣別: {target}"}
                 
-            final_rate = val_target / val_base
+            # 換算公式: 1 Base = (1/rate_to_usd_base) USD = (rate_to_usd_target / rate_to_usd_base) Target
+            final_rate = rate_to_usd_target / rate_to_usd_base
+            
             return {
-                "pair": f"{base.upper()}/{target.upper()}",
-                "rate": round(final_rate, 4),
-                "last_update_utc": data.get("time_last_update_utc"),
-                "source": "Real-time ExchangeRate-API (Market Mid-Rate)",
-                "usage_tip": f"數據反映市場中間匯率，銀行現鈔買賣請參考牌告價。"
+                "pair": f"{base}/{target}",
+                "rate": round(final_rate, 6),
+                "update_time": data.get(usd_target_key if target != "USD" else usd_base_key, {}).get("UTC"),
+                "source": "tw.rter.info (即匯站)",
+                "note": "數據經由 USD 交叉換算得出。"
             }
         except Exception as e:
+            logger.error(f"Forex calculation error: {str(e)}")
             return {"error": f"匯率計算失敗: {str(e)}"}
+
+    @staticmethod
+    async def get_latest_rates(base: str = "USD") -> Dict[str, Any]:
+        """
+        [Legacy Support] 獲取全球即時匯率表。
+        """
+        data = await ForexLogic.get_latest_rates_raw()
+        if base.upper() == "USD":
+            return data
+        
+        # 轉換為以 base 為基準的表
+        base = base.upper()
+        usd_base_key = f"USD{base}"
+        rate_to_usd_base = 1.0 if base == "USD" else data.get(usd_base_key, {}).get("Exrate")
+        
+        if not rate_to_usd_base:
+            return {"error": f"不支援的基準幣別: {base}"}
+            
+        converted_rates = {}
+        for key, val in data.items():
+            if key.startswith("USD"):
+                currency = key[3:]
+                converted_rates[currency] = round(val["Exrate"] / rate_to_usd_base, 6)
+                
+        return {
+            "base": base,
+            "rates": converted_rates,
+            "source": "tw.rter.info (Cross-rate calculation)"
+        }
