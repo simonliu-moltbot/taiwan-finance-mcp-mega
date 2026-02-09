@@ -136,16 +136,15 @@ class StockLogic:
         """
         [DevOps] 萬用接口：根據 Endpoint 自動映射並調用證交所或櫃買全量 API。
         """
-        headers = None
+        headers = {
+            "accept": "application/json",
+            "If-Modified-Since": "Mon, 26 Jul 1997 05:00:00 GMT",
+            "Cache-Control": "no-cache",
+            "Pragma": "no-cache"
+        }
+        
         if "tpex" in endpoint or endpoint.startswith("/v1/tpex_"):
             url = f"https://www.tpex.org.tw/openapi{endpoint}"
-            # TPEx Specific Anti-Cache Headers
-            headers = {
-                "accept": "application/json",
-                "If-Modified-Since": "Mon, 26 Jul 1997 05:00:00 GMT",
-                "Cache-Control": "no-cache",
-                "Pragma": "no-cache"
-            }
         else:
             url = f"{Config.TWSE_BASE}{endpoint}"
         
