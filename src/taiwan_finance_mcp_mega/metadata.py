@@ -67,7 +67,6 @@ TOOL_METADATA = {
     
     # 🕒 COMMON
     "get_current_time_taipei": { "summary": "獲取台北即時系統時間、日期與星期幾。", "inputs": "None", "outputs": "Timestamp", "source": "System" },
-    "get_bank_bot_credit_rating": { "summary": "獲取臺灣銀行 (Bank of Taiwan) 最新信用評等等級。包含 S&P, Moody's 與中華信評。", "inputs": "None", "outputs": "Credit Rating JSON", "source": "Bank of Taiwan" },
     "get_macro_global_stock_indices": { "summary": "[大盤指數] 每月國際主要股價指數。包含台股加權、美股 (Nasdaq/Dow)、日股等歷史趨勢。", "inputs": "None", "outputs": "Stock Indices JSON", "source": "MOL" },
     "get_macro_forex_rates_monthly": { "summary": "[歷史趨勢] 國際主要國家貨幣每月匯率概況。包含美元、人民幣、日圓等對台幣趨勢。", "inputs": "None", "outputs": "Forex Rates JSON", "source": "MOL" },
     "get_bank_bond_issuance_monthly": { "summary": "國內債券每月發行概況。包含公債、公司債。", "inputs": "None", "outputs": "Bond Issuance JSON", "source": "MOL" },

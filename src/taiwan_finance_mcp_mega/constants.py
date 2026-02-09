@@ -31,7 +31,6 @@ DERIVATIVES_LIST = [
 
 # 🏦 BANK: Commercial Bank specific metrics
 BANK_LIST = [
-    "get_bank_bot_credit_rating",
     "get_bank_bond_issuance_monthly",
     "get_bank_stock_issuance_monthly",
     "get_bank_pension_fund_stats_monthly"

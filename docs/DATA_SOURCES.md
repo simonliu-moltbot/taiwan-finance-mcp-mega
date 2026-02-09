@@ -63,7 +63,6 @@ This document provides an exhaustive mapping of every active tool in the `taiwan
 | `get_macro_forex_rates_monthly` | [MOL REST API](https://apiservice.mol.gov.tw/OdService/rest/datastore/A17030000J-000049-Iq0) | 國際主要國家貨幣每月匯率概況 |
 | `get_macro_global_stock_indices_annual` | [MOL REST API](https://apiservice.mol.gov.tw/OdService/rest/datastore/A17000000J-030245-4Ml) | 年度國際主要股價指數 |
 | `get_macro_forex_rates_annual` | [MOL REST API](https://apiservice.mol.gov.tw/OdService/rest/datastore/A17000000J-030185-CKf) | 國際主要國家貨幣年度匯率概況 |
-| `get_bank_bot_credit_rating` | [Bank of Taiwan JSON](https://quality.data.gov.tw/dq_download_json.php?nid=31927&md5_url=ebdd6bebd608b17380749eb0bc21d06f) | 臺灣銀行信用評等等級 (S&P/Moody's/中華信評) |
 | `get_bank_bond_issuance_monthly` | [MOL REST API](https://apiservice.mol.gov.tw/OdService/rest/datastore/A17030000J-000048-YHK) | 國內債券每月發行概況 |
 | `get_bank_stock_issuance_monthly` | [MOL REST API](https://apiservice.mol.gov.tw/OdService/rest/datastore/A17030000J-000047-Y4N) | 國內公開發行公司股票每月發行概況 |
 | `get_bank_pension_fund_stats_monthly` | [MOL REST API](https://apiservice.mol.gov.tw/OdService/rest/datastore/A17030000J-000045-2qm) | 國民年金保險基金每月經營概況 |
@@ -80,5 +79,5 @@ This document provides an exhaustive mapping of every active tool in the `taiwan
 | `get_current_time_taipei` | Local Environment | 獲取台北即時系統時間 |
 
 ---
-*Total Active Verified Tools: 56*
+*Total Active Verified Tools: 55*
 *Last Updated: 2026-02-09*
