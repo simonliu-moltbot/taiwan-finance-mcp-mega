@@ -12,7 +12,7 @@ This document provides an exhaustive mapping of every active tool in the `taiwan
 | `get_stock_quotes_realtime_all` | [https://openapi.twse.com.tw/v1/exchangeReport/STOCK_DAY_ALL](https://openapi.twse.com.tw/v1/exchangeReport/STOCK_DAY_ALL) | 上市個股當日即時行情 |
 | `get_stock_eps_ranking_summary` | [https://openapi.twse.com.tw/v1/opendata/t187ap14_L](https://openapi.twse.com.tw/v1/opendata/t187ap14_L) | 各產業 EPS 統計資訊 |
 | `get_stock_dividend_yield_pe_pb` | [https://openapi.twse.com.tw/v1/exchangeReport/BWIBBU_d](https://openapi.twse.com.tw/v1/exchangeReport/BWIBBU_d) | 個股日本益比、殖利率及淨值比 |
-| `get_stock_institutional_investor_flow` | [Web URL](https://www.twse.com.tw/zh/page/trading/fund/BFI82U.html) | 三大法人買賣超彙總統計 (上市) |
+| `get_stock_institutional_investor_flow` | [TWSE RWD API](https://www.twse.com.tw/rwd/zh/fund/BFI82U?response=json) | 三大法人買賣超彙總統計 (上市) |
 | `get_stock_institutional_trading_tpex` | [TPEx OpenAPI](https://www.tpex.org.tw/openapi/v1/tpex_3insti_daily_trading) | 三大法人買賣超明細 (上櫃個股) |
 | `get_stock_institutional_summary_tpex` | [TPEx OpenAPI](https://www.tpex.org.tw/openapi/v1/tpex_3insti_summary) | 三大法人買賣超彙總統計 (上櫃) |
 | `get_stock_margin_trading_balance` | [https://openapi.twse.com.tw/v1/exchangeReport/MI_MARGN](https://openapi.twse.com.tw/v1/exchangeReport/MI_MARGN) | 融資融券餘額明細 |

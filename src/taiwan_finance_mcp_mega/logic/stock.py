@@ -98,9 +98,32 @@ class StockLogic:
     # --- 3. 籌碼與法人類 (Chips & Institutions) ---
 
     @staticmethod
-    async def get_institutional_investors_summary() -> List[Dict[str, Any]]:
-        """查詢三大法人買賣超彙總統計 (BFI82U)。"""
-        return await AsyncHttpClient.fetch_json(f"{Config.TWSE_BASE}/fund/BFI82U")
+    async def get_institutional_investors_summary() -> Dict[str, Any]:
+        """查詢三大法人買賣超彙總統計 (BFI82U - TWSE RWD API)。"""
+        url = "https://www.twse.com.tw/rwd/zh/fund/BFI82U?response=json"
+        headers = {
+            "accept": "application/json",
+            "If-Modified-Since": "Mon, 26 Jul 1997 05:00:00 GMT",
+            "Cache-Control": "no-cache",
+            "Pragma": "no-cache"
+        }
+        try:
+            data = await AsyncHttpClient.fetch_json(url, headers=headers)
+            if data.get("stat") == "OK":
+                # 轉換為更易讀的格式
+                fields = data.get("fields", [])
+                records = []
+                for row in data.get("data", []):
+                    records.append(dict(zip(fields, row)))
+                return {
+                    "title": data.get("title"),
+                    "date": data.get("date"),
+                    "records": records,
+                    "source": "TWSE (RWD API)"
+                }
+            return data
+        except Exception as e:
+            return {"error": f"TWSE API 請求異常: {str(e)}"}
 
     @staticmethod
     async def get_margin_balance(symbol: Optional[str] = None) -> List[Dict[str, Any]]:
