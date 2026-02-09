@@ -55,9 +55,6 @@ TOOL_METADATA = {
 
     # 🏛️ MACRO: National Policy & Economy (DGBAS/CBC/MOF)
     "get_macro_gdp_growth_rate_quarterly": { "summary": "台灣季度 GDP 經濟成長率。國家級宏觀指標。", "inputs": "None", "outputs": "%", "source": "DGBAS" },
-    "get_macro_cpi_inflation_rate_tw": { "summary": "台灣 CPI 消費者物價指數(通膨率)。國家級宏觀指標。", "inputs": "None", "outputs": "%", "source": "MOL" },
-    "get_macro_unemployment_rate_seasonal_adjusted": { "summary": "台灣最新經季節調整後之失業率。國家級宏觀指標。", "inputs": "None", "outputs": "%", "source": "MOL" },
-    "get_macro_average_monthly_salary_dgbas": { "summary": "台灣勞工月平均總薪資(含獎金)。國家級指標。", "inputs": "None", "outputs": "TWD", "source": "MOL" },
     "get_macro_central_bank_policy_rate": { "summary": "中央銀行重貼現率 (官方基準利率)。影響市場資金成本。非一般銀行存款利率。", "inputs": "None", "outputs": "%", "source": "CBC" },
     "get_macro_national_debt_clock": { "summary": "中華民國國債鐘：中央政府長短期債務與人均負擔額。", "inputs": "None", "outputs": "Debt Amount", "source": "MOF" },
 

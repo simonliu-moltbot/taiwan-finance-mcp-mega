@@ -42,7 +42,7 @@ BANK_LIST = [
 MACRO_LIST = [
     "get_macro_gdp_growth_rate_quarterly", "get_macro_cpi_inflation_rate_tw", 
     "get_macro_unemployment_rate_seasonal_adjusted", "get_macro_average_monthly_salary_dgbas",
-    "get_macro_fuel_price_cpc_retail", "get_macro_national_debt_clock",
+    "get_macro_national_debt_clock",
     "get_macro_central_bank_policy_rate", "get_macro_money_supply_m1b_m2", 
     "get_macro_foreign_exchange_reserves", "get_macro_bank_mortgage_loan_rates"
 ]

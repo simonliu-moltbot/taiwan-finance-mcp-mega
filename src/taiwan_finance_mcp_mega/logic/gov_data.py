@@ -18,28 +18,7 @@ class EconomicsLogic:
 
     @staticmethod
     async def get_macro_stats(indicator: str = "all") -> Dict[str, Any]:
-        try:
-            data = await AsyncHttpClient.fetch_json(EconomicsLogic.MOL_ECON_API)
-            if not data or not isinstance(data, list):
-                return {"error": "無法獲取指標數據"}
-            latest = data[-1]
-            mapping = {
-                "gdp": {"key": "經濟成長率", "name": "GDP Growth Rate (%)"},
-                "cpi": {"key": "消費者物價-年增率", "name": "CPI Inflation Rate (%)"},
-                "unemployment": {"key": "失業率（百分比）", "name": "Unemployment Rate (%)"},
-                "salary": {"key": "工業及服務業平均月薪資（元）", "name": "Average Monthly Salary (TWD)"}
-            }
-            if indicator in mapping:
-                target = mapping[indicator]
-                return {
-                    "indicator": target["name"],
-                    "value": latest.get(target["key"], "N/A"),
-                    "year": latest.get("年度", "N/A"),
-                    "source": "行政院主計總處 / 勞動部"
-                }
-            return {"source": "勞動部指標摘要", "data": latest}
-        except:
-            return {"error": "數據抓取異常"}
+        return {"error": "MOL indicators decommissioned."}
 
     @staticmethod
     async def get_national_debt_clock() -> Dict[str, Any]:

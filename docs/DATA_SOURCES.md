@@ -55,11 +55,7 @@ This document provides a comprehensive list of direct API URLs for every tool in
 |-----------|-------------------------|-------------------|
 | `get_macro_gdp_growth_rate_quarterly` | [https://apiservice.mol.gov.tw/OdService/download/A17000000J-030243-YTl](https://apiservice.mol.gov.tw/OdService/download/A17000000J-030243-YTl) | 經濟成長率、CPI、失業率統計 |
 | `get_macro_fuel_price_cpc_retail` | [https://vipmbr.cpc.com.tw/openData/MainProdListPrice](https://vipmbr.cpc.com.tw/openData/MainProdListPrice) | 中油即時牌價 |
-| `get_macro_housing_price_index_tw` | [https://data.gov.tw/dataset/29683](https://data.gov.tw/dataset/29683) | 全國住宅價格指數 (主站頁面) |
-| `get_bank_list_of_institutions` | [https://data.gov.tw/dataset/18419](https://data.gov.tw/dataset/18419) | 金融機構基本資料 (主站頁面) |
-| `get_bank_profit_loss_statements` | [https://data.gov.tw/dataset/28567](https://data.gov.tw/dataset/28567) | 銀行業損益統計 (主站頁面) |
 | `get_corp_industry_electricity_consumption_stats` | [https://www.moeaea.gov.tw/ECW/populace/opendata/wHandOpenData_File.ashx?set_id=236](https://www.moeaea.gov.tw/ECW/populace/opendata/wHandOpenData_File.ashx?set_id=236) | 產業電力消費統計 |
-| `get_gov_financial_news_fsc` | [https://data.gov.tw/dataset/7334](https://data.gov.tw/dataset/7334) | 金管會新聞稿公告 (主站頁面) |
 
 ## 🪙 Cryptocurrency
 
