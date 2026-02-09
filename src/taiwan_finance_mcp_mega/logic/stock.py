@@ -136,17 +136,13 @@ class StockLogic:
     @staticmethod
     async def call_generic_api(endpoint: str, symbol: Optional[str] = None) -> Any:
         """
-        [DevOps] 萬用接口：根據 Endpoint 自動映射並調用證交所全量 API。
-        目前支援清單 (Exhaustive List in Docstring):
-        - 行情：/exchangeReport/STOCK_DAY_ALL, /exchangeReport/TWT53U, /exchangeReport/BFT41U, /exchangeReport/TWT84U
-        - 財務：/opendata/t187ap14_L, /opendata/t187ap05_L, /opendata/t187ap07_X_ci, /opendata/t187ap06_L_ci
-        - 籌碼：/fund/BFI82U, /exchangeReport/MI_MARGN, /exchangeReport/BWIBBU_d, /ETFReport/ETFRank
-        - 治理：/opendata/t187ap03_L, /opendata/t187ap04_L, /opendata/t187ap11_L, /opendata/t187ap12_L
-        - ESG：/opendata/t187ap46_L_1 至 _21 (包含排放、水資源、職安、食品安全等)
-        - 權證：/exchangeReport/TWT37U, /opendata/t187ap36_L
-        - 指數：/indicesReport/MI_5MINS_HIST, /indicesReport/TAI50I, /indicesReport/FRMSA
+        [DevOps] 萬用接口：根據 Endpoint 自動映射並調用證交所或櫃買全量 API。
         """
-        url = f"{Config.TWSE_BASE}{endpoint}"
+        if "tpex" in endpoint or endpoint.startswith("/v1/tpex_"):
+            url = f"https://www.tpex.org.tw/openapi{endpoint}"
+        else:
+            url = f"{Config.TWSE_BASE}{endpoint}"
+        
         return await StockLogic._fetch_and_filter(url, symbol)
 
     @staticmethod

@@ -38,7 +38,9 @@ MEGA_ENDPOINT_MAP = {
     "get_stock_quotes_realtime_all": "/exchangeReport/STOCK_DAY_ALL",
     "get_stock_eps_ranking_summary": "/opendata/t187ap14_L",
     "get_stock_dividend_yield_pe_pb": "/exchangeReport/BWIBBU_d",
-    "get_stock_institutional_investor_flow": "/fund/BFI82U",
+    "get_stock_institutional_investor_flow": "/fund/BFI82U_ALL",
+    "get_stock_institutional_trading_tpex": "/v1/tpex_3insti_daily_trading",
+    "get_stock_institutional_summary_tpex": "/v1/tpex_3insti_summary",
     "get_stock_margin_trading_balance": "/exchangeReport/MI_MARGN",
     "get_stock_odd_lot_trading_quotes": "/exchangeReport/TWT53U",
     "get_stock_mops_significant_announcements": "/opendata/t187ap04_L",
@@ -69,6 +71,11 @@ async def dispatch_mega_logic(name: str, query_val: Optional[str], limit: int) -
         if name.startswith("get_stock_"):
             endpoint = MEGA_ENDPOINT_MAP.get(name)
             if endpoint and endpoint.startswith("/"):
+                # Handle TPEx specifically if needed, or use a separate base
+                if "tpex" in endpoint:
+                    url = f"{Config.TPEX_BASE}{endpoint}"
+                else:
+                    url = f"{Config.TWSE_BASE}{endpoint}"
                 return await StockLogic.call_generic_api(endpoint, query_val)
             return await StockLogic.get_realtime_quotes(query_val)
 

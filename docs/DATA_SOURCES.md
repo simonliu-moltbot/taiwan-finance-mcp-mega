@@ -13,6 +13,7 @@ This document provides a comprehensive list of direct API URLs for every tool in
 | `get_stock_broker_list_all` | [https://openapi.twse.com.tw/v1/brokerService/brokerList](https://openapi.twse.com.tw/v1/brokerService/brokerList) | 證券商基本資料一覽表 |
 | `get_stock_etf_regular_savings_ranking` | [https://openapi.twse.com.tw/v1/ETFReport/ETFRank](https://openapi.twse.com.tw/v1/ETFReport/ETFRank) | ETF 定期定額交易戶數排行 |
 | `get_stock_after_hours_trading_info` | [https://openapi.twse.com.tw/v1/exchangeReport/BFT41U](https://openapi.twse.com.tw/v1/exchangeReport/BFT41U) | 盤後定價交易資訊 |
+| `get_stock_institutional_investor_flow` | [https://openapi.twse.com.tw/v1/fund/BFI82U_ALL](https://openapi.twse.com.tw/v1/fund/BFI82U_ALL) | 三大法人買賣超彙總統計 (上市) |
 | `get_stock_dividend_yield_pe_pb` | [https://openapi.twse.com.tw/v1/exchangeReport/BWIBBU_d](https://openapi.twse.com.tw/v1/exchangeReport/BWIBBU_d) | 個股日本益比、殖利率及淨值比 |
 | `get_stock_pe_averages_by_industry` | [https://openapi.twse.com.tw/v1/exchangeReport/FMNPTK_ALL](https://openapi.twse.com.tw/v1/exchangeReport/FMNPTK_ALL) | 上市公司各類股本益比統計 |
 | `get_stock_yield_averages_by_industry` | [https://openapi.twse.com.tw/v1/exchangeReport/FMSRFK_ALL](https://openapi.twse.com.tw/v1/exchangeReport/FMSRFK_ALL) | 上市公司各類股殖利率統計 |
@@ -22,7 +23,6 @@ This document provides a comprehensive list of direct API URLs for every tool in
 | `get_stock_quotes_realtime_all` | [https://openapi.twse.com.tw/v1/exchangeReport/STOCK_DAY_ALL](https://openapi.twse.com.tw/v1/exchangeReport/STOCK_DAY_ALL) | 上市個股當日即時行情 |
 | `get_stock_odd_lot_trading_quotes` | [https://openapi.twse.com.tw/v1/exchangeReport/TWT53U](https://openapi.twse.com.tw/v1/exchangeReport/TWT53U) | 盤中零股交易即時行情 |
 | `get_stock_price_limit_up_down_tracker` | [https://openapi.twse.com.tw/v1/exchangeReport/TWT84U](https://openapi.twse.com.tw/v1/exchangeReport/TWT84U) | 股價升降幅度/漲跌停預告 |
-| `get_stock_institutional_investor_flow` | [https://openapi.twse.com.tw/v1/fund/BFI82U](https://openapi.twse.com.tw/v1/fund/BFI82U) | 三大法人買賣超彙總統計 |
 | `get_stock_listed_company_basic_info` | [https://openapi.twse.com.tw/v1/opendata/t187ap03_L](https://openapi.twse.com.tw/v1/opendata/t187ap03_L) | 上市公司基本資料 |
 | `get_stock_mops_significant_announcements` | [https://openapi.twse.com.tw/v1/opendata/t187ap04_L](https://openapi.twse.com.tw/v1/opendata/t187ap04_L) | 每日重大訊息公告 (MOPS) |
 | `get_stock_monthly_revenue_summary` | [https://openapi.twse.com.tw/v1/opendata/t187ap05_L](https://openapi.twse.com.tw/v1/opendata/t187ap05_L) | 每月營業收入彙總表 |
@@ -30,6 +30,8 @@ This document provides a comprehensive list of direct API URLs for every tool in
 | `get_stock_buyback_treasury_status` | [https://openapi.twse.com.tw/v1/opendata/t187ap13_L](https://openapi.twse.com.tw/v1/opendata/t187ap13_L) | 庫藏股買回進度彙整 |
 | `get_stock_eps_ranking_summary` | [https://openapi.twse.com.tw/v1/opendata/t187ap14_L](https://openapi.twse.com.tw/v1/opendata/t187ap14_L) | 各產業 EPS 統計資訊 |
 | `get_stock_listed_company_profile_tpex` | [https://www.tpex.org.tw/openapi/v1/t187ap03_O](https://www.tpex.org.tw/openapi/v1/t187ap03_O) | 上櫃公司基本資料 |
+| `get_stock_institutional_trading_tpex` | [https://www.tpex.org.tw/openapi/v1/tpex_3insti_daily_trading](https://www.tpex.org.tw/openapi/v1/tpex_3insti_daily_trading) | 三大法人買賣超明細 (上櫃個股) |
+| `get_stock_institutional_summary_tpex` | [https://www.tpex.org.tw/openapi/v1/tpex_3insti_summary](https://www.tpex.org.tw/openapi/v1/tpex_3insti_summary) | 三大法人買賣超彙總統計 (上櫃) |
 
 ## 📉 Derivatives (Taifex)
 *Futures and options contracts data from the Taiwan Futures Exchange.*
