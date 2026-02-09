@@ -33,6 +33,8 @@ python src/main.py --mode http --port 8005
 ```
 
 ## 📊 數據源致謝
+詳細的資料來源連結與 API 端點清單請參閱： [**docs/DATA_SOURCES.md**](./docs/DATA_SOURCES.md)
+
 -   [臺灣證券交易所 (TWSE)](https://openapi.twse.com.tw/)
 -   [證券櫃檯買賣中心 (TPEx)](https://www.tpex.org.tw/openapi/)
 -   [政府資料開放平臺 (Data.gov.tw)](https://data.gov.tw/)
