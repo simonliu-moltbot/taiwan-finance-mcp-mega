@@ -46,7 +46,7 @@ This document provides a comprehensive list of direct API URLs for every tool in
 
 | Tool Name | Direct API URL (Source) | Description (說明) |
 |-----------|-------------------------|-------------------|
-| `get_forex_[CUR]_twd_realtime` | [https://tw.rter.info/capi.php](https://tw.rter.info/capi.php) | 全球即時匯率換算 (源自即匯站) |
+| `get_forex_any_to_any_conversion` | [https://tw.rter.info/capi.php](https://tw.rter.info/capi.php) | 任意幣別對任意幣別之即時匯率換算 (OOO to OOO) |
 | `get_commodity_oil_wti_price_usd` | [https://www2.moeaea.gov.tw/oil111/csv/GlobalOilOpenData.csv](https://www2.moeaea.gov.tw/oil111/csv/GlobalOilOpenData.csv) | 全球原油價格 (WTI/Brent) |
 
 ## 🏛️ Macroeconomics & Gov Data

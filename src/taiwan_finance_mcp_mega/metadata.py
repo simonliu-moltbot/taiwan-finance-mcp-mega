@@ -47,6 +47,7 @@ TOOL_METADATA = {
     "get_forex_cad_twd_realtime": { "summary": "加幣兌台幣即時匯率。", "inputs": "None", "outputs": "Rate", "source": "ExchangeRate-API" },
     "get_forex_sgd_twd_realtime": { "summary": "新幣兌台幣即時匯率。", "inputs": "None", "outputs": "Rate", "source": "ExchangeRate-API" },
     "get_forex_krw_twd_realtime": { "summary": "韓元兌台幣即時匯率。", "inputs": "None", "outputs": "Rate", "source": "ExchangeRate-API" },
+    "get_forex_any_to_any_conversion": { "summary": "任意幣別對任意幣別之即時匯率換算 (OOO to OOO)。", "inputs": "base: 原始幣別 (例: JPY), target: 目標幣別 (例: USD)。", "outputs": "計算後匯率。", "source": "tw.rter.info" },
     "get_commodity_oil_wti_price_usd": { "summary": "WTI 原油期貨報價(USD)。", "inputs": "None", "outputs": "USD/Bbl", "source": "MOEA" },
     "get_commodity_oil_brent_price_usd": { "summary": "Brent 原油期貨報價(USD)。", "inputs": "None", "outputs": "USD/Bbl", "source": "MOEA" },
     "get_commodity_gold_spot_price_twd": { "summary": "黃金現貨即時報價(TWD)。", "inputs": "None", "outputs": "TWD/oz", "source": "Yahoo" },

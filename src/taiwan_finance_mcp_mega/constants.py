@@ -19,7 +19,7 @@ FOREX_LIST = [
     "get_forex_usd_twd_realtime", "get_forex_jpy_twd_realtime", "get_forex_eur_twd_realtime", 
     "get_forex_cny_twd_realtime", "get_forex_hkd_twd_realtime", "get_forex_gbp_twd_realtime", 
     "get_forex_aud_twd_realtime", "get_forex_cad_twd_realtime", "get_forex_sgd_twd_realtime", 
-    "get_forex_krw_twd_realtime",
+    "get_forex_krw_twd_realtime", "get_forex_any_to_any_conversion",
     "get_commodity_oil_wti_price_usd", "get_commodity_oil_brent_price_usd", 
     "get_commodity_gold_spot_price_twd", "get_commodity_silver_spot_price_twd"
 ]

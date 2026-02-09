@@ -90,6 +90,9 @@ async def dispatch_mega_logic(name: str, query_val: Optional[str], limit: int) -
 
         # 2. 全球匯率與大宗路由
         elif name.startswith("get_forex_") or name.startswith("get_commodity_"):
+            if "any_to_any" in name:
+                # This would need its own tool registration or generic param handling
+                pass # Already handled by param creation below if logic is solid
             if "oil_wti" in name: return await GlobalMacroLogic.get_commodity_price("WTI")
             if "oil_brent" in name: return await GlobalMacroLogic.get_commodity_price("BRENT")
             if "gold_spot" in name: return await GlobalMacroLogic.get_commodity_price("GOLD")
@@ -183,6 +186,13 @@ def register_all_tools():
             elif t_name.startswith("get_bank_"):
                 param_name = "bank_query"
                 param_desc = "銀行名稱或金融機構代碼 (例如: 臺灣銀行, 004)。"
+            elif t_name == "get_forex_any_to_any_conversion":
+                @mcp.tool(name=t_name)
+                async def mcp_tool_forex_any(base: str = "JPY", target: str = "TWD") -> str:
+                    res = await ForexLogic.get_pair(base, target)
+                    return json.dumps(res, indent=2, ensure_ascii=False)
+                mcp_tool_forex_any.__doc__ = f"{rich_doc}\n\nArgs:\n  base: 原始幣別 (例: JPY)\n  target: 目標幣別 (例: TWD)"
+                continue
 
             # 註冊無參數工具 (完全移除 Args，強迫模型精確匹配)
             if "None" in inputs_desc:
