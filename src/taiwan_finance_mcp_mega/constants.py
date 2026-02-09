@@ -1,14 +1,18 @@
-# Taiwan Finance MCP Mega - Semantic Tool List Constants (v4.5.0)
+# Taiwan Finance MCP Mega - High-Contrast Tool List Constants (v4.6.0)
 
+# 📈 STOCK: Purely for Securities Exchange (TWSE/TPEx)
 STOCK_LIST = [
     "get_stock_quotes_realtime_all", "get_stock_eps_ranking_summary", "get_stock_dividend_yield_pe_pb", 
     "get_stock_institutional_investor_flow", "get_stock_margin_trading_balance", "get_stock_odd_lot_trading_quotes", 
     "get_stock_mops_significant_announcements", "get_stock_price_limit_up_down_tracker", "get_stock_balance_sheet_general", 
     "get_stock_monthly_revenue_summary", "get_stock_listed_company_basic_info", "get_stock_etf_regular_savings_ranking", 
-    "get_stock_block_trade_daily_summary", "get_stock_after_hours_trading_info", "get_stock_ipo_new_listing_schedule",
+    "get_stock_block_trade_daily_summary", "get_stock_after_hours_trading_info",
+    "get_stock_listed_stock_price_averages", "get_stock_daily_closing_quotes_all",
+    "get_stock_yield_averages_by_industry", "get_stock_pe_averages_by_industry",
     "get_stock_buyback_treasury_status", "get_stock_broker_regular_savings_data"
 ]
 
+# 🌍 FOREX & COMMODITY
 FOREX_LIST = [
     "get_forex_usd_twd_realtime", "get_forex_jpy_twd_realtime", "get_forex_eur_twd_realtime", 
     "get_forex_cny_twd_realtime", "get_forex_hkd_twd_realtime", "get_forex_gbp_twd_realtime", 
@@ -18,19 +22,28 @@ FOREX_LIST = [
     "get_commodity_gold_spot_price_twd", "get_commodity_silver_spot_price_twd"
 ]
 
+# 📉 DERIVATIVES: Specifically for TAIFEX (Futures/Options)
 DERIVATIVES_LIST = [
     "get_futures_quotes_daily", "get_futures_institutional_investor_flow", "get_futures_open_interest_ranking"
 ]
 
+# 🏦 BANK: Commercial Bank specific metrics
 BANK_LIST = [
     "get_bank_list_of_institutions", "get_bank_profit_loss_statements", 
     "get_bank_balance_sheets", "get_bank_major_assets_liabilities_stats",
-    "get_bank_m1b_m2_money_supply", "get_bank_foreign_exchange_reserves",
-    "get_bank_central_bank_base_rate", "get_bank_five_major_banks_loan_rates", 
     "get_bank_sme_loan_balance_stats", "get_bank_monthly_profit_summary",
     "get_bank_overdue_loan_stats", "get_bank_foreign_exchange_trading_volume",
     "get_bank_deposit_rate_fixed", "get_bank_mortgage_rate_average", 
     "get_bank_credit_card_delinquency", "get_bank_atm_location_map", "get_bank_capital_adequacy_ratio"
+]
+
+# 🏛️ MACRO: National Policy & Economy (DGBAS/CBC/MOF)
+MACRO_LIST = [
+    "get_macro_gdp_growth_rate_quarterly", "get_macro_cpi_inflation_rate_tw", 
+    "get_macro_unemployment_rate_seasonal_adjusted", "get_macro_average_monthly_salary_dgbas",
+    "get_macro_fuel_price_cpc_retail", "get_macro_housing_price_index_tw", "get_macro_national_debt_clock",
+    "get_macro_central_bank_policy_rate", "get_macro_money_supply_m1b_m2", 
+    "get_macro_foreign_exchange_reserves", "get_macro_bank_mortgage_loan_rates"
 ]
 
 TAX_LIST = [
@@ -42,12 +55,6 @@ CORP_LIST = [
     "get_corp_moea_business_registration", "get_corp_industry_production_index", 
     "get_corp_factory_count_statistics", "get_corp_export_value_by_industry",
     "get_corp_industry_electricity_consumption_stats"
-]
-
-MACRO_LIST = [
-    "get_macro_gdp_growth_rate_quarterly", "get_macro_cpi_inflation_rate_tw", 
-    "get_macro_unemployment_rate_seasonal_adjusted", "get_macro_average_monthly_salary_dgbas",
-    "get_macro_fuel_price_cpc_retail", "get_macro_housing_price_index_tw", "get_macro_national_debt_clock"
 ]
 
 NEWS_LIST = [
