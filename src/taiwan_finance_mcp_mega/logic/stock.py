@@ -19,13 +19,11 @@ class StockLogic:
     """
 
     @staticmethod
-    async def _fetch_and_filter(url: str, symbol: Optional[str] = None, code_key: str = "Code") -> List[Dict[str, Any]]:
+    async def _fetch_and_filter(url: str, symbol: Optional[str] = None, code_key: str = "Code", headers: Optional[Dict[str, str]] = None) -> List[Dict[str, Any]]:
         """
         [v3.7.0] 高性能過濾引擎：二段式掃描 (Fast Index Scan + Full Value Scan)。
-        1. 優先掃描常見代碼欄位 (提升 90% 性能，防止超時)。
-        2. 若無效則啟動全欄位模糊掃描。
         """
-        data = await AsyncHttpClient.fetch_json(url)
+        data = await AsyncHttpClient.fetch_json(url, headers=headers)
         if not isinstance(data, list):
             return []
         
@@ -138,15 +136,29 @@ class StockLogic:
         """
         [DevOps] 萬用接口：根據 Endpoint 自動映射並調用證交所或櫃買全量 API。
         """
+        headers = None
         if "tpex" in endpoint or endpoint.startswith("/v1/tpex_"):
             url = f"https://www.tpex.org.tw/openapi{endpoint}"
+            # TPEx Specific Anti-Cache Headers
+            headers = {
+                "accept": "application/json",
+                "If-Modified-Since": "Mon, 26 Jul 1997 05:00:00 GMT",
+                "Cache-Control": "no-cache",
+                "Pragma": "no-cache"
+            }
         else:
             url = f"{Config.TWSE_BASE}{endpoint}"
         
-        return await StockLogic._fetch_and_filter(url, symbol)
+        return await StockLogic._fetch_and_filter(url, symbol, headers=headers)
 
     @staticmethod
     async def get_tpex_quotes(symbol: Optional[str] = None) -> List[Dict[str, Any]]:
         """獲取上櫃個股當日即時行情 (TPEx)."""
         url = "https://www.tpex.org.tw/openapi/v1/t187ap03_O" # 上櫃基本資料為例
-        return await StockLogic._fetch_and_filter(url, symbol, "公司代號")
+        headers = {
+            "accept": "application/json",
+            "If-Modified-Since": "Mon, 26 Jul 1997 05:00:00 GMT",
+            "Cache-Control": "no-cache",
+            "Pragma": "no-cache"
+        }
+        return await StockLogic._fetch_and_filter(url, symbol, "公司代號", headers=headers)

@@ -29,8 +29,8 @@ class AsyncHttpClient:
         return cls._client
 
     @classmethod
-    async def fetch_json(cls, url: str, params: Optional[Dict[str, Any]] = None):
-        cache_key = f"json_{url}_{sorted(params.items()) if params else ''}"
+    async def fetch_json(cls, url: str, params: Optional[Dict[str, Any]] = None, headers: Optional[Dict[str, str]] = None):
+        cache_key = f"json_{url}_{sorted(params.items()) if params else ''}_{sorted(headers.items()) if headers else ''}"
         if cache_key in cls._cache:
             return cls._cache[cache_key]
 
@@ -38,7 +38,7 @@ class AsyncHttpClient:
             if cache_key in cls._cache: return cls._cache[cache_key]
             client = await cls.get_client()
             try:
-                response = await client.get(url, params=params)
+                response = await client.get(url, params=params, headers=headers)
                 response.raise_for_status()
                 data = response.json()
                 cls._cache[cache_key] = data
