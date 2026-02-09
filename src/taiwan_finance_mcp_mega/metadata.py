@@ -16,7 +16,6 @@ TOOL_METADATA = {
     "get_stock_odd_lot_trading_quotes": { "summary": "獲取股票盤中零股交易行情。非期貨。", "inputs": "ticker: 股票代碼。", "outputs": "成交價量。", "source": "TWSE" },
     "get_stock_mops_significant_announcements": { "summary": "查詢 MOPS 公開資訊觀測站重大訊息。僅限上市公司公告。", "inputs": "ticker: 股票代碼。", "outputs": "主旨、內容摘要。", "source": "TWSE" },
     "get_stock_price_limit_up_down_tracker": { "summary": "監控當日漲跌停股票清單。僅限現貨市場。", "inputs": "None", "outputs": "漲跌停清單。", "source": "TWSE" },
-    "get_stock_balance_sheet_general": { "summary": "獲取上市公司資產負債表。", "inputs": "ticker: 股票代碼。", "outputs": "資產、負債總額。", "source": "TWSE" },
     "get_stock_monthly_revenue_summary": { "summary": "查詢上市公司每月營業收入彙總。", "inputs": "ticker: 股票代碼。", "outputs": "月增率、年增率。", "source": "TWSE" },
     "get_stock_etf_regular_savings_ranking": { "summary": "ETF 定期定額交易戶數排行。僅限 ETF 現貨。", "inputs": "None", "outputs": "排名、戶數。", "source": "TWSE" },
     "get_stock_block_trade_daily_summary": { "summary": "查詢股票集中市場鉅額交易。不包含期貨大額部位。", "inputs": "None", "outputs": "成交資訊。", "source": "TWSE" },
