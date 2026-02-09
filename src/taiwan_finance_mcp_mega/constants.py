@@ -6,9 +6,9 @@ STOCK_LIST = [
     "get_stock_institutional_investor_flow", "get_stock_institutional_trading_tpex", "get_stock_institutional_summary_tpex",
     "get_stock_margin_trading_balance", "get_stock_odd_lot_trading_quotes", 
     "get_stock_mops_significant_announcements", "get_stock_price_limit_up_down_tracker", "get_stock_balance_sheet_general", 
-    "get_stock_monthly_revenue_summary", "get_stock_listed_company_basic_info", "get_stock_etf_regular_savings_ranking", 
+    "get_stock_monthly_revenue_summary", "get_stock_etf_regular_savings_ranking", 
     "get_stock_block_trade_daily_summary", "get_stock_after_hours_trading_info",
-    "get_stock_listed_stock_price_averages", "get_stock_daily_closing_quotes_all",
+    "get_stock_individual_average_price", "get_stock_daily_closing_quotes_all",
     "get_stock_yield_averages_by_industry", "get_stock_pe_averages_by_industry",
     "get_stock_broker_list_all",
     "get_stock_buyback_treasury_status", "get_stock_broker_regular_savings_data"
@@ -32,13 +32,9 @@ DERIVATIVES_LIST = [
 # 🏦 BANK: Commercial Bank specific metrics
 BANK_LIST = [
     "get_bank_bot_credit_rating",
-    "get_bank_stock_indices_monthly",
-    "get_bank_forex_rates_monthly",
     "get_bank_bond_issuance_monthly",
     "get_bank_stock_issuance_monthly",
-    "get_bank_pension_fund_stats_monthly",
-    "get_bank_stock_indices_annual",
-    "get_bank_forex_rates_annual"
+    "get_bank_pension_fund_stats_monthly"
 ]
 
 # 🏛️ MACRO: National Policy & Economy (DGBAS/CBC/MOF)
@@ -47,7 +43,11 @@ MACRO_LIST = [
     "get_macro_national_debt_clock",
     "get_macro_monthly_financial_indicators",
     "get_macro_economic_indicators_monthly",
-    "get_macro_economic_indicators_annual"
+    "get_macro_economic_indicators_annual",
+    "get_macro_global_stock_indices",
+    "get_macro_global_stock_indices_annual",
+    "get_macro_forex_rates_monthly",
+    "get_macro_forex_rates_annual"
 ]
 
 TAX_LIST = []

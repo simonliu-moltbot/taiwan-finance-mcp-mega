@@ -21,11 +21,10 @@ This document provides an exhaustive mapping of every active tool in the `taiwan
 | `get_stock_price_limit_up_down_tracker` | [https://openapi.twse.com.tw/v1/exchangeReport/TWT84U](https://openapi.twse.com.tw/v1/exchangeReport/TWT84U) | 股價升降幅度/漲跌停預告 |
 | `get_stock_balance_sheet_general` | [https://openapi.twse.com.tw/v1/opendata/t187ap07_X_ci](https://openapi.twse.com.tw/v1/opendata/t187ap07_X_ci) | 資產負債表-一般業 |
 | `get_stock_monthly_revenue_summary` | [https://openapi.twse.com.tw/v1/opendata/t187ap05_L](https://openapi.twse.com.tw/v1/opendata/t187ap05_L) | 每月營業收入彙總表 |
-| `get_stock_listed_company_basic_info` | [https://openapi.twse.com.tw/v1/opendata/t187ap03_L](https://openapi.twse.com.tw/v1/opendata/t187ap03_L) | 上市公司基本資料 |
 | `get_stock_etf_regular_savings_ranking` | [https://openapi.twse.com.tw/v1/ETFReport/ETFRank](https://openapi.twse.com.tw/v1/ETFReport/ETFRank) | ETF 定期定額交易戶數排行 |
 | `get_stock_block_trade_daily_summary` | [https://openapi.twse.com.tw/v1/block/BFIAUU_d](https://openapi.twse.com.tw/v1/block/BFIAUU_d) | 鉅額交易日成交量值統計 |
 | `get_stock_after_hours_trading_info` | [https://openapi.twse.com.tw/v1/exchangeReport/BFT41U](https://openapi.twse.com.tw/v1/exchangeReport/BFT41U) | 盤後定價交易資訊 |
-| `get_stock_listed_stock_price_averages` | [https://openapi.twse.com.tw/v1/exchangeReport/STOCK_DAY_AVG_ALL](https://openapi.twse.com.tw/v1/exchangeReport/STOCK_DAY_AVG_ALL) | 上市公司收盤價及月平均價 |
+| `get_stock_individual_average_price` | [https://openapi.twse.com.tw/v1/exchangeReport/STOCK_DAY_AVG_ALL](https://openapi.twse.com.tw/v1/exchangeReport/STOCK_DAY_AVG_ALL) | 上市公司收盤價及月平均價 |
 | `get_stock_daily_closing_quotes_all` | [https://openapi.twse.com.tw/v1/exchangeReport/MI_INDEX](https://openapi.twse.com.tw/v1/exchangeReport/MI_INDEX) | 收盤指數及各類股成交量值 |
 | `get_stock_yield_averages_by_industry` | [https://openapi.twse.com.tw/v1/exchangeReport/FMSRFK_ALL](https://openapi.twse.com.tw/v1/exchangeReport/FMSRFK_ALL) | 上市公司各類股殖利率統計 |
 | `get_stock_pe_averages_by_industry` | [https://openapi.twse.com.tw/v1/exchangeReport/FMNPTK_ALL](https://openapi.twse.com.tw/v1/exchangeReport/FMNPTK_ALL) | 上市公司各類股本益比統計 |
@@ -62,14 +61,14 @@ This document provides an exhaustive mapping of every active tool in the `taiwan
 | `get_macro_monthly_financial_indicators` | [MOL REST API](https://apiservice.mol.gov.tw/OdService/rest/datastore/A17030000J-000037-l9P) | 每月國內主要金融指標 (M1B/M2/外匯存底) |
 | `get_macro_economic_indicators_monthly` | [MOL REST API](https://apiservice.mol.gov.tw/OdService/rest/datastore/A17030000J-000016-1ci) | 每月國內主要經濟指標 (GDP/CPI/失業率) |
 | `get_macro_economic_indicators_annual` | [MOL REST API](https://apiservice.mol.gov.tw/OdService/rest/datastore/A17000000J-030243-XXL) | 年度國內主要經濟指標 (長期趨勢) |
+| `get_macro_global_stock_indices` | [MOL REST API](https://apiservice.mol.gov.tw/OdService/rest/datastore/A17030000J-000050-Ipz) | 每月國際主要股價指數 (台/美/日/歐) |
+| `get_macro_forex_rates_monthly` | [MOL REST API](https://apiservice.mol.gov.tw/OdService/rest/datastore/A17030000J-000049-Iq0) | 國際主要國家貨幣每月匯率概況 |
+| `get_macro_global_stock_indices_annual` | [MOL REST API](https://apiservice.mol.gov.tw/OdService/rest/datastore/A17000000J-030245-4Ml) | 年度國際主要股價指數 |
+| `get_macro_forex_rates_annual` | [MOL REST API](https://apiservice.mol.gov.tw/OdService/rest/datastore/A17000000J-030185-CKf) | 國際主要國家貨幣年度匯率概況 |
 | `get_bank_bot_credit_rating` | [Bank of Taiwan JSON](https://quality.data.gov.tw/dq_download_json.php?nid=31927&md5_url=ebdd6bebd608b17380749eb0bc21d06f) | 臺灣銀行信用評等等級 (S&P/Moody's/中華信評) |
-| `get_bank_stock_indices_monthly` | [MOL REST API](https://apiservice.mol.gov.tw/OdService/rest/datastore/A17030000J-000050-Ipz) | 每月國際主要股價指數 (台/美/日/歐) |
-| `get_bank_forex_rates_monthly` | [MOL REST API](https://apiservice.mol.gov.tw/OdService/rest/datastore/A17030000J-000049-Iq0) | 國際主要國家貨幣每月匯率概況 |
 | `get_bank_bond_issuance_monthly` | [MOL REST API](https://apiservice.mol.gov.tw/OdService/rest/datastore/A17030000J-000048-YHK) | 國內債券每月發行概況 |
 | `get_bank_stock_issuance_monthly` | [MOL REST API](https://apiservice.mol.gov.tw/OdService/rest/datastore/A17030000J-000047-Y4N) | 國內公開發行公司股票每月發行概況 |
 | `get_bank_pension_fund_stats_monthly` | [MOL REST API](https://apiservice.mol.gov.tw/OdService/rest/datastore/A17030000J-000045-2qm) | 國民年金保險基金每月經營概況 |
-| `get_bank_stock_indices_annual` | [MOL REST API](https://apiservice.mol.gov.tw/OdService/rest/datastore/A17000000J-030245-4Ml) | 年度國際主要股價指數 |
-| `get_bank_forex_rates_annual` | [MOL REST API](https://apiservice.mol.gov.tw/OdService/rest/datastore/A17000000J-030185-CKf) | 國際主要國家貨幣年度匯率概況 |
 | `get_corp_moea_business_registration` | [GCIS NAT API](https://data.gcis.nat.gov.tw/od/data/api/) | 經濟部商工登記公示資料 |
 
 ## 🪙 Cryptocurrency & System
@@ -83,5 +82,5 @@ This document provides an exhaustive mapping of every active tool in the `taiwan
 | `get_current_time_taipei` | Local Environment | 獲取台北即時系統時間 |
 
 ---
-*Total Active Verified Tools: 59*
+*Total Active Verified Tools: 58*
 *Last Updated: 2026-02-09*

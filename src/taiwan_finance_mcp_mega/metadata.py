@@ -18,11 +18,10 @@ TOOL_METADATA = {
     "get_stock_price_limit_up_down_tracker": { "summary": "監控當日漲跌停股票清單。僅限現貨市場。", "inputs": "None", "outputs": "漲跌停清單。", "source": "TWSE" },
     "get_stock_balance_sheet_general": { "summary": "獲取上市公司資產負債表。", "inputs": "ticker: 股票代碼。", "outputs": "資產、負債總額。", "source": "TWSE" },
     "get_stock_monthly_revenue_summary": { "summary": "查詢上市公司每月營業收入彙總。", "inputs": "ticker: 股票代碼。", "outputs": "月增率、年增率。", "source": "TWSE" },
-    "get_stock_listed_company_basic_info": { "summary": "獲取上市公司商工登記基本資料。", "inputs": "ticker: 股票代碼。", "outputs": "統編、地址、負責人。", "source": "TWSE" },
     "get_stock_etf_regular_savings_ranking": { "summary": "ETF 定期定額交易戶數排行。僅限 ETF 現貨。", "inputs": "None", "outputs": "排名、戶數。", "source": "TWSE" },
     "get_stock_block_trade_daily_summary": { "summary": "查詢股票集中市場鉅額交易。不包含期貨大額部位。", "inputs": "None", "outputs": "成交資訊。", "source": "TWSE" },
     "get_stock_after_hours_trading_info": { "summary": "獲取股票盤後定價交易資訊。", "inputs": "ticker: 股票代碼。", "outputs": "成交價量。", "source": "TWSE" },
-    "get_stock_listed_stock_price_averages": { "summary": "上市公司本月股票收盤價與月平均價。包含個股本月平均價格。", "inputs": "None", "outputs": "收盤價、月平均價。", "source": "TWSE" },
+    "get_stock_individual_average_price": { "summary": "[個股] 上市公司本月股票收盤價與月平均價。查詢單一股票之平均價格。", "inputs": "None", "outputs": "收盤價、月平均價。", "source": "TWSE" },
     "get_stock_daily_closing_quotes_all": { "summary": "收盤指數及各類股成交量值。每日市場收盤總覽資訊。", "inputs": "None", "outputs": "指數、成交量值。", "source": "TWSE" },
     "get_stock_yield_averages_by_industry": { "summary": "上市公司各類股殖利率與現金殖利率統計。", "inputs": "None", "outputs": "類股殖利率。", "source": "TWSE" },
     "get_stock_pe_averages_by_industry": { "summary": "上市公司各類股本益比與殖利率統計。用於比較產業估值。", "inputs": "None", "outputs": "類股本益比。", "source": "TWSE" },
@@ -71,11 +70,11 @@ TOOL_METADATA = {
     # 🕒 COMMON
     "get_current_time_taipei": { "summary": "獲取台北即時系統時間、日期與星期幾。", "inputs": "None", "outputs": "Timestamp", "source": "System" },
     "get_bank_bot_credit_rating": { "summary": "獲取臺灣銀行 (Bank of Taiwan) 最新信用評等等級。包含 S&P, Moody's 與中華信評。", "inputs": "None", "outputs": "Credit Rating JSON", "source": "Bank of Taiwan" },
-    "get_bank_stock_indices_monthly": { "summary": "每月國際主要股價指數。包含台股、美股、日股等趨勢。", "inputs": "None", "outputs": "Stock Indices JSON", "source": "MOL" },
-    "get_bank_forex_rates_monthly": { "summary": "國際主要國家貨幣每月匯率。包含美元、人民幣、日圓等對台幣。", "inputs": "None", "outputs": "Forex Rates JSON", "source": "MOL" },
+    "get_macro_global_stock_indices": { "summary": "[大盤指數] 每月國際主要股價指數。包含台股加權、美股 (Nasdaq/Dow)、日股等歷史趨勢。", "inputs": "None", "outputs": "Stock Indices JSON", "source": "MOL" },
+    "get_macro_forex_rates_monthly": { "summary": "[歷史趨勢] 國際主要國家貨幣每月匯率概況。包含美元、人民幣、日圓等對台幣趨勢。", "inputs": "None", "outputs": "Forex Rates JSON", "source": "MOL" },
     "get_bank_bond_issuance_monthly": { "summary": "國內債券每月發行概況。包含公債、公司債。", "inputs": "None", "outputs": "Bond Issuance JSON", "source": "MOL" },
     "get_bank_stock_issuance_monthly": { "summary": "國內公開發行公司股票每月發行概況。", "inputs": "None", "outputs": "Stock Issuance JSON", "source": "MOL" },
     "get_bank_pension_fund_stats_monthly": { "summary": "國民年金保險基金每月經營概況。包含規模與收益率。", "inputs": "None", "outputs": "Fund Stats JSON", "source": "MOL" },
-    "get_bank_stock_indices_annual": { "summary": "年度國際主要股價指數。歷史長期對比用。", "inputs": "None", "outputs": "Stock Indices JSON", "source": "MOL" },
-    "get_bank_forex_rates_annual": { "summary": "國際主要國家貨幣年度匯率。歷史長期對比用。", "inputs": "None", "outputs": "Forex Rates JSON", "source": "MOL" }
+    "get_macro_global_stock_indices_annual": { "summary": "[大盤指數] 年度國際主要股價指數。歷史長期對比趨勢。", "inputs": "None", "outputs": "Stock Indices JSON", "source": "MOL" },
+    "get_macro_forex_rates_annual": { "summary": "[歷史趨勢] 國際主要國家貨幣年度匯率歷史概況。", "inputs": "None", "outputs": "Forex Rates JSON", "source": "MOL" }
 }

@@ -99,7 +99,7 @@ class BankLogic:
     """處理銀行業大數據統計。"""
     
     @staticmethod
-    async def get_bot_credit_rating() -> List[Dict[str, Any]]:
+    async def get_bank_bot_credit_rating() -> List[Dict[str, Any]]:
         """獲取臺灣銀行最新信用評等等級 (S&P, Moody's, 中華信評)。"""
         url = "https://quality.data.gov.tw/dq_download_json.php?nid=31927&md5_url=ebdd6bebd608b17380749eb0bc21d06f"
         try:
@@ -109,13 +109,13 @@ class BankLogic:
             return [{"error": f"無法獲取台銀信評數據: {str(e)}"}]
 
     @staticmethod
-    async def get_bank_stock_indices_monthly() -> Dict[str, Any]:
+    async def get_macro_global_stock_indices() -> Dict[str, Any]:
         """獲取每月國際主要股價指數。"""
         url = "https://apiservice.mol.gov.tw/OdService/rest/datastore/A17030000J-000050-Ipz"
         return await EconomicsLogic._fetch_mol_api(url, "每月國際主要股價指數")
 
     @staticmethod
-    async def get_bank_forex_rates_monthly() -> Dict[str, Any]:
+    async def get_macro_forex_rates_monthly() -> Dict[str, Any]:
         """獲取國際主要國家貨幣每月匯率。"""
         url = "https://apiservice.mol.gov.tw/OdService/rest/datastore/A17030000J-000049-Iq0"
         return await EconomicsLogic._fetch_mol_api(url, "國際主要國家貨幣每月匯率")
@@ -139,13 +139,13 @@ class BankLogic:
         return await EconomicsLogic._fetch_mol_api(url, "國民年金保險基金每月經營概況")
 
     @staticmethod
-    async def get_bank_stock_indices_annual() -> Dict[str, Any]:
+    async def get_macro_global_stock_indices_annual() -> Dict[str, Any]:
         """獲取年度國際主要股價指數。"""
         url = "https://apiservice.mol.gov.tw/OdService/rest/datastore/A17000000J-030245-4Ml"
         return await EconomicsLogic._fetch_mol_api(url, "年度國際主要股價指數")
 
     @staticmethod
-    async def get_bank_forex_rates_annual() -> Dict[str, Any]:
+    async def get_macro_forex_rates_annual() -> Dict[str, Any]:
         """獲取國際主要國家貨幣年度匯率。"""
         url = "https://apiservice.mol.gov.tw/OdService/rest/datastore/A17000000J-030185-CKf"
         return await EconomicsLogic._fetch_mol_api(url, "國際主要國家貨幣年度匯率")
