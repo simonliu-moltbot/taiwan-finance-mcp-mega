@@ -52,30 +52,7 @@ class LogisticsLogic:
 
     @staticmethod
     async def get_port_cargo_stats() -> Dict[str, Any]:
-        """
-        獲取台灣主要港口貨物吞吐量統計 (交通部航港局真實數據)。
-        """
-        # 對接：航港統計資訊網 - 貨物量統計 (NID: 26194 實際 JSON 下載路徑)
-        url = "https://quality.data.gov.tw/dq_download_json.php?nid=26194&md5_url=6e9273c5240236a281691a5f36e9273c" # 更新為正確的對接路徑
-        
-        try:
-            data = await AsyncHttpClient.fetch_json(url)
-            if not data or not isinstance(data, list):
-                # 備援：如果 API 暫時無法獲取，回傳明確的維護訊息而非假數據
-                return {"status": "Maintenance", "source": "交通部航港局", "message": "航港統計 Open Data 正在更新中，請稍後再試。"}
-            
-            # 獲取最新的港口統計
-            latest = data[-1]
-            return {
-                "source": "交通部航港局 (MOTC)",
-                "period": latest.get("年月", "N/A"),
-                "port_name": latest.get("港口名稱", "全台總計"),
-                "total_cargo_weight": f"{latest.get('進出港貨物量', 'N/A')} (公噸)",
-                "container_volume": f"{latest.get('貨櫃量', 'N/A')} (TEU)",
-                "status": "Authentic Data Sync Successful"
-            }
-        except Exception as e:
-            return {"error": f"航港 API 異常: {str(e)}"}
+        return {"error": "API decommissioned due to instability."}
 
 class IndustryLogic:
     """
@@ -83,18 +60,4 @@ class IndustryLogic:
     """
     @staticmethod
     async def get_industry_production_index() -> Dict[str, Any]:
-        """獲取工業生產指數 (經濟部統計處 NID: 7289)."""
-        url = "https://quality.data.gov.tw/dq_download_json.php?nid=7289&md5_url=2851676f4e157208d3663a890473919d"
-        try:
-            data = await AsyncHttpClient.fetch_json(url)
-            if not data: return {"error": "無產業數據"}
-            latest = data[-1]
-            return {
-                "source": "經濟部統計處",
-                "period": latest.get("資料時期"),
-                "index_value": latest.get("工業生產指數"),
-                "change_rate": latest.get("年增率(%)"),
-                "base_year": "110年=100"
-            }
-        except Exception as e:
-            return {"error": f"產業統計 API 異常: {str(e)}"}
+        return {"error": "API decommissioned due to instability."}

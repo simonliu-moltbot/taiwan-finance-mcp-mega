@@ -52,30 +52,12 @@ class EconomicsLogic:
             "note": "數據反映中央政府未償債務餘額"
         }
 
-    @staticmethod
-    async def get_housing_price_index() -> Dict[str, Any]:
-        return {
-            "error": "OpenAPI endpoint is currently down for maintenance.",
-            "source": "內政部",
-            "url": "https://data.gov.tw/dataset/29683",
-            "info": "請點擊網址並在頁面下方找到「JSON」下載按鈕獲取數據。"
-        }
-
 class GovNewsLogic:
     """
     處理政府官方新聞稿與政策公告。
-    數據源：金管會 (FSC)、央行 (CBC)、經濟部 (MOEA)。
+    數據源：央行 (CBC)、經濟部 (MOEA)。
     """
     
-    @staticmethod
-    async def get_fsc_news() -> List[Dict[str, Any]]:
-        """獲取金管會最新新聞稿 (NID: 7334)。"""
-        return [{
-            "error": "OpenAPI endpoint is currently down for maintenance.",
-            "url": "https://data.gov.tw/dataset/7334",
-            "info": "請點擊網址查看金管會官方新聞稿頁面。"
-        }]
-
     @staticmethod
     async def get_cbc_news() -> List[Dict[str, Any]]:
         """獲取中央銀行最新重要公告。"""
@@ -102,20 +84,8 @@ class BankLogic:
     """處理銀行業大數據統計。"""
     
     @staticmethod
-    async def get_list_of_institutions() -> List[Dict[str, Any]]:
-        return [{
-            "error": "OpenAPI endpoint is currently down for maintenance.",
-            "url": "https://data.gov.tw/dataset/18419",
-            "info": "請至主站頁面手動下載 JSON 資料。"
-        }]
-
-    @staticmethod
-    async def get_bank_profit_loss() -> List[Dict[str, Any]]:
-        return [{
-            "error": "OpenAPI endpoint is currently down for maintenance.",
-            "url": "https://data.gov.tw/dataset/28567",
-            "info": "請至主站頁面手動下載 JSON 資料。"
-        }]
+    async def dummy_method():
+        pass
 
 class PublicServiceLogic:
     """公共服務邏輯。"""

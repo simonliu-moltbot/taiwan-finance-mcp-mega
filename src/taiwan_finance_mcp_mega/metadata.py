@@ -37,16 +37,16 @@ TOOL_METADATA = {
     "get_futures_open_interest_ranking": { "summary": "查詢期貨市場大額交易人未平倉部位排名。用於追蹤期貨大戶動向。", "inputs": "None", "outputs": "大戶持倉比例、排名。", "source": "Taifex" },
 
     # 🌍 FOREX & COMMODITY
-    "get_forex_usd_twd_realtime": { "summary": "美元兌台幣即時匯率。", "inputs": "None", "outputs": "Rate", "source": "ExchangeRate-API" },
-    "get_forex_jpy_twd_realtime": { "summary": "日圓兌台幣即時匯率。", "inputs": "None", "outputs": "Rate", "source": "ExchangeRate-API" },
-    "get_forex_eur_twd_realtime": { "summary": "歐元兌台幣即時匯率。", "inputs": "None", "outputs": "Rate", "source": "ExchangeRate-API" },
-    "get_forex_cny_twd_realtime": { "summary": "人民幣兌台幣即時匯率。", "inputs": "None", "outputs": "Rate", "source": "ExchangeRate-API" },
-    "get_forex_hkd_twd_realtime": { "summary": "港幣兌台幣即時匯率。", "inputs": "None", "outputs": "Rate", "source": "ExchangeRate-API" },
-    "get_forex_gbp_twd_realtime": { "summary": "英鎊兌台幣即時匯率。", "inputs": "None", "outputs": "Rate", "source": "ExchangeRate-API" },
-    "get_forex_aud_twd_realtime": { "summary": "澳幣兌台幣即時匯率。", "inputs": "None", "outputs": "Rate", "source": "ExchangeRate-API" },
-    "get_forex_cad_twd_realtime": { "summary": "加幣兌台幣即時匯率。", "inputs": "None", "outputs": "Rate", "source": "ExchangeRate-API" },
-    "get_forex_sgd_twd_realtime": { "summary": "新幣兌台幣即時匯率。", "inputs": "None", "outputs": "Rate", "source": "ExchangeRate-API" },
-    "get_forex_krw_twd_realtime": { "summary": "韓元兌台幣即時匯率。", "inputs": "None", "outputs": "Rate", "source": "ExchangeRate-API" },
+    "get_forex_usd_twd_realtime": { "summary": "美元兌台幣即時匯率。", "inputs": "None", "outputs": "Rate", "source": "tw.rter.info" },
+    "get_forex_jpy_twd_realtime": { "summary": "日圓兌台幣即時匯率。", "inputs": "None", "outputs": "Rate", "source": "tw.rter.info" },
+    "get_forex_eur_twd_realtime": { "summary": "歐元兌台幣即時匯率。", "inputs": "None", "outputs": "Rate", "source": "tw.rter.info" },
+    "get_forex_cny_twd_realtime": { "summary": "人民幣兌台幣即時匯率。", "inputs": "None", "outputs": "Rate", "source": "tw.rter.info" },
+    "get_forex_hkd_twd_realtime": { "summary": "港幣兌台幣即時匯率。", "inputs": "None", "outputs": "Rate", "source": "tw.rter.info" },
+    "get_forex_gbp_twd_realtime": { "summary": "英鎊兌台幣即時匯率。", "inputs": "None", "outputs": "Rate", "source": "tw.rter.info" },
+    "get_forex_aud_twd_realtime": { "summary": "澳幣兌台幣即時匯率。", "inputs": "None", "outputs": "Rate", "source": "tw.rter.info" },
+    "get_forex_cad_twd_realtime": { "summary": "加幣兌台幣即時匯率。", "inputs": "None", "outputs": "Rate", "source": "tw.rter.info" },
+    "get_forex_sgd_twd_realtime": { "summary": "新幣兌台幣即時匯率。", "inputs": "None", "outputs": "Rate", "source": "tw.rter.info" },
+    "get_forex_krw_twd_realtime": { "summary": "韓元兌台幣即時匯率。", "inputs": "None", "outputs": "Rate", "source": "tw.rter.info" },
     "get_forex_any_to_any_conversion": { "summary": "任意幣別對任意幣別之即時匯率換算 (OOO to OOO)。", "inputs": "base: 原始幣別 (例: JPY), target: 目標幣別 (例: USD)。", "outputs": "計算後匯率。", "source": "tw.rter.info" },
     "get_commodity_oil_wti_price_usd": { "summary": "WTI 原油期貨報價(USD)。", "inputs": "None", "outputs": "USD/Bbl", "source": "MOEA" },
     "get_commodity_oil_brent_price_usd": { "summary": "Brent 原油期貨報價(USD)。", "inputs": "None", "outputs": "USD/Bbl", "source": "MOEA" },
@@ -59,16 +59,9 @@ TOOL_METADATA = {
     "get_macro_unemployment_rate_seasonal_adjusted": { "summary": "台灣最新經季節調整後之失業率。國家級宏觀指標。", "inputs": "None", "outputs": "%", "source": "MOL" },
     "get_macro_average_monthly_salary_dgbas": { "summary": "台灣勞工月平均總薪資(含獎金)。國家級指標。", "inputs": "None", "outputs": "TWD", "source": "MOL" },
     "get_macro_central_bank_policy_rate": { "summary": "中央銀行重貼現率 (官方基準利率)。影響市場資金成本。非一般銀行存款利率。", "inputs": "None", "outputs": "%", "source": "CBC" },
-    "get_macro_money_supply_m1b_m2": { "summary": "台灣貨幣總計數 M1B/M2 年增率 (資金動能指標)。", "inputs": "None", "outputs": "%", "source": "CBC" },
-    "get_macro_foreign_exchange_reserves": { "summary": "台灣外匯存底統計。國家財力指標。", "inputs": "None", "outputs": "USD 億元", "source": "CBC" },
-    "get_macro_bank_mortgage_loan_rates": { "summary": "台灣五大銀行新承做購屋貸款(房貸)平均利率。", "inputs": "None", "outputs": "%", "source": "CBC" },
-    "get_macro_fuel_price_cpc_retail": { "summary": "中油當週零售掛牌油價 (92/95/98/柴油)。", "inputs": "None", "outputs": "Price", "source": "CPC" },
-    "get_macro_housing_price_index_tw": { "summary": "台灣全國住宅價格指數與漲跌趨勢。", "inputs": "None", "outputs": "Index", "source": "Interior Ministry" },
     "get_macro_national_debt_clock": { "summary": "中華民國國債鐘：中央政府長短期債務與人均負擔額。", "inputs": "None", "outputs": "Debt Amount", "source": "MOF" },
 
     # 🏦 BANK: Commercial Bank specific metrics
-    "get_bank_list_of_institutions": { "summary": "獲取台灣金融機構代碼與一覽表。", "inputs": "bank_query: 名稱或代碼。", "outputs": "名稱、代號。", "source": "CBC" },
-    "get_bank_profit_loss_statements": { "summary": "獲取全體本國銀行損益表彙總。銀行業獲利數據。", "inputs": "None", "outputs": "損益數據。", "source": "CBC" },
     "get_bank_balance_sheets": { "summary": "獲取全體本國銀行資產負債表彙總。", "inputs": "None", "outputs": "規模結構。", "source": "CBC" },
     "get_bank_major_assets_liabilities_stats": { "summary": "獲取銀行主要資產負債項目 (存款、貸款、有價證券) 統計。", "inputs": "None", "outputs": "統計金額。", "source": "CBC" },
     "get_bank_sme_loan_balance_stats": { "summary": "獲取本國銀行對中小企業(SME)放款餘額與家數。", "inputs": "None", "outputs": "Balance (TWD)", "source": "FSC" },
@@ -82,19 +75,15 @@ TOOL_METADATA = {
 
     # 🏢 CORP & INDUSTRY
     "get_corp_moea_business_registration": { "summary": "經濟部商工登記公示資料。查詢公司基本信息。", "inputs": "company_query: 公司名稱或統編。", "outputs": "登記資料。", "source": "MOEA" },
-    "get_corp_industry_production_index": { "summary": "台灣各業別工業生產指數。判斷製造業動能。", "inputs": "None", "outputs": "Index", "source": "MOEA" },
-    "get_corp_industry_electricity_consumption_stats": { "summary": "各產業部門(如電子、半導體)電力消費統計。判斷產業景氣。", "inputs": "None", "outputs": "GWh", "source": "MOEA" },
-    "get_corp_factory_count_statistics": { "summary": "全台工廠登記數統計分布。", "inputs": "None", "outputs": "Count", "source": "MOEA" },
-    "get_corp_export_value_by_industry": { "summary": "各行業出口貿易總值與占比。判斷出口競爭力。", "inputs": "None", "outputs": "Value", "source": "MOEA" },
+    "get_corp_industry_electricity_consumption_stats": { "summary": "各產業部門電力消費統計。判斷產業景氣。", "inputs": "None", "outputs": "GWh", "source": "MOEA" },
 
     # 📰 NEWS & GOV (Official Announcements)
-    "get_gov_financial_news_fsc": { "summary": "獲取金管會(FSC)最新官方新聞稿。包含金融政策、裁罰與新制說明。", "inputs": "None", "outputs": "標題、連結。", "source": "FSC" },
     "get_gov_central_bank_announcements": { "summary": "獲取中央銀行(CBC)重要政策公告、理監事會議決議、外匯政策。", "inputs": "None", "outputs": "主旨、日期。", "source": "CBC" },
     "get_gov_industrial_policy_news_moea": { "summary": "獲取經濟部(MOEA)經貿、產業與能源政策動態新聞。", "inputs": "None", "outputs": "日期、主旨。", "source": "MOEA" },
 
     # 🪙 CRYPTO
     "get_crypto_btc_twd_price": { "summary": "比特幣 Bitcoin 即時 TWD/USD 報價與 24h 漲跌。", "inputs": "None", "outputs": "Price", "source": "CoinGecko" },
-    "get_crypto_eth_twd_price": { "summary": "以太幣 Ethereum 即時 TWD/USD 報價與 24h 漲跌。", "inputs": "None", "outputs": "Price", "source": "CoinGecko" },
+    "get_crypto_eth_twd_price": { "summary": "以太幣 Ethereum 即時 TWD/USD 報價與 24h 漲跌。", "inputs": "None", "outputs": "Rate", "source": "CoinGecko" },
     "get_crypto_sol_twd_price": { "summary": "Solana 即時報價與市場表現。", "inputs": "None", "outputs": "Price", "source": "CoinGecko" },
     "get_crypto_market_fear_greed_index": { "summary": "全球加密幣市場恐慌與貪婪指數。情緒判斷指標。", "inputs": "None", "outputs": "Index", "source": "CoinGecko" },
     
