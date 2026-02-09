@@ -18,18 +18,20 @@ class DerivativesLogic:
 
     @staticmethod
     async def get_futures_quotes() -> List[Dict[str, Any]]:
-        """獲取期貨每日收盤行情 (DailyMarketReportFut)。"""
+        """[v4.3.0] 獲取期貨每日收盤行情。僅回傳前 20 筆以防止 500 錯誤。"""
         url = f"{DerivativesLogic.TAIFEX_BASE}/DailyMarketReportFut"
-        return await AsyncHttpClient.fetch_json(url)
+        data = await AsyncHttpClient.fetch_json(url)
+        return data[:20] if isinstance(data, list) else data
 
     @staticmethod
     async def get_taifex_institutional_flow() -> List[Dict[str, Any]]:
-        """獲取三大法人期貨交易量與未平倉量彙總 (MarketDataOfMajorInstitutionalTradersGeneralBytheDate)。"""
+        """獲取三大法人期貨交易量與未平倉量彙總。"""
         url = f"{DerivativesLogic.TAIFEX_BASE}/MarketDataOfMajorInstitutionalTradersGeneralBytheDate"
         return await AsyncHttpClient.fetch_json(url)
 
     @staticmethod
     async def get_futures_oi_top_list() -> List[Dict[str, Any]]:
-        """獲取期貨大額交易人未平倉部位統計 (OpenInterestOfLargeTradersFutures)。"""
+        """[v4.3.0] 獲取期貨大額交易人未平倉部位統計。僅回傳前 20 筆以防止 500 錯誤。"""
         url = f"{DerivativesLogic.TAIFEX_BASE}/OpenInterestOfLargeTradersFutures"
-        return await AsyncHttpClient.fetch_json(url)
+        data = await AsyncHttpClient.fetch_json(url)
+        return data[:20] if isinstance(data, list) else data
