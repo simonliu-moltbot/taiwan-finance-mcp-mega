@@ -30,36 +30,21 @@ DERIVATIVES_LIST = [
 ]
 
 # 🏦 BANK: Commercial Bank specific metrics
-BANK_LIST = [
-    "get_bank_balance_sheets", "get_bank_major_assets_liabilities_stats",
-    "get_bank_sme_loan_balance_stats", "get_bank_monthly_profit_summary",
-    "get_bank_overdue_loan_stats", "get_bank_foreign_exchange_trading_volume",
-    "get_bank_deposit_rate_fixed", "get_bank_mortgage_rate_average", 
-    "get_bank_credit_card_delinquency", "get_bank_atm_location_map", "get_bank_capital_adequacy_ratio"
-]
+BANK_LIST = []
 
 # 🏛️ MACRO: National Policy & Economy (DGBAS/CBC/MOF)
 MACRO_LIST = [
-    "get_macro_gdp_growth_rate_quarterly", "get_macro_cpi_inflation_rate_tw", 
-    "get_macro_unemployment_rate_seasonal_adjusted", "get_macro_average_monthly_salary_dgbas",
-    "get_macro_national_debt_clock",
-    "get_macro_central_bank_policy_rate", "get_macro_money_supply_m1b_m2", 
-    "get_macro_foreign_exchange_reserves", "get_macro_bank_mortgage_loan_rates"
+    "get_macro_gdp_growth_rate_quarterly",
+    "get_macro_national_debt_clock"
 ]
 
-TAX_LIST = [
-    "get_tax_income_bracket_calculator", "get_tax_revenue_collection_monthly", 
-    "get_tax_electronic_invoice_usage_stats"
-]
+TAX_LIST = []
 
 CORP_LIST = [
-    "get_corp_moea_business_registration", 
-    "get_corp_industry_electricity_consumption_stats"
+    "get_corp_moea_business_registration"
 ]
 
-NEWS_LIST = [
-    "get_gov_central_bank_announcements", "get_gov_industrial_policy_news_moea"
-]
+NEWS_LIST = []
 
 CRYPTO_LIST = [
     "get_crypto_btc_twd_price", "get_crypto_eth_twd_price", "get_crypto_sol_twd_price",

@@ -54,28 +54,10 @@ TOOL_METADATA = {
 
     # 🏛️ MACRO: National Policy & Economy (DGBAS/CBC/MOF)
     "get_macro_gdp_growth_rate_quarterly": { "summary": "台灣季度 GDP 經濟成長率。國家級宏觀指標。", "inputs": "None", "outputs": "%", "source": "DGBAS" },
-    "get_macro_central_bank_policy_rate": { "summary": "中央銀行重貼現率 (官方基準利率)。影響市場資金成本。非一般銀行存款利率。", "inputs": "None", "outputs": "%", "source": "CBC" },
     "get_macro_national_debt_clock": { "summary": "中華民國國債鐘：中央政府長短期債務與人均負擔額。", "inputs": "None", "outputs": "Debt Amount", "source": "MOF" },
 
-    # 🏦 BANK: Commercial Bank specific metrics
-    "get_bank_balance_sheets": { "summary": "獲取全體本國銀行資產負債表彙總。", "inputs": "None", "outputs": "規模結構。", "source": "CBC" },
-    "get_bank_major_assets_liabilities_stats": { "summary": "獲取銀行主要資產負債項目 (存款、貸款、有價證券) 統計。", "inputs": "None", "outputs": "統計金額。", "source": "CBC" },
-    "get_bank_sme_loan_balance_stats": { "summary": "獲取本國銀行對中小企業(SME)放款餘額與家數。", "inputs": "None", "outputs": "Balance (TWD)", "source": "FSC" },
-    "get_bank_monthly_profit_summary": { "summary": "獲取銀行業每月稅前損益彙總。不包含稅務收入。", "inputs": "None", "outputs": "Profit", "source": "FSC" },
-    "get_bank_overdue_loan_stats": { "summary": "查詢銀行資產品質：逾期放款 (NPL) 比率與備抵呆帳覆蓋率。", "inputs": "None", "outputs": "Ratio (%)", "source": "FSC" },
-    "get_bank_foreign_exchange_trading_volume": { "summary": "查詢台北外匯指定銀行 (DBU) 交易量統計。", "inputs": "None", "outputs": "Volume", "source": "CBC" },
-    "get_bank_deposit_rate_fixed": { "summary": "查詢本國銀行定期存款(一年期)之平均固定利率。非央行政策利率。", "inputs": "bank_query: 名稱。", "outputs": "Rate (%)", "source": "Banks" },
-    "get_bank_mortgage_rate_average": { "summary": "個別商業銀行房貸利率查詢。非國家平均。", "inputs": "bank_query: 銀行名稱。", "outputs": "Rate (%)", "source": "Banks" },
-    "get_bank_credit_card_delinquency": { "summary": "信用卡逾期帳款比率統計。", "inputs": "None", "outputs": "Ratio", "source": "FSC" },
-    "get_bank_capital_adequacy_ratio": { "summary": "本國銀行資本適足率 (BIS) 統計。", "inputs": "None", "outputs": "Ratio", "source": "FSC" },
-
     # 🏢 CORP & INDUSTRY
-    "get_corp_moea_business_registration": { "summary": "經濟部商工登記公示資料。查詢公司基本信息。", "inputs": "company_query: 公司名稱或統編。", "outputs": "登記資料。", "source": "MOEA" },
-    "get_corp_industry_electricity_consumption_stats": { "summary": "各產業部門電力消費統計。判斷產業景氣。", "inputs": "None", "outputs": "GWh", "source": "MOEA" },
-
-    # 📰 NEWS & GOV (Official Announcements)
-    "get_gov_central_bank_announcements": { "summary": "獲取中央銀行(CBC)重要政策公告、理監事會議決議、外匯政策。", "inputs": "None", "outputs": "主旨、日期。", "source": "CBC" },
-    "get_gov_industrial_policy_news_moea": { "summary": "獲取經濟部(MOEA)經貿、產業與能源政策動態新聞。", "inputs": "None", "outputs": "日期、主旨。", "source": "MOEA" },
+    "get_corp_moea_business_registration": { "summary": "經濟部商工登記公示資料。查詢公司基本信息。", "inputs": "company_query: 公司名稱 or 統編。", "outputs": "登記資料。", "source": "MOEA" },
 
     # 🪙 CRYPTO
     "get_crypto_btc_twd_price": { "summary": "比特幣 Bitcoin 即時 TWD/USD 報價與 24h 漲跌。", "inputs": "None", "outputs": "Price", "source": "CoinGecko" },
@@ -83,11 +65,6 @@ TOOL_METADATA = {
     "get_crypto_sol_twd_price": { "summary": "Solana 即時報價與市場表現。", "inputs": "None", "outputs": "Price", "source": "CoinGecko" },
     "get_crypto_market_fear_greed_index": { "summary": "全球加密幣市場恐慌與貪婪指數。情緒判斷指標。", "inputs": "None", "outputs": "Index", "source": "CoinGecko" },
     
-    # ⚖️ TAX
-    "get_tax_revenue_collection_monthly": { "summary": "全國賦稅實徵淨額統計。國家稅收月報。", "inputs": "None", "outputs": "Revenue", "source": "MOF" },
-    "get_tax_income_bracket_calculator": { "summary": "綜合所得稅級距、免稅額與試算公式。", "inputs": "None", "outputs": "Brackets", "source": "MOF" },
-    "get_tax_electronic_invoice_usage_stats": { "summary": "電子發票普及率與張數統計。", "inputs": "None", "outputs": "Stats", "source": "MOF" },
-
     # 🕒 COMMON
     "get_current_time_taipei": { "summary": "獲取台北即時系統時間、日期與星期幾。", "inputs": "None", "outputs": "Timestamp", "source": "System" }
 }
