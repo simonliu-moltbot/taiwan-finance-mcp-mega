@@ -16,17 +16,17 @@ TOOL_METADATA = {
     "get_stock_odd_lot_trading_quotes": { "summary": "獲取股票盤中零股交易行情。非期貨。", "inputs": "ticker: 股票代碼。", "outputs": "成交價量。", "source": "TWSE" },
     "get_stock_mops_significant_announcements": { "summary": "查詢 MOPS 公開資訊觀測站重大訊息。僅限上市公司公告。", "inputs": "ticker: 股票代碼。", "outputs": "主旨、內容摘要。", "source": "TWSE" },
     "get_stock_price_limit_up_down_tracker": { "summary": "監控當日漲跌停股票清單。僅限現貨市場。", "inputs": "None", "outputs": "漲跌停清單。", "source": "TWSE" },
-    "get_stock_monthly_revenue_summary": { "summary": "查詢上市公司每月營業收入彙總。", "inputs": "ticker: 股票代碼。", "outputs": "月增率、年增率。", "source": "TWSE" },
-    "get_stock_etf_regular_savings_ranking": { "summary": "ETF 定期定額交易戶數排行。僅限 ETF 現貨。", "inputs": "None", "outputs": "排名、戶數。", "source": "TWSE" },
+    "get_stock_monthly_revenue_summary": { "summary": "[營收報表] 查詢上市公司每月營業收入統計（包含單月營收、月增率、年增率）。與股價無關。", "inputs": "ticker: 股票代碼。", "outputs": "月增率、年增率。", "source": "TWSE" },
+    "get_stock_etf_regular_savings_ranking": { "summary": "[排行/人氣] 查詢全市場 ETF 定期定額交易戶數排行榜。用於觀察熱門 ETF 熱度。非查詢券商。", "inputs": "None", "outputs": "排名、戶數。", "source": "TWSE" },
     "get_stock_block_trade_daily_summary": { "summary": "查詢股票集中市場鉅額交易。不包含期貨大額部位。", "inputs": "None", "outputs": "成交資訊。", "source": "TWSE" },
     "get_stock_after_hours_trading_info": { "summary": "獲取股票盤後定價交易資訊。", "inputs": "ticker: 股票代碼。", "outputs": "成交價量。", "source": "TWSE" },
-    "get_stock_individual_average_price": { "summary": "[個股] 上市公司本月股票收盤價與月平均價。查詢單一股票之平均價格。", "inputs": "None", "outputs": "收盤價、月平均價。", "source": "TWSE" },
+    "get_stock_individual_average_price": { "summary": "[個股/均價] 查詢單一股票本月的收盤價與月平均價格趨勢。與公司營收、基本面無關。", "inputs": "None", "outputs": "收盤價、月平均價。", "source": "TWSE" },
     "get_stock_daily_closing_quotes_all": { "summary": "收盤指數及各類股成交量值。每日市場收盤總覽資訊。", "inputs": "None", "outputs": "指數、成交量值。", "source": "TWSE" },
     "get_stock_yield_averages_by_industry": { "summary": "上市公司各類股殖利率與現金殖利率統計。", "inputs": "None", "outputs": "類股殖利率。", "source": "TWSE" },
     "get_stock_pe_averages_by_industry": { "summary": "上市公司各類股本益比與殖利率統計。用於比較產業估值。", "inputs": "None", "outputs": "類股本益比。", "source": "TWSE" },
     "get_stock_broker_list_all": { "summary": "獲取全台證券商基本資料一覽表。包含券商名稱、地址與聯絡電話。", "inputs": "None", "outputs": "券商清單。", "source": "TWSE" },
     "get_stock_buyback_treasury_status": { "summary": "查詢上市公司庫藏股買回進度。", "inputs": "ticker: 股票代碼。", "outputs": "執行率。", "source": "TWSE" },
-    "get_stock_broker_regular_savings_data": { "summary": "查詢開辦股票定期定額之證券商名單。", "inputs": "None", "outputs": "券商名單。", "source": "TWSE" },
+    "get_stock_broker_regular_savings_data": { "summary": "[券商/業務] 查詢開辦「定期定額」業務的證券商名單（哪家券商可以開戶）。非查詢 ETF 排行。", "inputs": "None", "outputs": "券商名單。", "source": "TWSE" },
 
     # 📉 DERIVATIVES: Specifically for TAIFEX (Futures/Options)
     # MANDATORY: Use ONLY for questions about 'Futures', 'Options', 'Open Interest', or 'Daily Settlement'.
