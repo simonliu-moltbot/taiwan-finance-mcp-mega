@@ -3,7 +3,7 @@
 # 📈 STOCK: Purely for Securities Exchange (TWSE/TPEx)
 STOCK_LIST = [
     "get_stock_quotes_realtime_all", "get_stock_eps_ranking_summary", "get_stock_dividend_yield_pe_pb", 
-    "get_stock_institutional_investor_flow", "get_stock_institutional_trading_tpex", "get_stock_institutional_summary_tpex",
+    "get_stock_institutional_summary_twse", "get_stock_institutional_details_tpex", "get_stock_institutional_summary_tpex",
     "get_stock_margin_trading_balance", "get_stock_odd_lot_trading_quotes", 
     "get_stock_mops_significant_announcements", "get_stock_price_limit_up_down_tracker", 
     "get_stock_monthly_revenue_summary", "get_stock_etf_regular_savings_ranking", 
