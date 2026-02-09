@@ -57,7 +57,6 @@ This document provides an exhaustive mapping of every active tool in the `taiwan
 | Tool Name | Direct API URL (Source) | Description (說明) |
 |-----------|-------------------------|-------------------|
 | `get_macro_gdp_growth_rate_quarterly` | [MOL / DGBAS API](https://apiservice.mol.gov.tw/OdService/download/A17000000J-030243-YTl) | 台灣季度 GDP 經濟成長率 |
-| `get_macro_national_debt_clock` | Static MOF Data | 中華民國國債鐘數據 |
 | `get_macro_monthly_financial_indicators` | [MOL REST API](https://apiservice.mol.gov.tw/OdService/rest/datastore/A17030000J-000037-l9P) | 每月國內主要金融指標 (M1B/M2/外匯存底) |
 | `get_macro_economic_indicators_monthly` | [MOL REST API](https://apiservice.mol.gov.tw/OdService/rest/datastore/A17030000J-000016-1ci) | 每月國內主要經濟指標 (GDP/CPI/失業率) |
 | `get_macro_economic_indicators_annual` | [MOL REST API](https://apiservice.mol.gov.tw/OdService/rest/datastore/A17000000J-030243-XXL) | 年度國內主要經濟指標 (長期趨勢) |
@@ -82,5 +81,5 @@ This document provides an exhaustive mapping of every active tool in the `taiwan
 | `get_current_time_taipei` | Local Environment | 獲取台北即時系統時間 |
 
 ---
-*Total Active Verified Tools: 58*
+*Total Active Verified Tools: 57*
 *Last Updated: 2026-02-09*

@@ -40,7 +40,6 @@ BANK_LIST = [
 # 🏛️ MACRO: National Policy & Economy (DGBAS/CBC/MOF)
 MACRO_LIST = [
     "get_macro_gdp_growth_rate_quarterly",
-    "get_macro_national_debt_clock",
     "get_macro_monthly_financial_indicators",
     "get_macro_economic_indicators_monthly",
     "get_macro_economic_indicators_annual",
