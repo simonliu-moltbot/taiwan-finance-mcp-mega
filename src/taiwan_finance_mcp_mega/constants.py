@@ -30,7 +30,9 @@ DERIVATIVES_LIST = [
 ]
 
 # 🏦 BANK: Commercial Bank specific metrics
-BANK_LIST = []
+BANK_LIST = [
+    "get_bank_bot_credit_rating"
+]
 
 # 🏛️ MACRO: National Policy & Economy (DGBAS/CBC/MOF)
 MACRO_LIST = [

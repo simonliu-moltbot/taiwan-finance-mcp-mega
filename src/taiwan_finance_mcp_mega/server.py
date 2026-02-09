@@ -146,6 +146,7 @@ async def dispatch_mega_logic(name: str, query_val: Optional[str], limit: int) -
 
         # 6. 銀行數據 (Commercial Banks only)
         elif name.startswith("get_bank_"):
+            if "bot_credit_rating" in name: return await BankLogic.get_bot_credit_rating()
             if "list_of_institutions" in name: return await BankLogic.get_list_of_institutions()
             if "profit_loss" in name: return await BankLogic.get_bank_profit_loss()
             return {"error": "銀行商業數據正在對接中"}

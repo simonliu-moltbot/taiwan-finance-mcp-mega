@@ -60,6 +60,7 @@ This document provides an exhaustive mapping of every active tool in the `taiwan
 | `get_macro_gdp_growth_rate_quarterly` | [MOL / DGBAS API](https://apiservice.mol.gov.tw/OdService/download/A17000000J-030243-YTl) | 台灣季度 GDP 經濟成長率 |
 | `get_macro_national_debt_clock` | Static MOF Data | 中華民國國債鐘數據 |
 | `get_macro_monthly_financial_indicators` | [MOL REST API](https://apiservice.mol.gov.tw/OdService/openapi/OAS.html) | 每月國內主要金融指標 (M1B/M2/外匯存底) |
+| `get_bank_bot_credit_rating` | [Bank of Taiwan JSON](https://quality.data.gov.tw/dq_download_json.php?nid=31927&md5_url=ebdd6bebd608b17380749eb0bc21d06f) | 臺灣銀行信用評等等級 (S&P/Moody's/中華信評) |
 | `get_corp_moea_business_registration` | [GCIS NAT API](https://data.gcis.nat.gov.tw/od/data/api/) | 經濟部商工登記公示資料 |
 
 ## 🪙 Cryptocurrency & System

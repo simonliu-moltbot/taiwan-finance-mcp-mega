@@ -67,5 +67,6 @@ TOOL_METADATA = {
     "get_crypto_market_fear_greed_index": { "summary": "全球加密幣市場恐慌與貪婪指數。情緒判斷指標。", "inputs": "None", "outputs": "Index", "source": "CoinGecko" },
     
     # 🕒 COMMON
-    "get_current_time_taipei": { "summary": "獲取台北即時系統時間、日期與星期幾。", "inputs": "None", "outputs": "Timestamp", "source": "System" }
+    "get_current_time_taipei": { "summary": "獲取台北即時系統時間、日期與星期幾。", "inputs": "None", "outputs": "Timestamp", "source": "System" },
+    "get_bank_bot_credit_rating": { "summary": "獲取臺灣銀行 (Bank of Taiwan) 最新信用評等等級。包含 S&P, Moody's 與中華信評。", "inputs": "None", "outputs": "Credit Rating JSON", "source": "Bank of Taiwan" }
 }

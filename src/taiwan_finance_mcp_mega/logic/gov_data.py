@@ -87,8 +87,14 @@ class BankLogic:
     """處理銀行業大數據統計。"""
     
     @staticmethod
-    async def dummy_method():
-        pass
+    async def get_bot_credit_rating() -> List[Dict[str, Any]]:
+        """獲取臺灣銀行最新信用評等等級 (S&P, Moody's, 中華信評)。"""
+        url = "https://quality.data.gov.tw/dq_download_json.php?nid=31927&md5_url=ebdd6bebd608b17380749eb0bc21d06f"
+        try:
+            data = await AsyncHttpClient.fetch_json(url)
+            return data
+        except Exception as e:
+            return [{"error": f"無法獲取台銀信評數據: {str(e)}"}]
 
 class PublicServiceLogic:
     """公共服務邏輯。"""
