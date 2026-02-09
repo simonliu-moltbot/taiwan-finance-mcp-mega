@@ -53,6 +53,7 @@ MEGA_ENDPOINT_MAP = {
     "get_stock_daily_closing_quotes_all": "/exchangeReport/MI_INDEX",
     "get_stock_yield_averages_by_industry": "/exchangeReport/FMSRFK_ALL",
     "get_stock_pe_averages_by_industry": "/exchangeReport/FMNPTK_ALL",
+    "get_stock_broker_list_all": "/brokerService/brokerList",
     "get_stock_buyback_treasury_status": "/opendata/t187ap13_L",
     "get_stock_broker_regular_savings_data": "/brokerService/secRegData"
 }

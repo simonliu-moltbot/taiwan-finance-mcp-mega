@@ -9,6 +9,7 @@ STOCK_LIST = [
     "get_stock_block_trade_daily_summary", "get_stock_after_hours_trading_info",
     "get_stock_listed_stock_price_averages", "get_stock_daily_closing_quotes_all",
     "get_stock_yield_averages_by_industry", "get_stock_pe_averages_by_industry",
+    "get_stock_broker_list_all",
     "get_stock_buyback_treasury_status", "get_stock_broker_regular_savings_data"
 ]
 

@@ -24,6 +24,7 @@ TOOL_METADATA = {
     "get_stock_daily_closing_quotes_all": { "summary": "收盤指數及各類股成交量值。每日市場收盤總覽資訊。", "inputs": "None", "outputs": "指數、成交量值。", "source": "TWSE" },
     "get_stock_yield_averages_by_industry": { "summary": "上市公司各類股殖利率與現金殖利率統計。", "inputs": "None", "outputs": "類股殖利率。", "source": "TWSE" },
     "get_stock_pe_averages_by_industry": { "summary": "上市公司各類股本益比與殖利率統計。用於比較產業估值。", "inputs": "None", "outputs": "類股本益比。", "source": "TWSE" },
+    "get_stock_broker_list_all": { "summary": "獲取全台證券商基本資料一覽表。包含券商名稱、地址與聯絡電話。", "inputs": "None", "outputs": "券商清單。", "source": "TWSE" },
     "get_stock_buyback_treasury_status": { "summary": "查詢上市公司庫藏股買回進度。", "inputs": "ticker: 股票代碼。", "outputs": "執行率。", "source": "TWSE" },
     "get_stock_broker_regular_savings_data": { "summary": "查詢開辦股票定期定額之證券商名單。", "inputs": "None", "outputs": "券商名單。", "source": "TWSE" },
 
