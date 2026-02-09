@@ -48,7 +48,7 @@ This document provides an exhaustive mapping of every active tool in the `taiwan
 | `get_forex_[CUR]_twd_realtime` | [https://tw.rter.info/capi.php](https://tw.rter.info/capi.php) | 各國幣別對台幣即時匯率 |
 | `get_forex_any_to_any_conversion` | [https://tw.rter.info/capi.php](https://tw.rter.info/capi.php) | 任意幣別對任意幣別即時換算 |
 | `get_commodity_oil_wti_price_usd` | [https://www2.moeaea.gov.tw/oil111/csv/GlobalOilOpenData.csv](https://www2.moeaea.gov.tw/oil111/csv/GlobalOilOpenData.csv) | 全球原油價格 (WTI/Brent) |
-| `get_commodity_gold_spot_price_twd` | [https://www.tpex.org.tw/openapi/v1/gold_DailyQuotes](https://www.tpex.org.tw/openapi/v1/gold_DailyQuotes) | 黃金現貨即時報價(TWD) |
+| `get_commodity_gold_spot_price_twd` | [TPEx OpenAPI](https://www.tpex.org.tw/openapi/v1/tpex_gold_latest) | 黃金現貨即時報價(TWD) |
 
 ## 🏛️ Macroeconomics & Corporate
 *Status: Stable Government API Endpoints.*
