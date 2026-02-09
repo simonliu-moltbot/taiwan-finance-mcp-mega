@@ -65,11 +65,11 @@ This document provides an exhaustive mapping of every active tool in the `taiwan
 
 | Tool Name | Direct API URL (Source) | Description (說明) |
 |-----------|-------------------------|-------------------|
-| `get_crypto_btc_twd_price` | [CoinGecko API](https://api.coingecko.com/api/v3/) | 比特幣即時 TWD/USD 報價 |
-| `get_crypto_eth_twd_price` | [CoinGecko API](https://api.coingecko.com/api/v3/) | 以太幣即時 TWD/USD 報價 |
-| `get_crypto_sol_twd_price` | [CoinGecko API](https://api.coingecko.com/api/v3/) | Solana 即時報價與市場表現 |
-| `get_crypto_market_fear_greed_index` | [CoinGecko API](https://api.coingecko.com/api/v3/) | 全球加密幣市場恐慌與貪婪指數 |
-| `get_current_time_taipei` | System | 獲取台北即時系統時間 |
+| `get_crypto_btc_twd_price` | [CoinGecko (Bitcoin)](https://www.coingecko.com/en/coins/bitcoin) | 比特幣即時 TWD/USD 報價 |
+| `get_crypto_eth_twd_price` | [CoinGecko (Ethereum)](https://www.coingecko.com/en/coins/ethereum) | 以太幣即時 TWD/USD 報價 |
+| `get_crypto_sol_twd_price` | [CoinGecko (Solana)](https://www.coingecko.com/en/coins/solana) | Solana 即時報價與市場表現 |
+| `get_crypto_market_fear_greed_index` | [Alternative.me (Fear & Greed)](https://alternative.me/crypto/fear-and-greed-index/) | 全球加密幣市場恐慌與貪婪指數 |
+| `get_current_time_taipei` | Local Environment | 獲取台北即時系統時間 |
 
 ---
 *Total Active Verified Tools: 49*

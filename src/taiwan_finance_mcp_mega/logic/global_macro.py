@@ -5,6 +5,7 @@ Global Macro-economics Logic - v4.1.0
 """
 import logging
 import json
+from datetime import datetime
 from typing import Dict, Any, Optional
 from taiwan_finance_mcp_mega.utils.http_client import AsyncHttpClient
 
@@ -71,3 +72,21 @@ class CryptoLogic:
             return {"error": f"找不到貨幣 {coin}"}
         except:
             return {"error": "Crypto API 異常"}
+
+    @staticmethod
+    async def get_fear_greed_index() -> Dict[str, Any]:
+        """獲取加密貨幣恐慌與貪婪指數。"""
+        url = "https://api.alternative.me/fng/"
+        try:
+            data = await AsyncHttpClient.fetch_json(url)
+            if "data" in data and len(data["data"]) > 0:
+                fng = data["data"][0]
+                return {
+                    "value": fng["value"],
+                    "classification": fng["value_classification"],
+                    "timestamp": datetime.fromtimestamp(int(fng["timestamp"])).strftime("%Y-%m-%d"),
+                    "source": "Alternative.me"
+                }
+            return {"error": "無法獲取情緒數據"}
+        except:
+            return {"error": "Fear & Greed API 異常"}
