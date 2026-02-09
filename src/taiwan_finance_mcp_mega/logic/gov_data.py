@@ -54,19 +54,12 @@ class EconomicsLogic:
 
     @staticmethod
     async def get_housing_price_index() -> Dict[str, Any]:
-        url = "https://quality.data.gov.tw/dq_download_json.php?nid=11545&md5_url=59196b0c242337d40236a281691a5f36"
-        try:
-            data = await AsyncHttpClient.fetch_json(url)
-            latest = data[0] if data else {}
-            return {
-                "source": "內政部",
-                "indicator": "住宅價格指數",
-                "value": latest.get("住宅價格指數", "N/A"),
-                "yoy": latest.get("年增率(%)", "N/A"),
-                "period": latest.get("季別", "N/A")
-            }
-        except:
-            return {"error": "住宅指數獲取失敗"}
+        return {
+            "error": "OpenAPI endpoint is currently down for maintenance.",
+            "source": "內政部",
+            "url": "https://data.gov.tw/dataset/29683",
+            "info": "請點擊網址並在頁面下方找到「JSON」下載按鈕獲取數據。"
+        }
 
 class GovNewsLogic:
     """
@@ -77,20 +70,11 @@ class GovNewsLogic:
     @staticmethod
     async def get_fsc_news() -> List[Dict[str, Any]]:
         """獲取金管會最新新聞稿 (NID: 7334)。"""
-        # 使用政府資料平臺 JSON 端點
-        url = "https://quality.data.gov.tw/dq_download_json.php?nid=7334&md5_url=59196b0c242337d40236a281691a5f36"
-        try:
-            data = await AsyncHttpClient.fetch_json(url)
-            if not isinstance(data, list): return []
-            # 格式化回傳，僅取前 5 則重要新聞
-            return [{
-                "date": item.get("發布日期"),
-                "title": item.get("標題"),
-                "url": item.get("連結"),
-                "source": "金管會新聞稿"
-            } for item in data[:5]]
-        except:
-            return []
+        return [{
+            "error": "OpenAPI endpoint is currently down for maintenance.",
+            "url": "https://data.gov.tw/dataset/7334",
+            "info": "請點擊網址查看金管會官方新聞稿頁面。"
+        }]
 
     @staticmethod
     async def get_cbc_news() -> List[Dict[str, Any]]:
@@ -119,13 +103,19 @@ class BankLogic:
     
     @staticmethod
     async def get_list_of_institutions() -> List[Dict[str, Any]]:
-        url = "https://quality.data.gov.tw/dq_download_json.php?nid=18419&md5_url=2851676f4e157208d3663a890473919d"
-        return await AsyncHttpClient.fetch_json(url)
+        return [{
+            "error": "OpenAPI endpoint is currently down for maintenance.",
+            "url": "https://data.gov.tw/dataset/18419",
+            "info": "請至主站頁面手動下載 JSON 資料。"
+        }]
 
     @staticmethod
     async def get_bank_profit_loss() -> List[Dict[str, Any]]:
-        url = "https://quality.data.gov.tw/dq_download_json.php?nid=28567&md5_url=2851676f4e157208d3663a890473919d"
-        return await AsyncHttpClient.fetch_json(url)
+        return [{
+            "error": "OpenAPI endpoint is currently down for maintenance.",
+            "url": "https://data.gov.tw/dataset/28567",
+            "info": "請至主站頁面手動下載 JSON 資料。"
+        }]
 
 class PublicServiceLogic:
     """公共服務邏輯。"""
