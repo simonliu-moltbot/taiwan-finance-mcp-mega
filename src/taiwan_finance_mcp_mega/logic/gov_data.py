@@ -31,6 +31,30 @@ class EconomicsLogic:
             "note": "數據反映中央政府未償債務餘額"
         }
 
+    @staticmethod
+    async def get_monthly_financial_indicators() -> Dict[str, Any]:
+        """獲取每月國內主要金融指標 (中央銀行/勞動部 API)。"""
+        url = "https://apiservice.mol.gov.tw/OdService/rest/datastore/A17030000J-000037-l9P"
+        try:
+            data = await AsyncHttpClient.fetch_json(url)
+            if data.get("success") and "result" in data:
+                records = data["result"].get("records", [])
+                if records:
+                    latest = records[-1]  # 獲取最新月份數據
+                    return {
+                        "status": "success",
+                        "month": latest.get("月別"),
+                        "m1b_growth_rate": f"{latest.get('貨幣供給額期底年增率-M1B')}%",
+                        "m2_growth_rate": f"{latest.get('貨幣供給額期底年增率-M2')}%",
+                        "foreign_exchange_reserves": f"{latest.get('外匯存底（億美元）')} 億美元",
+                        "cbc_discount_rate": f"{latest.get('利率（年息%）-中央銀行重貼現率')}%",
+                        "stock_index_end": latest.get("證券（集中市場）-發行量加權股價指數（月底）"),
+                        "source": "中央銀行/勞動部 (Open Data)"
+                    }
+            return {"error": "無法從政府平台獲取金融指標數據"}
+        except Exception as e:
+            return {"error": f"API 請求異常: {str(e)}"}
+
 class GovNewsLogic:
     """
     處理政府官方新聞稿與政策公告。

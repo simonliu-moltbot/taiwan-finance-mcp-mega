@@ -111,6 +111,7 @@ async def dispatch_mega_logic(name: str, query_val: Optional[str], limit: int) -
             if "fuel_price" in name: return await PublicServiceLogic.get_fuel_prices()
             if "housing_price_index" in name: return await EconomicsLogic.get_housing_price_index()
             if "national_debt_clock" in name: return await EconomicsLogic.get_national_debt_clock()
+            if "monthly_financial_indicators" in name: return await EconomicsLogic.get_monthly_financial_indicators()
             
             # Moved Bank tools to Macro
             if "policy_rate" in name: return await EconomicsLogic.get_macro_stats("gdp") # Placeholder for actual rate logic

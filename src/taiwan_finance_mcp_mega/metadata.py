@@ -55,6 +55,7 @@ TOOL_METADATA = {
     # 🏛️ MACRO: National Policy & Economy (DGBAS/CBC/MOF)
     "get_macro_gdp_growth_rate_quarterly": { "summary": "台灣季度 GDP 經濟成長率。國家級宏觀指標。", "inputs": "None", "outputs": "%", "source": "DGBAS" },
     "get_macro_national_debt_clock": { "summary": "中華民國國債鐘：中央政府長短期債務與人均負擔額。", "inputs": "None", "outputs": "Debt Amount", "source": "MOF" },
+    "get_macro_monthly_financial_indicators": { "summary": "每月國內主要金融指標。包含 M1B/M2、外匯存底、重貼現率、股價指數等總體指標。", "inputs": "None", "outputs": "Financial Indicators JSON", "source": "CBC/MOL" },
 
     # 🏢 CORP & INDUSTRY
     "get_corp_moea_business_registration": { "summary": "經濟部商工登記公示資料。查詢公司基本信息。", "inputs": "company_query: 公司名稱 or 統編。", "outputs": "登記資料。", "source": "MOEA" },
