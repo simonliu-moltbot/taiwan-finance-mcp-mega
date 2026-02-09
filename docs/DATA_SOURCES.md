@@ -13,7 +13,7 @@ This document provides a comprehensive list of direct API URLs for every tool in
 | `get_stock_broker_list_all` | [https://openapi.twse.com.tw/v1/brokerService/brokerList](https://openapi.twse.com.tw/v1/brokerService/brokerList) | 證券商基本資料一覽表 |
 | `get_stock_etf_regular_savings_ranking` | [https://openapi.twse.com.tw/v1/ETFReport/ETFRank](https://openapi.twse.com.tw/v1/ETFReport/ETFRank) | ETF 定期定額交易戶數排行 |
 | `get_stock_after_hours_trading_info` | [https://openapi.twse.com.tw/v1/exchangeReport/BFT41U](https://openapi.twse.com.tw/v1/exchangeReport/BFT41U) | 盤後定價交易資訊 |
-| `get_stock_institutional_investor_flow` | [https://openapi.twse.com.tw/v1/fund/BFI82U_ALL](https://openapi.twse.com.tw/v1/fund/BFI82U_ALL) | 三大法人買賣超彙總統計 (上市) |
+| `get_stock_institutional_investor_flow` | [https://www.twse.com.tw/zh/page/trading/fund/BFI82U.html](https://www.twse.com.tw/zh/page/trading/fund/BFI82U.html) | 三大法人買賣超彙總統計 (上市) |
 | `get_stock_dividend_yield_pe_pb` | [https://openapi.twse.com.tw/v1/exchangeReport/BWIBBU_d](https://openapi.twse.com.tw/v1/exchangeReport/BWIBBU_d) | 個股日本益比、殖利率及淨值比 |
 | `get_stock_pe_averages_by_industry` | [https://openapi.twse.com.tw/v1/exchangeReport/FMNPTK_ALL](https://openapi.twse.com.tw/v1/exchangeReport/FMNPTK_ALL) | 上市公司各類股本益比統計 |
 | `get_stock_yield_averages_by_industry` | [https://openapi.twse.com.tw/v1/exchangeReport/FMSRFK_ALL](https://openapi.twse.com.tw/v1/exchangeReport/FMSRFK_ALL) | 上市公司各類股殖利率統計 |

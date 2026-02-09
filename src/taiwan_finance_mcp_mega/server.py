@@ -38,7 +38,7 @@ MEGA_ENDPOINT_MAP = {
     "get_stock_quotes_realtime_all": "/exchangeReport/STOCK_DAY_ALL",
     "get_stock_eps_ranking_summary": "/opendata/t187ap14_L",
     "get_stock_dividend_yield_pe_pb": "/exchangeReport/BWIBBU_d",
-    "get_stock_institutional_investor_flow": "/fund/BFI82U_ALL",
+    "get_stock_institutional_investor_flow": "https://www.twse.com.tw/zh/page/trading/fund/BFI82U.html",
     "get_stock_institutional_trading_tpex": "/v1/tpex_3insti_daily_trading",
     "get_stock_institutional_summary_tpex": "/v1/tpex_3insti_summary",
     "get_stock_margin_trading_balance": "/exchangeReport/MI_MARGN",
@@ -70,6 +70,9 @@ async def dispatch_mega_logic(name: str, query_val: Optional[str], limit: int) -
         # 1. 台灣股市路由 (Only Stock/ETF)
         if name.startswith("get_stock_"):
             endpoint = MEGA_ENDPOINT_MAP.get(name)
+            if endpoint and endpoint.startswith("http"):
+                # Direct external URL (e.g. for broken OpenAPI endpoints)
+                return {"info": "該數據源目前 OpenAPI 已失效，請點擊連結查看網頁版數據。", "url": endpoint}
             if endpoint and endpoint.startswith("/"):
                 # Handle TPEx specifically if needed, or use a separate base
                 if "tpex" in endpoint:
