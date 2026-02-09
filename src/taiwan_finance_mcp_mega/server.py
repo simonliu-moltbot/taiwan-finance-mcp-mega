@@ -93,6 +93,7 @@ async def dispatch_mega_logic(name: str, query_val: Optional[str], limit: int) -
             if "any_to_any" in name:
                 # This would need its own tool registration or generic param handling
                 pass # Already handled by param creation below if logic is solid
+            if "gold_spot" in name: return await StockLogic.call_generic_api("/v1/gold_DailyQuotes", None)
             if "oil_wti" in name: return await GlobalMacroLogic.get_commodity_price("WTI")
             if "oil_brent" in name: return await GlobalMacroLogic.get_commodity_price("BRENT")
             if "gold_spot" in name: return await GlobalMacroLogic.get_commodity_price("GOLD")
