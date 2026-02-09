@@ -38,9 +38,9 @@ This document provides a comprehensive list of direct API URLs for every tool in
 
 | Tool Name | Direct API URL (Source) | Description (說明) |
 |-----------|-------------------------|-------------------|
-| `get_futures_quotes_daily` | [https://openapi.taifex.com.tw/v1/DailyQuotes](https://openapi.taifex.com.tw/v1/DailyQuotes) | 期貨每日收盤行情 |
-| `get_futures_institutional_investor_flow` | [https://openapi.taifex.com.tw/v1/InstitutionalInvestorsDaily](https://openapi.taifex.com.tw/v1/InstitutionalInvestorsDaily) | 三大法人期貨交易量與未平倉彙總 |
-| `get_futures_open_interest_ranking` | [https://openapi.taifex.com.tw/v1/LargeTradersPositionsDaily](https://openapi.taifex.com.tw/v1/LargeTradersPositionsDaily) | 期貨大額交易人未平倉部位統計 |
+| `get_futures_quotes_daily` | [https://openapi.taifex.com.tw/v1/DailyMarketReportFut](https://openapi.taifex.com.tw/v1/DailyMarketReportFut) | 期貨每日收盤行情 |
+| `get_futures_institutional_investor_flow` | [https://openapi.taifex.com.tw/v1/MarketDataOfMajorInstitutionalTradersGeneralBytheDate](https://openapi.taifex.com.tw/v1/MarketDataOfMajorInstitutionalTradersGeneralBytheDate) | 三大法人期貨交易量與未平倉彙總 |
+| `get_futures_open_interest_ranking` | [https://openapi.taifex.com.tw/v1/OpenInterestOfLargeTradersFutures](https://openapi.taifex.com.tw/v1/OpenInterestOfLargeTradersFutures) | 期貨大額交易人未平倉部位統計 |
 
 ## 🌍 Forex & Commodities
 
